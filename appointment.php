@@ -32,6 +32,13 @@ include 'cn.php';
     <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+
+  <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
+
+  
 	<link href='bt/css/fullcalendar.min.css' rel='stylesheet' />
 	<link href='bt/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 	
@@ -209,22 +216,7 @@ include 'cn.php';
 	</div>
 	
 	
-	<!-- <?php 
-	$query = $db->query("SELECT * FROM availability");
-	foreach($query as $row) :?>
-		<div id="myModal<?php echo$row['id']?>" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Appointment</h4>
-					</div>
-					<div class="modal-body">
-					</div>
-				</div>
-			</div>
-		</div>
-		<?php endforeach?> -->
+
       <!--/.sidebar-offcanvas-->
 				</div>	
 		</div>
@@ -249,27 +241,37 @@ include 'cn.php';
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Schedule</h4>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-					<label for="">Name</label>
-					<p class="form-control" id="title"></p>
-				</div>
+            <form method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="hiddenid" id="hiddenid">
+                    <input type="hidden" name="doctor_email" id="doctor_email">
+                    <input type="hidden" name="day" id="day">
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <p class="form-control" id="title"></p>
+                    </div>
 
-				<div class="form-group">
-					<label for="">Available From</label>
-					<p class="form-control" id="from"></p>
-				</div>
+                    <div class="form-group">
+                        <label for="">Available From - To</label>
+                        <p class="form-control" id="from"></p>
+                    </div>
 
-				<div class="form-group">
-					<label for="">Available To</label>
-					<p class="form-control" id="to"></p>
-				</div>
+                    <div class="form-group">
+                        <label for="">Specialization</label>
+                        <p class="form-control" id="specialization"></p>
+                    </div>
 
-            </div>
+                    <div class="form-group">
+                        <label for="">Choose Time</label>
+                        <input type="text" class="form-control timepicker" id="chosentime">
+                    </div>
+
+                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="save-event">Submit</button>
+                <button type="button" class="btn btn-primary" id="submit">Submit</button>
             </div>
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -329,6 +331,10 @@ include 'cn.php';
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
 <script src='bt/js/moment.min.js'></script>
 <script src='bt/js/fullcalendar.min.js'></script>
+<script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+<script type="text/javascript" src="bt/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="bt/js/jquery.timepicker.min.js"></script>
+  
 <script>
 
 		$.ajax({
@@ -352,36 +358,70 @@ include 'cn.php';
                 $('.modal').modal('show');
 				$('.modal').find('#title').text('');
                 $('.modal').find('#from').text('');
-                $('.modal').find('#to').text('');
-				$('#save-event').attr('disabled',true);
+                $('.modal').find('#hiddenid').val('');
+                $('.modal').find('#doctor_email').val('');
+                $('.modal').find('#specialization').text('');
+                $('.modal').find('#day').val('');
+				$('#submit').attr('disabled',true);
             },
             eventClick: function(event, element) {
                 // Display the modal and set the values to the event values.
-				var froms = event.time_from;
                 $('.modal').modal('show');
                 $('.modal').find('#title').text(event.title);
-                $('.modal').find('#from').text(froms);
-                $('.modal').find('#to').text(event.time_to);
-				$('#save-event').attr('disabled',false);
+                $('.modal').find('#from').text(event.time_from + ' - ' + event.time_to);
+                $('.modal').find('#hiddenid').val(event.id);
+                $('.modal').find('#doctor_email').val(event.email);
+                $('.modal').find('#specialization').text(event.SPECIALIZATION);
+                $('.modal').find('#day').val(event.day);
+                
+				$('#submit').attr('disabled',false);
 				
-
+                $('.timepicker').timepicker({ 
+                    'timeFormat': 'g:i A',
+                    minTime:  event.time_base_from,
+                    maxTime: event.time_base_to
+                    
+                });
             },
+            
 			
             editable: false,
             eventLimit: true,
-            events: data
+            events: data,function(){
+                
+            }
 
 
         });
+       
 
-
-        $('#save-event').on('click', function() {
-			$('#save-event').attr('disabled',false);
-			
+        $('#submit').on('click', function() {
+			$('#submit').attr('disabled',false);
+            var doctor_email = $('#doctor_email').val();
+            var hiddenid = $('#hiddenid').val();
+            var day = $('#day').val();
+            var chosentime = $('#chosentime').val();
+            $.ajax({
+                type: 'POST',
+                url : 'function_appointment.php',
+                cache:false,
+                dataType: 'json',
+                data: { action : 'submit', hiddenid : hiddenid, day : day, doctor_email : doctor_email, chosentime : chosentime },
+                success:function(response){
+                    if(response.success == true) {
+                        alert(response.message)
+                    } else {
+                        alert(response.message)
+                    }
+                }
+            });
             $('.modal').modal('hide');
         });
 			}
 		});
+    
+    
+        
 
 // $('.modal').modal({backdrop: 'static', keyboard: false})  
 

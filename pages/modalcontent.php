@@ -2,24 +2,32 @@
 session_start();
 include '../cn.php';
 ?>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
 <link href="../bt/css/bootstrap.min.css" rel="stylesheet">
-<link href="../bt/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../bt/css/jquery.timepicker.css" />
+<link rel="stylesheet" type="text/css" href="../bt/css/bootstrap-datepicker.css" />
+
+  <link rel="stylesheet" type="text/css" href="../bt/css/jquery.timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="../bt/css/bootstrap-datepicker.css" />
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/base/jquery-ui.css">
+  
 <form method="POST">
 			<div class="form-group">
 				<label for="day">Day</label>
 				<input type="text" name="day" id="day" class="form-control" >
 			</div>
 
-			<div class="form-group clockpickerfrom">
-				<label for="from">From</label>
-				<input type="text" class="form-control" id="from">
-			</div>
+			<div id="datepairExample">	
+				<div class="form-group clockpickerfrom">
+					<label for="from">From</label>
+					<input type="text" class="form-control time start" id="from">
+				</div>
 
-			<div class="form-group clockpickerto">
-				<label for="to">To</label>
-				<input type="text" class="form-control" id="to">
+				<div class="form-group">
+					<label for="to">To</label>
+					<input type="text" class="form-control timepicker time end" id="to">
+				</div>
 			</div>
 
 			<div class="modal-footer">
@@ -30,42 +38,33 @@ include '../cn.php';
 
 
 <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+
+<script type="text/javascript" src="../bt/js/jquery.timepicker.min.js"></script>
+<script type="text/javascript" src="../bt/js/jquery.datepair.min.js"></script>
+<script src="https://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
 <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-<script src="../bt/js/bootstrap.min.js"></script>
-<script src="../bt/js/bootstrap-clockpicker.min.js"></script>
-
-<script type="text/javascript">
-$('.clockpickerfrom').clockpicker({
-    placement: 'bottom',
-    align: 'left',
-    donetext: 'Done',
-	autoclose: true,
-	min: '10:15'
-	
-});
-
-$('.clockpickerto').clockpicker({
-    placement: 'bottom',
-    align: 'left',
-    donetext: 'Done',
-	autoclose: true
-});
-</script>
 <script>
-$(function() {
-$( "#day" ).datepicker({
-    buttonImageOnly: true,
-    dateFormat:'yy-mm-dd',
-    changeYear: true,
-    changeMonth: true,
-    minDate: 0
-});
 
-});
+	$( "#day" ).datepicker({
+		buttonImageOnly: true,
+		dateFormat:'yy-mm-dd',
+		changeYear: true,
+		changeMonth: true,
+		minDate: 0
+	});
 
 
+    // initialize input widgets first
+    $('#datepairExample .time').timepicker({
+        'showDuration': true,
+        'timeFormat': 'h:i A',
+		'minTime' : '08:00:00',
+		'maxTime' : '22:00:00'
+    });
 
 
+    // initialize datepair
+    $('#datepairExample').datepair();
 
 function AddAvailability() {
 		var day = $('#day').val();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2017 at 08:32 AM
+-- Generation Time: Aug 11, 2017 at 10:30 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -21,6 +21,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `dblaggerslane`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointment`
+--
+
+CREATE TABLE `appointment` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `chosentime` time NOT NULL,
+  `patient_name` varchar(255) NOT NULL,
+  `patient_email` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL,
+  `date` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`id`, `email`, `chosentime`, `patient_name`, `patient_email`, `status`, `date`) VALUES
+(36, 'iamdoctor@yahoo.com', '17:00:00', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, '2017-08-14'),
+(37, 'iamdoctor@yahoo.com', '15:00:00', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, '2017-08-14'),
+(38, 'iamdoctor@yahoo.com', '15:00:00', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, '2017-08-14'),
+(39, 'iamdoctor@yahoo.com', '15:00:00', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, '2017-08-14');
 
 -- --------------------------------------------------------
 
@@ -52,12 +78,24 @@ INSERT INTO `audit` (`id`, `fid`, `action`, `dt`) VALUES
 
 CREATE TABLE `availability` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `day` date NOT NULL,
+  `time_from` varchar(255) NOT NULL,
+  `time_to` varchar(255) NOT NULL,
   `start` varchar(255) NOT NULL,
   `end` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL
+  `email` varchar(255) NOT NULL,
+  `time_base_from` time NOT NULL,
+  `time_base_to` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `availability`
+--
+
+INSERT INTO `availability` (`id`, `title`, `day`, `time_from`, `time_to`, `start`, `end`, `email`, `time_base_from`, `time_base_to`) VALUES
+(78, 'Dr. iamdoctor iamdoctor iamdoctor', '2017-08-14', '2 PM', '5 PM', '2017-08-14T02:00:00', '2017-08-14T17:30:00', 'iamdoctor@yahoo.com', '14:00:00', '17:30:00'),
+(81, 'Dr. iamdoctor iamdoctor iamdoctor', '2017-08-14', '8 AM', '11 AM', '2017-08-14T08:00:00', '2017-08-14T11:00:00', 'iamdoctor@yahoo.com', '08:00:00', '11:00:00');
 
 -- --------------------------------------------------------
 
@@ -171,7 +209,13 @@ INSERT INTO `logins` (`id`, `fid`, `dt`) VALUES
 (11, 'DE BORJARALPH JOSEPHP-1993-10-17-', '2017-08-05 10:14:05'),
 (12, '1', '2017-08-10 10:43:21'),
 (13, '23', '2017-08-10 16:16:08'),
-(14, '24', '2017-08-10 21:38:01');
+(14, '24', '2017-08-10 21:38:01'),
+(15, '25', '2017-08-11 12:28:35'),
+(16, '25', '2017-08-11 12:30:38'),
+(17, '25', '2017-08-11 15:36:37'),
+(18, '25', '2017-08-11 16:04:30'),
+(19, '25', '2017-08-11 16:38:56'),
+(20, '25', '2017-08-11 16:51:26');
 
 -- --------------------------------------------------------
 
@@ -228,7 +272,7 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`id`, `LN`, `FN`, `MN`, `SN`, `GENDER`, `WEIGHT`, `HEIGHT`, `BIRTHDAY`, `BIRTHPLACE`, `CIVILSTATUS`, `NATIONALITY`, `ZIPCODE`, `RELIGION`, `ADDRESS`, `BLOOD_TYPE`, `CONTACT_NUMBER`, `EMAIL`) VALUES
-(24, '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '');
+(25, 'Lozano', 'John David', 'Sadia', '', 'Male', '176', '5\'6', '1994-03-31', 'Quezon City', 'Married', 'Filipino', 1211, 'Islam', 'Quezon City', 'AB Positive', '09555773952', 'lozanojohndavid@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -328,7 +372,19 @@ INSERT INTO `test` (`id`, `start`, `end`, `title`, `body`) VALUES
 (12, '2017-8-8 10:0', '2017-8-8 11:0', '', ''),
 (13, '2017-8-8 10:0', '2017-8-8 11:0', '', ''),
 (14, '', '', '', ''),
-(15, '2017-8-9 10:30', '2017-8-9 11:30', '', '');
+(15, '2017-8-9 10:30', '2017-8-9 11:30', '', ''),
+(16, '2017-8-9 10:30', '2017-8-9 11:30', '', ''),
+(17, '', '', '', ''),
+(18, '2017-8-8 9:0', '2017-8-8 10:0', '', ''),
+(19, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
+(20, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
+(21, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
+(22, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
+(23, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
+(24, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
+(25, '2017-8-9 13:0', '2017-8-9 14:0', '', ''),
+(26, '2017-8-9 13:0', '2017-8-9 14:0', 'asdasd', 'asdasdas'),
+(27, '2017-8-7 9:0', '2017-8-7 17:30', 'asdasd', 'asasdad');
 
 -- --------------------------------------------------------
 
@@ -356,12 +412,18 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `UN`, `PW`, `Type`, `SQ1`, `SQ2`, `EMAIL`, `fid`, `st`, `attempts`) VALUES
 (2, 'admin', 'admin', 'Administrator', '', '', '', 'admin', '', 3),
 (31, 'iamdoctor', '@passworD1234', 'Doctor', '', '', 'iamdoctor@yahoo.com', '', 'Verified', 3),
-(32, 'dave.lozano2016', 'QEO7ZXYU0L', 'Patient', 'kisses', 'dave', 'lozanojohndavid@gmail.com', '', 'Not Yet Verified', 3),
-(33, 'jeddahlyncabuga', '@passworD1234', 'Doctor', '', '', 'cabugajeddahlyn@gmail.com', '', 'Verified', 3);
+(33, 'jeddahlyncabuga', '@passworD1234', 'Doctor', '', '', 'cabugajeddahlyn@gmail.com', '', 'Verified', 3),
+(34, 'dave.lozano2016', 'dave.lozano2016', 'Patient', 'kisses', 'dave', 'lozanojohndavid@gmail.com', '', 'Not Yet Verified', 3);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `appointment`
+--
+ALTER TABLE `appointment`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `audit`
@@ -434,6 +496,11 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `appointment`
+--
+ALTER TABLE `appointment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+--
 -- AUTO_INCREMENT for table `audit`
 --
 ALTER TABLE `audit`
@@ -442,7 +509,7 @@ ALTER TABLE `audit`
 -- AUTO_INCREMENT for table `availability`
 --
 ALTER TABLE `availability`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 --
 -- AUTO_INCREMENT for table `comments`
 --
@@ -457,12 +524,12 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT for table `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `specialization`
 --
@@ -472,12 +539,12 @@ ALTER TABLE `specialization`
 -- AUTO_INCREMENT for table `test`
 --
 ALTER TABLE `test`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;COMMIT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
