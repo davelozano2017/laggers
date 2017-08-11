@@ -33,37 +33,7 @@ include "../cn.php";
         <h4 class="modal-title">Add Availability</h4>
       </div>
       <div class="modal-body">
-		<form method="POST">
-			<div class="form-group">
-				<label for="day">Day</label>
-				<select name="day" id="day" class="form-control">
-					<option value="Monday" selected>Monday</option>
-					<option value="Tuesday">Tuesday</option>
-					<option value="Wednesday">Wednesday</option>
-					<option value="Thursday">Thursday</option>
-					<option value="Friday">Friday</option>
-					<option value="Saturday">Saturday</option>
-					<option value="Sunday">Sunday</option>
-				</select>
-			</div>
-
-			<div class="form-group">
-				<label for="day">From</label>
-				<input type="text" class="form-control" name="from" id="from">
-			</div>
-
-
-			<div class="form-group">
-				<label for="day">To</label>
-				<input type="text" class="form-control" name="to" id="to">
-				</div>
-			</div>
-			
-			<div class="modal-footer">
-				<button type="button" onclick="AddAvailability()" class="btn btn-primary" >Add</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</form>
+		<iframe src="pages/modalcontent.php" style="overflow:scroll; border:none;width:100%;height:300px;">
 	</div>
   </div>
 </div>

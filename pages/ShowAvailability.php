@@ -12,17 +12,20 @@ include '../cn.php';?>
     </tr>
     </thead>
     <?php 
+    
     $query = $db->query("SELECT * FROM availability WHERE email = '".$_SESSION['session_email']."'");
     foreach($query as $row) :?>
+    <?php 
+    $myDate = new DateTime($row['day']);
+    $formattedDate = $myDate->format('D, M d, Y');
+   ?>
         <tbody>
         <tr>
-            <td><?php echo $row['day']?> </td>
+            <td><?php echo $formattedDate?></td>
             <td><?php echo $row['time_from']?></td>
             <td><?php echo $row['time_to']?></td>
             <td><button class="btn btn-primary" onclick="DeleteAvailability('<?php echo$row['id']?>')">Delete</button></td>
         </tr>
         </tbody>
     <?php endforeach; ?>
-      
 </table>
-

@@ -1,13 +1,9 @@
-<?php
-if(isset($_SESSION['session_iid'])){
-
-}else{
+<?php 
 session_start();
-include "cn.php";
-include "function/enc.php";
-
-}
+include 'cn.php';
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +31,11 @@ include "function/enc.php";
     <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+	<link href='bt/css/fullcalendar.min.css' rel='stylesheet' />
+	<link href='bt/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+	
+
 
     <script src="bt/assets/js/ie-emulation-modes-warning.js"></script>
 
@@ -100,16 +101,7 @@ include "function/enc.php";
 		
 	</head>
 
-	<body onload="<?php if(!isset($_GET['p'])){
-		if(isset($_SESSION['session_i'])){
-			if($_SESSION['session_itype']=="Administrator"){
-				?>show_page('profile_admin','0')<?php 
-			}elseif($_SESSION['session_itype']=="Patient"){
-				?>show_page('profile','0')<?php 
-			}elseif($_SESSION['session_itype']=="Doctor"){
-			?>show_page('profile_doctor','0')<?php } 
-	}}
-		?> ">
+	<body>
 		
 		 <div class="body_wrap">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -169,28 +161,144 @@ include "function/enc.php";
    
 	
 	  </br>
-	 
-	
-							
-							
-			
-
-		
-				
 				<div class="content">
 					<div id="maincontent">
-							
-						<?php
-				
-						if(isset($_GET['p'])){
-							include "pages/" .  $_GET['p'] . ".php";
-						}else{
-							include "pages/home.php";
-						}
+
+	</head>
+<body>
+
+		
+
+
+
+			
 						
+
+
+			
+
+      <div class="row row-offcanvas row-offcanvas-left">
+	        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+		<div class="panel panel-primary">
+						 <div class="panel_title">Patient</div>
 					
-						?>
-					
+				 <div class="panel-body" style="background: linear-gradient(to bottom, #eeeeef 0%, #c7c7cb 98%); background-image: -webkit-gradient(linear, left top, left bottom, from(#eeeeef), to(#98));
+  background-image: -webkit-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);
+  background-image:      -o-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);">
+				<div  class="list-group" >
+			
+		
+    
+		  
+		  	
+		
+
+	
+            <a href="#" onclick="show_page('profile','0')" >Personal Information</a>
+            <a href="appointment.php" >View Appointments</a>
+            
+           
+            <a href="pages/logout.php" >Logout</a>
+			
+			
+			
+
+		 
+	</br>
+	</br>
+	</div>
+	
+	
+	<!-- <?php 
+	$query = $db->query("SELECT * FROM availability");
+	foreach($query as $row) :?>
+		<div id="myModal<?php echo$row['id']?>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Appointment</h4>
+					</div>
+					<div class="modal-body">
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php endforeach?> -->
+      <!--/.sidebar-offcanvas-->
+				</div>	
+		</div>
+      </div><!--/row-->
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-left visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><<<</button>
+          </p>
+            <div class="panel panel-primary">
+				 <div class="panel_title" id="div_title"></div>
+				<div  class="panel-body" id="leftcontent">
+
+                    <!-- start -->
+
+<div id='calendar'></div>
+<div id='datepicker'></div>
+
+<div class="modal fade" tabindex="-1" role="dialog" data-toggle="modal" data-target="#form-content">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Create new event</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="title">Event title</label>
+                        <input type="text" name="title" id="title" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="starts-at">Starts at</label>
+                        <input type="text" name="starts_at" id="starts-at" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="ends-at">Ends at</label>
+                        <input type="text" name="ends_at" id="ends-at" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-event">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+                    
+                    <!-- end -->
+
+
+				</div>	
+			</div> 
+        </div><!--/.col-xs-12.col-sm-9-->
+
+
+</div>
+      <hr>
+		<center>
+      <footer>
+        <p> 2017</p>
+      </footer>
+		</center>
+
+  </body>
+</html>			
+
+<!-- Modal -->
+
 					</div>
 				</div>
 				
@@ -200,13 +308,10 @@ include "function/enc.php";
 		
 		</center>
 				</div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="bt/js/bootstrap.min.js"></script>
 	
     <script src="bt/assets/js/ie10-viewport-bug-workaround.js"></script>
-		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/y_crud.js"></script>
 		<script type="text/javascript" src="js/y_crud_template.js"></script>
@@ -225,7 +330,8 @@ include "function/enc.php";
 <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-	
+<script src='bt/js/moment.min.js'></script>
+<script src='bt/js/fullcalendar.min.js'></script>
 <script>
 	function UpdateSpecialization(id) {
 		var specialization = $('#specialization'+id).val();
@@ -292,10 +398,57 @@ include "function/enc.php";
 		});
 	}
 
-	
-	
+		$.ajax({
+			type:'POST',
+			dataType: 'json',
+			url : 'functions.php',
+			success:function(data){
+				
+				 $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultDate: new Date(),
+            navLinks: true, // can click day/week names to navigate views
+            selectable: true,
+            select: function(start, end) {
+                // Display the modal.
+                // You could fill in the start and end fields based on the parameters
+                $('.modal').modal('show');
+$('.modal').find('#title').val('');
+                $('.modal').find('#starts-at').val('');
+                $('.modal').find('#ends-at').val('');
+            },
+            eventClick: function(event, element) {
+                // Display the modal and set the values to the event values.
+                $('.modal').modal('show');
+                $('.modal').find('#title').val(event.title);
+                $('.modal').find('#starts-at').val(event.start);
+                $('.modal').find('#ends-at').val(event.end);
+
+            },
+			
+            editable: false,
+            eventLimit: true,
+            events: data
+
+
+        });
+
+
+        $('#save-event').on('click', function() {
+			
+            $('.modal').modal('hide');
+        });
+			}
+		});
+
+// $('.modal').modal({backdrop: 'static', keyboard: false})  
 
 </script>
+
 
 </html>
 
