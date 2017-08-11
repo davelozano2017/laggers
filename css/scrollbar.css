@@ -1,0 +1,36 @@
+
+::-webkit-scrollbar {
+	height:12px;
+	overflow:visible;
+	width:12px;
+}
+
+::-webkit-scrollbar-thumb {
+	background:lightblue;
+	background-color:rgba(0,50,150,0.7);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background:blue;
+}
+::-webkit-scrollbar-thumb:active {
+	background:blue;
+}
+
+::-webkit-scrollbar-corner {
+	background:transparent;
+}
+::-webkit-scrollbar-track-piece {
+	background-color:transparent;
+	
+}
+::-webkit-scrollbar-track-piece:horizontal {
+
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+	
+}
+::-webkit-scrollbar-corner {
+	
+}

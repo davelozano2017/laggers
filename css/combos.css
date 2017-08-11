@@ -1,0 +1,16 @@
+
+select {
+	-webkit-appearance: none;
+	-webkit-padding-end: 20px;
+	-webkit-padding-start: 6px;
+	
+	-moz-padding-end: 20px;
+	-moz-padding-start: 6px;
+	outline:none;
+	background-image: url('img/cmb.png'), -webkit-linear-gradient(#f0f0f0, #f0f0f0 38%, #e0e0e0);
+	background-position: right center;
+	background-repeat: no-repeat;
+}
+
+
+

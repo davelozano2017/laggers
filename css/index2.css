@@ -1,0 +1,126 @@
+
+body {
+  padding-top:88px;
+  padding-bottom: 20px;
+  background-image:url(../img/bg.jpg);
+   overflow-x: hidden;
+   
+}
+
+.nav-justified {
+  background-color: lightblue;
+
+  border-radius: 5px;
+    border:solid lightblue 2px;
+
+  background-opacity:0.3px;
+  	-webkit-box-shadow: 3px 5px 15px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    3px 5px 15px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         3px 5px 15px 0px rgba(50, 50, 50, 0.75);
+	-o-shadow :  3px 5px 15px 0px rgba(50, 50, 50, 0.75);
+}
+.nav-justified > li > a {
+ 
+
+
+  font-weight: bold;
+  color: white;
+  text-align: center;
+
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#275f94), to(#1f5080));
+  background-image: -webkit-linear-gradient(to bottom, #275f94 0%, #1f5080 100%);
+  background-image:      -o-linear-gradient(to bottom, #275f94 0%, #1f5080 100%);
+  background-image:         linear-gradient(to bottom, #275f94 0%,#1f5080 100%);
+
+
+
+
+}
+.nav-justified > .active > a,
+.nav-justified > .active > a:hover,
+.nav-justified > .active > a:focus {
+  background-color: red;
+
+
+}
+.nav-justified > li:first-child > a {
+  border-radius: 5px 5px 0 0;
+}
+.nav-justified > li:last-child > a {
+  border-bottom: 0;
+  border-radius: 0 0 5px 5px;
+}
+
+@media (min-width: 768px) {
+  .nav-justified {
+    max-height: 52px;
+  }
+  .nav-justified > li > a {
+    border-right: 1px solid #d5d5d5;
+    border-left: 1px solid #fff;
+  }
+  .nav-justified > li:first-child > a {
+    border-left: 0;
+    border-radius: 5px 0 0 5px;
+  }
+  .nav-justified > li:last-child > a {
+    border-right: 0;
+    border-radius: 0 5px 5px 0;
+  }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .masthead,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+			
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+	
+  }
+}
+
+
+

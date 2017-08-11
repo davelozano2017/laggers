@@ -1,0 +1,133 @@
+:-moz-any(button, input[type='button'], input[type='submit']):not(.custom-appearance):not(.link-button){
+	outline:none;
+	padding: 2px 23px;
+	font-size: 14px;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: #fff!important;
+	border: solid 1px silver;
+	border-top: solid 1px orange;
+	background: #d7930f;
+	text-shadow: none;
+	background: #d7930f;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-ms-border-radius: 20px;
+	-o-border-radius: 20px;
+	border-radius: 20px;
+	background: -webkit-gradient(linear,50% 0%,50% 100%,color-stop(0%,#d7930f),color-stop(100%,#ffa800));
+	background: -webkit-linear-gradient(#d7930f,#ffa800);
+	background: -moz-linear-gradient(#d7930f,#ffa800);
+	background: -o-linear-gradient(#d7930f,#ffa800);
+	background: linear-gradient(#d7930f,#ffa800);
+	-webkit-box-shadow: rgba(0,0,0,.2) 0 1px 2px;
+	-moz-box-shadow: rgba(0,0,0,.2) 0 1px 2px;
+	box-shadow: rgba(0,0,0,.2) 0 1px 2px;
+	cursor:pointer;
+}
+
+
+
+:-moz-any(button, input[type='button'], input[type='submit']):not(.custom-appearance):not(.link-button){
+	
+}
+
+:-moz-any(button, input[type='button']:hover, input[type='submit']):not(.custom-appearance):not(.link-button){
+	background: -webkit-gradient(linear,50% 0%,50% 100%,color-stop(0%,#d7930f),color-stop(100%,#ffa800));
+	background: -webkit-linear-gradient(#d7930f,#ffa800);
+	background: -moz-linear-gradient(#d7930f,#ffa800);
+	background: -o-linear-gradient(#d7930f,#ffa800);
+	background: linear-gradient(#d7930f,#ffa800);
+}
+
+
+:-webkit-any(button, input[type='button'], input[type='submit']):not(.custom-appearance):not(.link-button){
+	outline:none;
+	padding: 2px 23px;
+	font-size: 14px;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: #fff!important;
+	border: solid 1px silver;
+	border-top: solid 1px orange;
+	background: #d7930f;
+	text-shadow: none;
+	background: #d7930f;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-ms-border-radius: 20px;
+	-o-border-radius: 20px;
+	border-radius: 20px;
+	background: -webkit-gradient(linear,50% 0%,50% 100%,color-stop(0%,#d7930f),color-stop(100%,#ffa800));
+	background: -webkit-linear-gradient(#d7930f,#ffa800);
+	background: -moz-linear-gradient(#d7930f,#ffa800);
+	background: -o-linear-gradient(#d7930f,#ffa800);
+	background: linear-gradient(#d7930f,#ffa800);
+	-webkit-box-shadow: rgba(0,0,0,.2) 0 1px 2px;
+	-moz-box-shadow: rgba(0,0,0,.2) 0 1px 2px;
+	box-shadow: rgba(0,0,0,.2) 0 1px 2px;
+	cursor:pointer;
+}
+
+
+
+:-webkit-any(button, input[type='button'], input[type='submit']):not(.custom-appearance):not(.link-button){
+	
+}
+
+:-webkit-any(button, input[type='button']:hover, input[type='submit']):not(.custom-appearance):not(.link-button){
+	background: -webkit-gradient(linear,50% 0%,50% 100%,color-stop(0%,#d7930f),color-stop(100%,#ffa800));
+	background: -webkit-linear-gradient(#d7930f,#ffa800);
+	background: -moz-linear-gradient(#d7930f,#ffa800);
+	background: -o-linear-gradient(#d7930f,#ffa800);
+	background: linear-gradient(#d7930f,#ffa800);
+}
+
+input[type='text'], input[type='password'], input[type='number'], input[type='date'], textarea, select{
+	
+	background: -webkit-gradient(linear,50% 0%,50% 10%,color-stop(0%,#f8f8f8),color-stop(10%,#fefefe));
+	background: -webkit-linear-gradient(#f8f8f8,#fefefe);
+	background: -moz-linear-gradient(#f8f8f8,#fefefe);
+	background: -o-linear-gradient(#f8f8f8,#fefefe);
+	background: linear-gradient(#f8f8f8,#fefefe);
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border: 0px solid #cdced0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	text-indent: 10px;
+	height:34px;
+	font-size:14px;
+	border:dotted silver 1px;
+}
+input[type='text']:focus, input[type='password']:focus, input[type='number']:focus, input[type='date']:focus, textarea:focus{
+	outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+.div_button_actions{
+	padding:3px;
+}
+.button_delete{
+	background:silver;
+	border-radius:8px;
+	padding:2px 6px 2px 6px;
+	color:white;
+	font-size:12px;
+	float:right;
+	margin-left:3px;
+	margin-bottom:5px;
+	cursor:pointer;
+}
+.span_count{
+	font-size:11px;
+	float:left;
+}
+.span_update_status{
+	font-size:11px;
+	float:right;
+}
