@@ -1,13 +1,9 @@
-<?php
-if(isset($_SESSION['session_iid'])){
-
-}else{
+<?php 
 session_start();
-include "cn.php";
-include "function/enc.php";
-
-}
+include 'cn.php';
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,16 +96,7 @@ include "function/enc.php";
 		
 	</head>
 
-	<body onload="<?php if(!isset($_GET['p'])){
-		if(isset($_SESSION['session_i'])){
-			if($_SESSION['session_itype']=="Administrator"){
-				?>show_page('profile_admin','0')<?php 
-			}elseif($_SESSION['session_itype']=="Patient"){
-				?>show_page('profile','0')<?php 
-			}elseif($_SESSION['session_itype']=="Doctor"){
-			?>show_page('profile_doctor','0')<?php } 
-	}}
-		?> ">
+	<body>
 		
 		 <div class="body_wrap">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -143,16 +130,7 @@ include "function/enc.php";
 				
 			
 	
-				<img src="img/BANNER1.jpg" class="featurette-image img-responsive left-block" style="margin-bottom: 5px; height: 1%; width: 100%"/>
-									
-									
-						
-							
-			
-								
-								
-				
-
+<img src="img/BANNER1.jpg" class="featurette-image img-responsive left-block" style="margin-bottom: 5px; height: 1%; width: 100%"/>
         <nav>
 					
           <ul class="nav nav-justified">
@@ -169,28 +147,136 @@ include "function/enc.php";
    
 	
 	  </br>
-	 
-	
-							
-							
-			
-
-		
-				
 				<div class="content">
 					<div id="maincontent">
-							
-						<?php
-				
-						if(isset($_GET['p'])){
-							include "pages/" .  $_GET['p'] . ".php";
-						}else{
-							include "pages/home.php";
-						}
-						
+
+	</head>
+<body>
+      <div class="row row-offcanvas row-offcanvas-left">
+	        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+		<div class="panel panel-primary">
+						 <div class="panel_title">Doctor</div>
 					
-						?>
-					
+				 <div class="panel-body" style="background: linear-gradient(to bottom, #eeeeef 0%, #c7c7cb 98%); background-image: -webkit-gradient(linear, left top, left bottom, from(#eeeeef), to(#98));
+  background-image: -webkit-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);
+  background-image:      -o-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);">
+				<div  class="list-group" >
+			
+            <a href="main.php" >Doctor Information</a>
+            <a href="main.php" >My Availability</a>
+            <a href="view_appointment.php" >View Appointments</a>
+            <a href="patient_history.php" >Patient History</a>
+            <a href="pages/logout.php" >Logout</a>
+			
+			
+			
+
+		 
+	</br>
+	</br>
+	</div>
+	
+	
+
+      <!--/.sidebar-offcanvas-->
+				</div>	
+		</div>
+      </div><!--/row-->
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-left visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><<<</button>
+          </p>
+            <div class="panel panel-primary">
+				 <div class="panel_title" id="div_title"></div>
+				<div  class="panel-body" id="leftcontent">
+
+                    <!-- start -->
+								<div id="show_patient_history"></div>
+                    <!-- end -->
+
+
+				</div>	
+			</div> 
+        </div><!--/.col-xs-12.col-sm-9-->
+
+
+</div>
+      <hr>
+		<center>
+      <footer>
+        <p> 2017</p>
+      </footer>
+		</center>
+
+  </body>
+</html>			
+
+<!-- Modal -->
+<div id="MyModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Patient Information</h4>
+      </div>
+      <div class="modal-body">
+		
+		<div class="form-group">
+			<label for="">Name</label>
+	        <input type="hidden" id="hiddenid" class="form-control">
+	        <p id="patient_name" class="form-control"></p>
+		</div>
+
+		<div class="form-group">
+			<label for="">Email</label>
+	        <p id="patient_email" class="form-control"></p>
+		</div>
+
+		<div class="form-group">
+			<label for="">Appointed Date</label>
+	        <p id="appointment" class="form-control"></p>
+		</div>
+       
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+			<button type="button" class="btn btn-primary" id="approve">Approve</button>
+			<button type="button" class="btn btn-danger" id="decline">Decline</button>
+		</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
+<div id="MyModalDecline" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Decline Patient</h4>
+      </div>
+      <div class="modal-body">
+	        <input type="hidden" id="hiddenid" class="form-control">
+		<h4> Are you sure you want to decline this patient? </h4>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+			<button type="button" class="btn btn-danger" id="yes">Yes</button>
+			<button type="button" class="btn btn-primary" id="no">No</button>
+		</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end modal -->
 					</div>
 				</div>
 				
@@ -200,9 +286,9 @@ include "function/enc.php";
 		
 		</center>
 				</div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="bt/js/bootstrap.min.js"></script>
+	
     <script src="bt/assets/js/ie10-viewport-bug-workaround.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/y_crud.js"></script>
@@ -222,77 +308,36 @@ include "function/enc.php";
 <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-	
+  
 <script>
-	function UpdateSpecialization(id) {
-		var specialization = $('#specialization'+id).val();
+	function show_patient_history() {
 		$.ajax({
-			type:'GET',
-			url: 'pages/specialization_execute.php',
-			data: {action: 'update', id: id, specialization: specialization},
-			success:function(){
-				$('#span_update_status'+id).html('success').fadeIn().delay(1).fadeOut();
-			}
-		})		
-	}
-
-	function AddSpecialization() {
-		var specialization = $('#specialization').val();
-		$.ajax({
-			type: 'GET',
-			url: 'pages/specialization_execute.php',
-			data: {action: 'add', specialization: specialization},
-			success:function(){
-				specialization.val() = null;
-			}
-		});
-	}
-
-	function hidediv() {
-		$('button#addnew').show();
-	}
-
-	function AddAvailability() {
-		var day = $('#day').val();
-		var from = $('#from').val();
-		var to = $('#to').val();
-
-		$.ajax({
-			type: 'POST',
-			url: 'pages/AddAvailabilityExecution.php',
-			data: { action: 'add', day: day, from: from, to: to },
-			success:function(){
-				ShowAvailability()
-			}
-		});
-	}
-
-	function DeleteAvailability($id) {
-		var id = $id;
-		$.ajax({
-			type: 'POST',
-			url: 'pages/AddAvailabilityExecution.php',
-			data: { action: 'delete', id: id},
-			success:function(){
-				ShowAvailability()
-			}
-		});
-	}
-
-	function ShowAvailability() {
-		$.ajax({
-			url: 'pages/ShowAvailability.php',
+			url: 'pages/show_patient_history.php',
 			cache:false,
 			success:function(data){
-				$('#ShowAvailability').html(data);
+				$('#show_patient_history').html(data);
 			}
 		});
 	}
+show_patient_history();
 
-	
-	
+
+function notify(id) {
+  $('#notify'+id).html('Please Wait').attr('disabled',true);
+  $.ajax({
+    type: 'POST',
+    url: 'pages/notify_patient.php',
+    cache: false,
+    data: { action : 'declined', id : id },
+    success:function() {
+      alert('An email has been sent');
+      $('#notify'+id).html('Notify Patient').attr('disabled',false);
+    }
+  });
+}
 
 </script>
+
 
 </html>
 

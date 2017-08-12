@@ -18,10 +18,22 @@ if($_POST['action'] == 'submit') {
         $query = $db->query("INSERT INTO appointment
         (email,chosentime,patient_name,patient_email,status,date) 
         VALUES
-        ('$doctor_email','$chosentime','$patient_name','$patient_email',1,'$day')");
+        ('$doctor_email','$chosentime','$patient_name','$patient_email',0,'$day')");
         if($query) {
             echo json_encode(array('success' => true, 'message' => 'success'));
         }
     }
 
-}
+} elseif($_POST['action'] == 'approve') {
+    $id = $_POST['id'];
+    $query = $db->query("UPDATE appointment SET status = 1 WHERE id = $id");
+    if($query) {
+        echo 'Approved';
+    }
+} elseif($_POST['action'] == 'decline') {
+    $id = $_POST['id'];
+    $query = $db->query("UPDATE appointment SET status = 2 WHERE id = $id");
+    if($query) {
+        echo 'Declined';
+    }
+} 

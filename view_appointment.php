@@ -32,16 +32,7 @@ include 'cn.php';
     <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
-
-  <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
-  <link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
-
-  
-	<link href='bt/css/fullcalendar.min.css' rel='stylesheet' />
-	<link href='bt/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-	
+    <script src="bt/assets/js/ie-emulation-modes-warning.js"></script>
 
 		<style>
 .panel{
@@ -139,16 +130,7 @@ include 'cn.php';
 				
 			
 	
-				<img src="img/BANNER1.jpg" class="featurette-image img-responsive left-block" style="margin-bottom: 5px; height: 1%; width: 100%"/>
-									
-									
-						
-							
-			
-								
-								
-				
-
+<img src="img/BANNER1.jpg" class="featurette-image img-responsive left-block" style="margin-bottom: 5px; height: 1%; width: 100%"/>
         <nav>
 					
           <ul class="nav nav-justified">
@@ -170,37 +152,20 @@ include 'cn.php';
 
 	</head>
 <body>
-
-		
-
-
-
-			
-						
-
-
-			
-
       <div class="row row-offcanvas row-offcanvas-left">
 	        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
 		<div class="panel panel-primary">
-						 <div class="panel_title">Patient</div>
+						 <div class="panel_title">Doctor</div>
 					
 				 <div class="panel-body" style="background: linear-gradient(to bottom, #eeeeef 0%, #c7c7cb 98%); background-image: -webkit-gradient(linear, left top, left bottom, from(#eeeeef), to(#98));
   background-image: -webkit-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);
   background-image:      -o-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);">
 				<div  class="list-group" >
 			
-		
-    
-		  
-		  	
-		
-
-	
-            <a href="#" onclick="show_page('profile','0')" >Personal Information</a>
-            <a href="appointment.php" >View Appointments</a>
-            <a href="my_history.php">My History</a>
+            <a href="main.php" >Doctor Information</a>
+            <a href="main.php" >My Availability</a>
+            <a href="view_appointment.php" >View Appointments</a>
+            <a href="patient_history.php" >Patient History</a>
             <a href="pages/logout.php" >Logout</a>
 			
 			
@@ -226,53 +191,7 @@ include 'cn.php';
 				<div  class="panel-body" id="leftcontent">
 
                     <!-- start -->
-
-<div id='calendar'></div>
-<div id='datepicker'></div>
-
-<div class="modal fade" tabindex="-1" role="dialog" data-toggle="modal" data-target="#form-content">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Schedule</h4>
-            </div>
-            <form method="POST">
-                <div class="modal-body">
-                    <input type="hidden" name="hiddenid" id="hiddenid">
-                    <input type="hidden" name="doctor_email" id="doctor_email">
-                    <input type="hidden" name="day" id="day">
-                    <div class="form-group">
-                        <label for="">Name</label>
-                        <p class="form-control" id="title"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Available From - To</label>
-                        <p class="form-control" id="from"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Specialization</label>
-                        <p class="form-control" id="specialization"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Choose Time</label>
-                        <input type="text" class="form-control timepicker" id="chosentime">
-                    </div>
-
-                </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="submit">Submit</button>
-            </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-                    
+                    <div id="show_appointment"></div>
                     <!-- end -->
 
 
@@ -293,7 +212,71 @@ include 'cn.php';
 </html>			
 
 <!-- Modal -->
+<div id="MyModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Patient Information</h4>
+      </div>
+      <div class="modal-body">
+		
+		<div class="form-group">
+			<label for="">Name</label>
+	        <input type="hidden" id="hiddenid" class="form-control">
+	        <p id="patient_name" class="form-control"></p>
+		</div>
+
+		<div class="form-group">
+			<label for="">Email</label>
+	        <p id="patient_email" class="form-control"></p>
+		</div>
+
+		<div class="form-group">
+			<label for="">Appointed Date</label>
+	        <p id="appointment" class="form-control"></p>
+		</div>
+       
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+			<button type="button" class="btn btn-primary" id="approve">Approve</button>
+			<button type="button" class="btn btn-danger" id="decline">Decline</button>
+		</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end modal -->
+
+<!-- Modal -->
+<div id="MyModalDecline" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Decline Patient</h4>
+      </div>
+      <div class="modal-body">
+	        <input type="hidden" id="hiddenid" class="form-control">
+		<h4> Are you sure you want to decline this patient? </h4>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+			<button type="button" class="btn btn-danger" id="yes">Yes</button>
+			<button type="button" class="btn btn-primary" id="no">No</button>
+		</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end modal -->
 					</div>
 				</div>
 				
@@ -305,6 +288,7 @@ include 'cn.php';
 				</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="bt/js/bootstrap.min.js"></script>
+	
     <script src="bt/assets/js/ie10-viewport-bug-workaround.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/y_crud.js"></script>
@@ -324,103 +308,77 @@ include 'cn.php';
 <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-<script src='bt/js/moment.min.js'></script>
-<script src='bt/js/fullcalendar.min.js'></script>
-<script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-<script type="text/javascript" src="bt/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="bt/js/jquery.timepicker.min.js"></script>
-    <script src="bt/assets/js/ie-emulation-modes-warning.js"></script>
   
 <script>
-
+	function show_appointment() {
 		$.ajax({
-			type:'POST',
-			dataType: 'json',
-			url : 'functions.php',
+			url: 'pages/show_appointment.php',
+			cache:false,
 			success:function(data){
-				
-				 $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            defaultDate: new Date(),
-            navLinks: true, // can click day/week names to navigate views
-            selectable: true,
-            select: function(start, end) {
-                // Display the modal.
-                // You could fill in the start and end fields based on the parameters
-                $('.modal').modal('show');
-				$('.modal').find('#title').text('');
-                $('.modal').find('#from').text('');
-                $('.modal').find('#hiddenid').val('');
-                $('.modal').find('#doctor_email').val('');
-                $('.modal').find('#specialization').text('');
-                $('.modal').find('#day').val('');
-				$('#submit').attr('disabled',true);
-            },
-            eventClick: function(event, element) {
-                // Display the modal and set the values to the event values.
-                $('.modal').modal('show');
-                $('.modal').find('#title').text(event.title);
-                $('.modal').find('#from').text(event.time_from + ' - ' + event.time_to);
-                $('.modal').find('#hiddenid').val(event.id);
-                $('.modal').find('#doctor_email').val(event.email);
-                $('.modal').find('#specialization').text(event.SPECIALIZATION);
-                $('.modal').find('#day').val(event.day);
-                
-				$('#submit').attr('disabled',false);
-				
-                $('.timepicker').timepicker({ 
-                    'timeFormat': 'g:i A',
-                    minTime:  event.time_base_from,
-                    maxTime: event.time_base_to
-                    
-                });
-            },
-            
-			
-            editable: false,
-            eventLimit: true,
-            events: data,function(){
-                
-            }
-
-
-        });
-       
-
-        $('#submit').on('click', function() {
-			$('#submit').attr('disabled',false);
-            var doctor_email = $('#doctor_email').val();
-            var hiddenid = $('#hiddenid').val();
-            var day = $('#day').val();
-            var chosentime = $('#chosentime').val();
-            $.ajax({
-                type: 'POST',
-                url : 'function_appointment.php',
-                cache:false,
-                dataType: 'json',
-                data: { action : 'submit', hiddenid : hiddenid, day : day, doctor_email : doctor_email, chosentime : chosentime },
-                success:function(response){
-                    if(response.success == true) {
-                        alert(response.message)
-                    } else {
-                        alert(response.message)
-                    }
-                }
-            });
-            $('.modal').modal('hide');
-        });
+				$('#show_appointment').html(data);
 			}
 		});
-    
-    
-        
+	}
+show_appointment();
 
-// $('.modal').modal({backdrop: 'static', keyboard: false})  
+	function showmodal($id,$patient_name,$patient_email,$appointment) {
+		var id = $id;
+		var patient_name = $patient_name;
+		var patient_email = $patient_email;
+		var appointment = $appointment;
+		$('#MyModal').modal('show');
+		$('#MyModal').find('#hiddenid').val(id);
+		$('#MyModal').find('#patient_name').html(patient_name);
+		$('#MyModal').find('#patient_email').html(patient_email);
+		$('#MyModal').find('#appointment').html(appointment);
+	}
 
+	function approveordecline() {
+		$('#approve').click(function(e){
+			e.preventDefault();
+			var hiddenid = $('#hiddenid').val();
+			$.ajax({
+				type: 'POST',
+				url : 'function_appointment.php',
+				data: { action : 'approve', id : hiddenid },
+				success:function(){
+					show_appointment();
+					alert('Approved');
+					$('#MyModal').modal('hide');
+				}
+			})
+		})
+
+		$('#decline').click(function(e){
+			e.preventDefault();
+			$('#MyModal').modal('hide');
+			$('#MyModalDecline').modal('show');
+		})
+
+		$('#no').click(function(){
+			$('#MyModal').modal('show');
+			$('#MyModalDecline').modal('hide');
+		})
+
+		$('#yes').click(function(e){
+			e.preventDefault();
+			var hiddenid = $('#hiddenid').val();
+			$.ajax({
+				type: 'POST',
+				url : 'function_appointment.php',
+				data: { action : 'decline', id : hiddenid },
+				success:function(){
+					show_appointment();
+					alert('Declined');
+					$('#MyModalDecline').modal('hide');
+				}
+			})
+		})
+
+
+		
+	}
+	approveordecline();		
 </script>
 
 

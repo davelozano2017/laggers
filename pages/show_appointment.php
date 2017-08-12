@@ -1,0 +1,47 @@
+
+<?php 
+session_start();
+$email = $_SESSION['session_email'];
+include '../cn.php';
+?>
+ <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Patient Name</th>
+        <th>Patient Email</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php 
+    
+    $query = $db->query("SELECT * FROM appointment WHERE email = '$email' AND status = 0");
+    if($query->num_rows == 0) {
+        echo '<tr><td colspan=4 style="text-align:center">No record found.</td></tr>';
+    } 
+    foreach($query as $row) :
+    $id = $row['id'];
+    $myDate = new DateTime($row['date']);
+    $date = $myDate->format('D, M d, Y');
+    $patient_name = $row['patient_name'];
+    $patient_email = $row['patient_email'];
+    $appointment = $date. ' '.date('g:i A', strtotime($row['chosentime']));
+
+    
+?>
+
+        <input type="hidden" id="hiddenid" value="<?php echo $id?>">
+        <tr>
+            <td><?php echo $patient_name?></td>
+            <td><?php echo $patient_email?></td>
+            <td><?php echo $appointment?></td>
+            <td><button class="btn btn-primary" onclick="showmodal('<?php echo $id?>','<?php echo $patient_name?>','<?php echo $patient_email?>','<?php echo $appointment?>')">Modify</button></td>
+        </tr>
+    
+
+
+    <?php  endforeach;  ?>
+    </tbody>
+</table>
+

@@ -3,7 +3,6 @@ var oldstr = "";
 
 
 $(function(){
-	ShowAvailability();
 	$('body').hide();
 	$('body').fadeIn('slow');
 });
