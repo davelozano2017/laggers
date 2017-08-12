@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2017 at 10:30 PM
+-- Generation Time: Aug 12, 2017 at 12:40 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -32,21 +32,21 @@ CREATE TABLE `appointment` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `chosentime` time NOT NULL,
+  `purpose` varchar(1000) NOT NULL,
   `patient_name` varchar(255) NOT NULL,
   `patient_email` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
-  `date` varchar(255) NOT NULL
+  `reference_code` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`id`, `email`, `chosentime`, `patient_name`, `patient_email`, `status`, `date`) VALUES
-(36, 'iamdoctor@yahoo.com', '17:00:00', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, '2017-08-14'),
-(37, 'iamdoctor@yahoo.com', '15:00:00', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, '2017-08-14'),
-(38, 'iamdoctor@yahoo.com', '15:00:00', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, '2017-08-14'),
-(39, 'iamdoctor@yahoo.com', '15:00:00', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, '2017-08-14');
+INSERT INTO `appointment` (`id`, `email`, `chosentime`, `purpose`, `patient_name`, `patient_email`, `status`, `reference_code`, `date`, `datetime`) VALUES
+(46, 'cabugajeddahlyn@gmail.com', '10:30:00', 'Check Up', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, 'RITFFOUZYW', '2017-08-12', '2017-08-12 03:26:41');
 
 -- --------------------------------------------------------
 
@@ -95,7 +95,9 @@ CREATE TABLE `availability` (
 
 INSERT INTO `availability` (`id`, `title`, `day`, `time_from`, `time_to`, `start`, `end`, `email`, `time_base_from`, `time_base_to`) VALUES
 (78, 'Dr. iamdoctor iamdoctor iamdoctor', '2017-08-14', '2 PM', '5 PM', '2017-08-14T02:00:00', '2017-08-14T17:30:00', 'iamdoctor@yahoo.com', '14:00:00', '17:30:00'),
-(81, 'Dr. iamdoctor iamdoctor iamdoctor', '2017-08-14', '8 AM', '11 AM', '2017-08-14T08:00:00', '2017-08-14T11:00:00', 'iamdoctor@yahoo.com', '08:00:00', '11:00:00');
+(81, 'Dr. iamdoctor iamdoctor iamdoctor', '2017-08-14', '8 AM', '11 AM', '2017-08-14T08:00:00', '2017-08-14T11:00:00', 'iamdoctor@yahoo.com', '08:00:00', '11:00:00'),
+(83, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-12', '10 AM', '3 PM', '2017-08-12T10:00:00', '2017-08-12T15:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '15:00:00'),
+(86, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-19', '8 AM', '11 AM', '2017-08-19T08:30:00', '2017-08-19T11:30:00', 'cabugajeddahlyn@gmail.com', '08:30:00', '11:30:00');
 
 -- --------------------------------------------------------
 
@@ -153,6 +155,48 @@ CREATE TABLE `doctor` (
 INSERT INTO `doctor` (`id`, `LN`, `FN`, `MN`, `SN`, `GENDER`, `YEARS`, `SPECIALIZATION`, `CN`, `email`, `attempts`) VALUES
 (45, 'iamdoctor', 'iamdoctor', 'iamdoctor', 'iamdoctor', 'Male', '5', 'adult pulmonary medicine', '1233123', 'iamdoctor@yahoo.com', 3),
 (46, 'Cabuga', 'Jeddahlyn', 'Linzag', '', 'Female', '15', 'endocrinology', '095448484844', 'cabugajeddahlyn@gmail.com', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctor_rating`
+--
+
+CREATE TABLE `doctor_rating` (
+  `id` int(11) NOT NULL,
+  `doctor_name` varchar(255) NOT NULL,
+  `specialization` varchar(255) NOT NULL,
+  `ratings` varchar(255) NOT NULL,
+  `ip` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `doctor_rating`
+--
+
+INSERT INTO `doctor_rating` (`id`, `doctor_name`, `specialization`, `ratings`, `ip`) VALUES
+(9, 'Jeddahlyn Linzag Cabuga ', 'cabugajeddahlyn@gmail.com', '5', '::1'),
+(10, 'iamdoctor iamdoctor iamdoctor iamdoctor', 'iamdoctor@yahoo.com', '5', '::1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctor_upload`
+--
+
+CREATE TABLE `doctor_upload` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `filename` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `doctor_upload`
+--
+
+INSERT INTO `doctor_upload` (`id`, `email`, `filename`) VALUES
+(36, 'cabugajeddahlyn@gmail.com', 'female.jpg'),
+(37, 'cabugajeddahlyn@gmail.com', 'appointment.php');
 
 -- --------------------------------------------------------
 
@@ -215,7 +259,23 @@ INSERT INTO `logins` (`id`, `fid`, `dt`) VALUES
 (17, '25', '2017-08-11 15:36:37'),
 (18, '25', '2017-08-11 16:04:30'),
 (19, '25', '2017-08-11 16:38:56'),
-(20, '25', '2017-08-11 16:51:26');
+(20, '25', '2017-08-11 16:51:26'),
+(21, '25', '2017-08-11 20:50:48'),
+(22, '25', '2017-08-11 21:03:39'),
+(23, '25', '2017-08-11 23:01:17'),
+(24, '25', '2017-08-11 23:33:08'),
+(25, '25', '2017-08-12 00:00:29'),
+(26, '25', '2017-08-12 00:17:59'),
+(27, '25', '2017-08-12 02:16:29'),
+(28, '25', '2017-08-12 03:05:41'),
+(29, '25', '2017-08-12 03:25:09'),
+(30, '25', '2017-08-12 03:32:44'),
+(31, '25', '2017-08-12 03:34:26'),
+(32, '25', '2017-08-12 04:05:06'),
+(33, '25', '2017-08-12 04:19:44'),
+(34, '25', '2017-08-12 06:38:31'),
+(35, '25', '2017-08-12 06:42:38'),
+(36, '25', '2017-08-12 06:43:52');
 
 -- --------------------------------------------------------
 
@@ -273,6 +333,30 @@ CREATE TABLE `patient` (
 
 INSERT INTO `patient` (`id`, `LN`, `FN`, `MN`, `SN`, `GENDER`, `WEIGHT`, `HEIGHT`, `BIRTHDAY`, `BIRTHPLACE`, `CIVILSTATUS`, `NATIONALITY`, `ZIPCODE`, `RELIGION`, `ADDRESS`, `BLOOD_TYPE`, `CONTACT_NUMBER`, `EMAIL`) VALUES
 (25, 'Lozano', 'John David', 'Sadia', '', 'Male', '176', '5\'6', '1994-03-31', 'Quezon City', 'Married', 'Filipino', 1211, 'Islam', 'Quezon City', 'AB Positive', '09555773952', 'lozanojohndavid@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `id` int(11) NOT NULL,
+  `patient_name` varchar(255) NOT NULL,
+  `patient_email` varchar(255) NOT NULL,
+  `doctor_name` varchar(255) NOT NULL,
+  `doctor_email` varchar(255) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `reference_code` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `patient_name`, `patient_email`, `doctor_name`, `doctor_email`, `amount`, `reference_code`, `date`) VALUES
+(15, 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 'Jeddahlyn Linzag Cabuga', 'cabugajeddahlyn@gmail.com', 222, 'RITFFOUZYW', 'August 12,  2017 11:50 AM');
 
 -- --------------------------------------------------------
 
@@ -450,6 +534,18 @@ ALTER TABLE `doctor`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `doctor_rating`
+--
+ALTER TABLE `doctor_rating`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `doctor_upload`
+--
+ALTER TABLE `doctor_upload`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `employee`
 --
 ALTER TABLE `employee`
@@ -471,6 +567,12 @@ ALTER TABLE `news`
 -- Indexes for table `patient`
 --
 ALTER TABLE `patient`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -499,7 +601,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `audit`
 --
@@ -509,7 +611,7 @@ ALTER TABLE `audit`
 -- AUTO_INCREMENT for table `availability`
 --
 ALTER TABLE `availability`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT for table `comments`
 --
@@ -521,15 +623,30 @@ ALTER TABLE `comments`
 ALTER TABLE `doctor`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
+-- AUTO_INCREMENT for table `doctor_rating`
+--
+ALTER TABLE `doctor_rating`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `doctor_upload`
+--
+ALTER TABLE `doctor_upload`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+--
 -- AUTO_INCREMENT for table `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `specialization`
 --

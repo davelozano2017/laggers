@@ -28,21 +28,7 @@ include 'cn.php';
     <link href="css/index2.css" rel="stylesheet">
 	<link href="css/panels.css" rel="stylesheet">
 	<link href="css/hrs.css" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
-<link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
-
-  <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
-  <link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
-
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/base/jquery-ui.css">
-
-	<link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css" rel="stylesheet">
     <script src="bt/assets/js/ie-emulation-modes-warning.js"></script>
 
 		<style>
@@ -182,7 +168,6 @@ include 'cn.php';
             <a href="pages/logout.php" >Logout</a>
 			
 			
-			
 
 		 
 	</br>
@@ -202,53 +187,32 @@ include 'cn.php';
             <div class="panel panel-primary">
 				 <div class="panel_title" id="div_title"></div>
 				<div  class="panel-body" id="leftcontent">
-                <div id="divnav" style="background:;">
-                    <div class="form-group">
-                        <input type="button" data-toggle="modal" data-target="#myModal" value="Add New" class="btn btn-sm btn-warning" />
-                    </div>
-                </div>
+                <div id="divnav" style="background:;"></div>
                     <!-- start -->
-                    <div id="ShowAvailability"></div>
-                    <!-- end -->
+                    <div class="form-group">
+                        <button id="uploadedfiles" class="btn btn-primary">Show Uploaded Files</button>
+                    </div>
+                    <form action="pages/showuploads.php" id="uploads" name="files" method="POST" enctype="multipart/form-data" class="dropzone"></form>
+                    
+                      <br />
 
+
+                    <div id="showuploads"></div>
+                    <!-- end -->
+                  
                   
 				</div>	
 			</div> 
         </div><!--/.col-xs-12.col-sm-9-->
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add Availability</h4>
-                    </div>
-                    <div class="modal-body">
-                    <form method="POST">
-			<div class="form-group">
-				<label for="day">Day</label>
-				<input type="text" name="day" id="day" class="form-control" >
-			</div>
 
-			<div id="datepairExample">	
-				<div class="form-group clockpickerfrom">
-					<label for="from">From</label>
-					<input type="text" class="form-control time start" id="from">
-				</div>
-
-				<div class="form-group">
-					<label for="to">To</label>
-					<input type="text" class="form-control timepicker time end" id="to">
-				</div>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" onclick="AddAvailability()" class="btn btn-primary" >Add</button>
-			</div>
-        </form>
-                    </div>
-                </div>
-            </div> 
-        </div>
+        
+<html>
+ <body>
+    
+ 
+ </body>
+</html>
+        
 
 </div>
       <hr>
@@ -272,124 +236,29 @@ include 'cn.php';
 				</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="bt/js/bootstrap.min.js"></script>
-	
     <script src="bt/assets/js/ie10-viewport-bug-workaround.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/y_crud.js"></script>
 		<script type="text/javascript" src="js/y_crud_template.js"></script>
 	 <script src="bt/js/offcanvas.js"></script>
-	 	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
 
-<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-
-<script type="text/javascript" src="bt/js/jquery.timepicker.min.js"></script>
-<script type="text/javascript" src="bt/js/jquery.datepair.min.js"></script>
-<script src="https://jonthornton.github.io/jquery-timepicker/jquer  y.timepicker.js"></script>
-<script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
 	</body>
-<script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-<script src="vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-<script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-<script src="vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-<script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-<script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+
   
 <script>
-
-$( "#day" ).datepicker({
-		buttonImageOnly: true,
-		dateFormat:'yy-mm-dd',
-		changeYear: true,
-		changeMonth: true,
-		minDate: 0
-	});
-
-
-    // initialize input widgets first
-    $('#datepairExample .time').timepicker({
-        'showDuration': true,
-        'timeFormat': 'h:i A',
-		'minTime' : '08:00:00',
-		'maxTime' : '22:00:00'
-    });
-
-
-    // initialize datepair
-    $('#datepairExample').datepair();
-
-    function AddAvailability() {
-		var day = $('#day').val();
-		var from = $('#from').val();
-		var to = $('#to').val();
-
-		$.ajax({
-			type: 'POST',
-			url: 'pages/AddAvailabilityExecution.php',
-			data: { action: 'add', day: day, from: from, to: to },
-			success:function(){
-				ShowAvailability()
-			}
-		});
-	}
-
-	function DeleteAvailability($id) {
-		var id = $id;
-		$.ajax({
-			type: 'POST',
-			url: 'pages/AddAvailabilityExecution.php',
-			data: { action: 'delete', id: id},
-			success:function(){
-				ShowAvailability()
-			}
-		});
-	}
-
 	
-function ShowAvailability() {
-		$.ajax({
-			url: 'pages/ShowAvailability.php',
-			cache:false,
-			success:function(data){
-				$('#ShowAvailability').html(data);
-			}
-		});
-	}
+    $('#uploadedfiles').click(function(){
+        $.ajax({
+            type: 'GET',
+            url : 'pages/showfiles.php',
+            success:function(data){
+                $('#showuploads').html(data);
+            }
+        })  
+    })
 
-
-	function show_patient_history() {
-		$.ajax({
-			url: 'pages/show_patient_history.php',
-			cache:false,
-			success:function(data){
-				$('#show_patient_history').html(data);
-			}
-		});
-	}
-show_patient_history();
-
-
-function notify(id) {
-  $('#notify'+id).html('Please Wait').attr('disabled',true);
-  $.ajax({
-    type: 'POST',
-    url: 'pages/notify_patient.php',
-    cache: false,
-    data: { action : 'declined', id : id },
-    success:function() {
-      alert('An email has been sent');
-      $('#notify'+id).html('Notify Patient').attr('disabled',false);
-    }
-  });
-}
-ShowAvailability();
 </script>
 
 
 </html>
-

@@ -191,6 +191,7 @@
 	   <a href="view_appointment.php">View Appointment</a>
 	   <a href="patient_history.php">Patient History</a>
 		 <a href="generate_report.php" >Generate Report</a>
+		 <a href="my_uploads.php" >My Uploads</a>
      <a href="pages/logout.php" >Logout</a>
 	
 	<?php			

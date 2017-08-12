@@ -1,12 +1,7 @@
 <?php 
 session_start();
-if(empty($_SESSION['session_email'])){
-	header('location: index.php');
-}
 include 'cn.php';
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +13,7 @@ include 'cn.php';
     <meta name="author" content="">
     <link rel="icon" href="img/1.png">
 
-    <title>Online Appointment</title>
+    <title>Lagger's Lane</title>
 
 
     <link href="bt/css/bootstrap.min.css" rel="stylesheet">
@@ -28,14 +23,6 @@ include 'cn.php';
     <link href="css/index2.css" rel="stylesheet">
 	<link href="css/panels.css" rel="stylesheet">
 	<link href="css/hrs.css" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
-<link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
-
-  <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
-  <link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
-
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/base/jquery-ui.css">
 
 	<link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -148,7 +135,7 @@ include 'cn.php';
 			
             <li><a href="main.php" class="active">Home</a></li>
             <li><a href="main.php?p=about">About </a></li>
-            <li><a href="main.php?p=doctors_list">Doctors</a></li>
+            <li><a href="doctor_list.php">Doctors</a></li>
             <li><a href="main.php?p=news">News/Annoucements</a></li>
             <li><a href="main.php?p=contact_us">Contact Us</a></li>
             <li><a href="main.php?p=faq">Doctor Ratings/Feedbacks</a></li>
@@ -164,91 +151,44 @@ include 'cn.php';
 	</head>
 <body>
       <div class="row row-offcanvas row-offcanvas-left">
-	        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-		<div class="panel panel-primary">
-						 <div class="panel_title">Doctor</div>
-					
-				 <div class="panel-body" style="background: linear-gradient(to bottom, #eeeeef 0%, #c7c7cb 98%); background-image: -webkit-gradient(linear, left top, left bottom, from(#eeeeef), to(#98));
-  background-image: -webkit-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);
-  background-image:      -o-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);">
-				<div  class="list-group" >
-			
-            <a href="main.php" >Doctor Information</a>
-            <a href="my_availability.php">My Availability</a>
-            <a href="view_appointment.php" >View Appointments</a>
-            <a href="patient_history.php" >Patient History</a>
-			<a href="generate_report.php" >Generate Report</a>
-			<a href="my_uploads.php" >My Uploads</a>
-            <a href="pages/logout.php" >Logout</a>
-			
-			
-			
-
-		 
-	</br>
-	</br>
-	</div>
-	
-	
-
-      <!--/.sidebar-offcanvas-->
-				</div>	
-		</div>
-      </div><!--/row-->
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm12">
           <p class="pull-left visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><<<</button>
           </p>
             <div class="panel panel-primary">
 				 <div class="panel_title" id="div_title"></div>
 				<div  class="panel-body" id="leftcontent">
-                <div id="divnav" style="background:;">
-                    <div class="form-group">
-                        <input type="button" data-toggle="modal" data-target="#myModal" value="Add New" class="btn btn-sm btn-warning" />
-                    </div>
-                </div>
+
                     <!-- start -->
-                    <div id="ShowAvailability"></div>
+        <table style="width:100%" id="datatable-buttons" class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Specialization</th>
+              <th>Years of Experience</th>
+              <th style="width:1%"></th>
+            </tr>
+          </thead>
+            <?php $query = $db->query("SELECT * FROM doctor");
+            $i = 0;
+            foreach($query as $row):   $id = $row['id']; ?>
+            
+              <tr>
+                  <td style="width:1%"><?php echo ++$i?></td>
+                  <td><?php echo 'Dr. '.$row['FN']. ' ' . $row['MN'] . ' ' . $row['LN'] . ' ' .$row['SN']?></td>
+                  <td><?php echo $row['SPECIALIZATION']?></td>
+                  <td><?php echo $row['YEARS']?></td>
+                  <td style="width:1%"><a class="btn btn-primary" href='doctor_information.php?id=<?php echo $id?>'>More</a>  </td>
+            <?php endforeach ?>
+        </table>
+
                     <!-- end -->
 
-                  
+
 				</div>	
 			</div> 
         </div><!--/.col-xs-12.col-sm-9-->
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add Availability</h4>
-                    </div>
-                    <div class="modal-body">
-                    <form method="POST">
-			<div class="form-group">
-				<label for="day">Day</label>
-				<input type="text" name="day" id="day" class="form-control" >
-			</div>
 
-			<div id="datepairExample">	
-				<div class="form-group clockpickerfrom">
-					<label for="from">From</label>
-					<input type="text" class="form-control time start" id="from">
-				</div>
-
-				<div class="form-group">
-					<label for="to">To</label>
-					<input type="text" class="form-control timepicker time end" id="to">
-				</div>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" onclick="AddAvailability()" class="btn btn-primary" >Add</button>
-			</div>
-        </form>
-                    </div>
-                </div>
-            </div> 
-        </div>
 
 </div>
       <hr>
@@ -260,6 +200,7 @@ include 'cn.php';
 
   </body>
 </html>			
+
 
 					</div>
 				</div>
@@ -279,13 +220,6 @@ include 'cn.php';
 		<script type="text/javascript" src="js/y_crud_template.js"></script>
 	 <script src="bt/js/offcanvas.js"></script>
 	 	
-
-<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-
-<script type="text/javascript" src="bt/js/jquery.timepicker.min.js"></script>
-<script type="text/javascript" src="bt/js/jquery.datepair.min.js"></script>
-<script src="https://jonthornton.github.io/jquery-timepicker/jquer  y.timepicker.js"></script>
-<script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
 	</body>
 <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -301,94 +235,54 @@ include 'cn.php';
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
   
 <script>
+$(document).ready(function() {
+        var handleDataTableButtons = function() {
+          if ($("#datatable-buttons").length) {
+            $("#datatable-buttons").DataTable({
+              responsive: true
+            });
+          }
+        };
 
-$( "#day" ).datepicker({
-		buttonImageOnly: true,
-		dateFormat:'yy-mm-dd',
-		changeYear: true,
-		changeMonth: true,
-		minDate: 0
-	});
+        TableManageButtons = function() {
+          "use strict";
+          return {
+            init: function() {
+              handleDataTableButtons();
+            }
+          };
+        }();
 
+        $('#datatable').dataTable();
 
-    // initialize input widgets first
-    $('#datepairExample .time').timepicker({
-        'showDuration': true,
-        'timeFormat': 'h:i A',
-		'minTime' : '08:00:00',
-		'maxTime' : '22:00:00'
-    });
+        $('#datatable-keytable').DataTable({
+          keys: true
+        });
 
-
-    // initialize datepair
-    $('#datepairExample').datepair();
-
-    function AddAvailability() {
-		var day = $('#day').val();
-		var from = $('#from').val();
-		var to = $('#to').val();
-
-		$.ajax({
-			type: 'POST',
-			url: 'pages/AddAvailabilityExecution.php',
-			data: { action: 'add', day: day, from: from, to: to },
-			success:function(){
-				ShowAvailability()
-			}
-		});
-	}
-
-	function DeleteAvailability($id) {
-		var id = $id;
-		$.ajax({
-			type: 'POST',
-			url: 'pages/AddAvailabilityExecution.php',
-			data: { action: 'delete', id: id},
-			success:function(){
-				ShowAvailability()
-			}
-		});
-	}
-
-	
-function ShowAvailability() {
-		$.ajax({
-			url: 'pages/ShowAvailability.php',
-			cache:false,
-			success:function(data){
-				$('#ShowAvailability').html(data);
-			}
-		});
-	}
+        $('#datatable-responsive').DataTable();
 
 
-	function show_patient_history() {
-		$.ajax({
-			url: 'pages/show_patient_history.php',
-			cache:false,
-			success:function(data){
-				$('#show_patient_history').html(data);
-			}
-		});
-	}
-show_patient_history();
+        $('#datatable-fixed-header').DataTable({
+          fixedHeader: true
+        });
 
+        var $datatable = $('#datatable-checkbox');
 
-function notify(id) {
-  $('#notify'+id).html('Please Wait').attr('disabled',true);
-  $.ajax({
-    type: 'POST',
-    url: 'pages/notify_patient.php',
-    cache: false,
-    data: { action : 'declined', id : id },
-    success:function() {
-      alert('An email has been sent');
-      $('#notify'+id).html('Notify Patient').attr('disabled',false);
-    }
-  });
-}
-ShowAvailability();
-</script>
+        $datatable.dataTable({
+          'order': [[ 1, 'asc' ]],
+          'columnDefs': [
+            { orderable: false, targets: [0] }
+          ]
+        });
+        $datatable.on('draw.dt', function() {
+          $('input').iCheck({
+            checkboxClass: 'icheckbox_flat-green'
+          });
+        });
+
+        TableManageButtons.init();
+      });
+    </script>
 
 
 </html>

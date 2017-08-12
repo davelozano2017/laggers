@@ -137,7 +137,7 @@ include 'cn.php';
 			
             <li><a href="main.php" class="active">Home</a></li>
             <li><a href="main.php?p=about">About </a></li>
-            <li><a href="main.php?p=doctors_list">Doctors</a></li>
+            <li><a href="doctor_list.php">Doctors</a></li>
             <li><a href="main.php?p=news">News/Annoucements</a></li>
             <li><a href="main.php?p=contact_us">Contact Us</a></li>
             <li><a href="main.php?p=faq">Doctor Ratings/Feedbacks</a></li>
