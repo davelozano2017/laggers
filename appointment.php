@@ -17,7 +17,6 @@ include 'cn.php';
 
     <title>Online Appointment</title>
 
-
     <link href="bt/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="bt/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -38,7 +37,8 @@ include 'cn.php';
   <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
   <link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
 
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+
 	<link href='bt/css/fullcalendar.min.css' rel='stylesheet' />
 	<link href='bt/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 	
@@ -227,56 +227,23 @@ include 'cn.php';
 				<div  class="panel-body" id="leftcontent">
 
                     <!-- start -->
-
-<div id='calendar'></div>
-<div id='datepicker'></div>
-
-<div class="modal fade" tabindex="-1" role="dialog" data-toggle="modal" data-target="#form-content">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Schedule</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="specialization">Search by Specialization</label>
+                <select class="form-control specialization" id="search" style="width:100%">
+                    <option value="" selected></option>
+                    <?php $query = $db->query("SELECT * FROM specialization");
+                    foreach ($query as $row) : ?>
+                        <option value="<?php echo $row['specialization']?>"><?php echo $row['specialization']?></option>
+                    <?php endforeach;?>
+                </select>
             </div>
-            <form method="POST">
-                <div class="modal-body">
-                    <input type="hidden" name="hiddenid" id="hiddenid">
-                    <input type="hidden" name="doctor_email" id="doctor_email">
-                    <input type="hidden" name="day" id="day">
-                    <div class="form-group">
-                        <label for="">Name</label>
-                        <p class="form-control" id="title"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Available From - To</label>
-                        <p class="form-control" id="from"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Specialization</label>
-                        <p class="form-control" id="specialization"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Choose Time</label>
-                        <input type="text" class="form-control timepicker" id="chosentime">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Purpose</label>
-                        <input type="text" class="form-control" id="purpose">
-                    </div>
-
-                </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="bt n btn-primary" id="submit">Submit</button>
-            </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+    
+    <div id="calendarshow"></div>
+    <div id="calendarerror" class=""></div>
 
                     
                     <!-- end -->
@@ -335,105 +302,109 @@ include 'cn.php';
 <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
 <script type="text/javascript" src="bt/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="bt/js/jquery.timepicker.min.js"></script>
-    <script src="bt/assets/js/ie-emulation-modes-warning.js"></script>
-  
-<script>
-
-		$.ajax({
-			type:'POST',
-			dataType: 'json',
-			url : 'functions.php',
-			success:function(data){
-				
-				 $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            defaultDate: new Date(),
-            navLinks: true, // can click day/week names to navigate views
-            selectable: true,
-            select: function(start, end) {
-                // Display the modal.
-                // You could fill in the start and end fields based on the parameters
-                $('.modal').modal('show');
-				$('.modal').find('#title').text('');
-                $('.modal').find('#from').text('');
-                $('.modal').find('#hiddenid').val('');
-                $('.modal').find('#doctor_email').val('');
-                $('.modal').find('#specialization').text('');
-                $('.modal').find('#day').val('');
-				$('#submit').attr('disabled',true);
-            },
-            eventClick: function(event, element) {
-                // Display the modal and set the values to the event values.
-                $('.modal').modal('show');
-                $('.modal').find('#title').text(event.title);
-                $('.modal').find('#from').text(event.time_from + ' - ' + event.time_to);
-                $('.modal').find('#hiddenid').val(event.id);
-                $('.modal').find('#doctor_email').val(event.email);
-                $('.modal').find('#specialization').text(event.SPECIALIZATION);
-                $('.modal').find('#day').val(event.day);
-                
-				$('#submit').attr('disabled',false);
-				
-                $('.timepicker').timepicker({ 
-                    'timeFormat': 'g:i A',
-                    minTime:  event.time_base_from,
-                    maxTime: event.time_base_to
-                    
-                });
-            },
-            
-			
-            editable: false,
-            eventLimit: true,
-            events: data,function(){
-                
-            }
+<script src="bt/assets/js/ie-emulation-modes-warning.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script type="text/javascript">
+  $(".specialization").select2({
+          placeholder: "Select Doctor's Specialization",
+          allowClear: true
+    });
 
 
-        });
-       
 
-        $('#submit').on('click', function() {
-			$('#submit').attr('disabled',false);
-            var doctor_email = $('#doctor_email').val();
-            var hiddenid = $('#hiddenid').val();
-            var day = $('#day').val();
-            var chosentime = $('#chosentime').val();
-            var purpose = $('#purpose').val();
+
+
+    function search() {
+        
+        $('#search').change(function(e){
+        e.preventDefault();
+        var search = $('#search').val();
+        showcalendar() 
+            // start ajax
             $.ajax({
-                type: 'POST',
-                url : 'function_appointment.php',
-                cache:false,
+                type:'POST',
+                url : 'functions.php',
+                data: { action : 'search', specialization : search },
                 dataType: 'json',
-                data: { 
-                    action : 'submit', hiddenid : hiddenid, 
-                    day : day, doctor_email : doctor_email,
-                    chosentime : chosentime, purpose : purpose 
-                },
-                success:function(response){
-                    if(response.success == true) {
-                        alert(response.message)
-                    } else {
-                        alert(response.message)
-                    }
+                success:function(data){
+                    // start calendar
+                    $('#calendar').fullCalendar({
+                        displayEventTime : false,
+                        header: {
+                            left: 'next today',
+                            center: 'title',
+                            right: 'month,agendaWeek,agendaDay'
+                        },
+                        defaultDate: new Date(),
+                        navLinks: true,  
+                        selectable: true,
+                        select: function(start, end) {
+                            $('.modal').modal({ backdrop: 'static', keyboard: false })
+                            $('.modal').find('#title').text('');
+                            $('.modal').find('#from').text('');
+                            $('.modal').find('#hiddenid').val('');
+                            $('.modal').find('#doctor_email').val('');
+                            $('.modal').find('#specialization').text('');
+                            $('.modal').find('#day').val('');
+                            $('.modal').find('#chosentime').val('');
+                            $('#submit').attr('disabled',true);
+                            $('.timepicker').timepicker('remove');
+                        },
+
+                        eventClick: function(event, element) {
+
+                            $('.timepicker').timepicker({ 
+                                'timeFormat': 'g:i A',
+                                minTime:  event.time_base_from,
+                                maxTime: event.time_base_to
+                                
+                            });
+                            // Display the modal and set the values to the event values.
+                            $('.modal').modal({ backdrop: 'static', keyboard: false })
+                            $('.modal').find('#title').text(event.title);
+                            $('.modal').find('#from').text(event.time_from + ' - ' + event.time_to);
+                            $('.modal').find('#hiddenid').val(event.id);
+                            $('.modal').find('#doctor_email').val(event.email);
+                            $('.modal').find('#specialization').text(event.SPECIALIZATION);
+                            $('.modal').find('#day').val(event.day);
+                            $('.modal').find('#chosentime').val('');
+
+                            
+                            $('#submit').attr('disabled',false);
+                        
+                        },
+                            editable: false,
+                            eventLimit: true,
+                            events: data
+
+                    });
+                    $('#calendarerror').hide();
+                    
+                    
+                    // end calendar
+                },error:function() {
+                $('#calendarerror').show();
+                $('#calendarerror').html('No result found').addClass('alert alert-danger');
+
                 }
             });
-            $('.modal').modal('hide');
-        });
-			}
-		});
-    
-    
-        
+            // end ajax
+        })
+    }
 
-// $('.modal').modal({backdrop: 'static', keyboard: false})  
+    search();
+
+    function showcalendar() {
+        $.ajax({
+            url : 'calendarshow.php',
+            success:function(data){
+                $('#calendarshow').html(data)
+            }
+        });
+    }
+
 
 </script>
-
 
 </html>
 

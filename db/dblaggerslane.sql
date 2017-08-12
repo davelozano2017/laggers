@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2017 at 12:40 PM
+-- Generation Time: Aug 12, 2017 at 08:42 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -46,7 +46,7 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`id`, `email`, `chosentime`, `purpose`, `patient_name`, `patient_email`, `status`, `reference_code`, `date`, `datetime`) VALUES
-(46, 'cabugajeddahlyn@gmail.com', '10:30:00', 'Check Up', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, 'RITFFOUZYW', '2017-08-12', '2017-08-12 03:26:41');
+(55, 'cabugajeddahlyn@gmail.com', '10:00:00', 'check up', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 0, 'AEYIEZAZFD', '2017-08-21', '2017-08-12 18:40:53');
 
 -- --------------------------------------------------------
 
@@ -94,10 +94,12 @@ CREATE TABLE `availability` (
 --
 
 INSERT INTO `availability` (`id`, `title`, `day`, `time_from`, `time_to`, `start`, `end`, `email`, `time_base_from`, `time_base_to`) VALUES
-(78, 'Dr. iamdoctor iamdoctor iamdoctor', '2017-08-14', '2 PM', '5 PM', '2017-08-14T02:00:00', '2017-08-14T17:30:00', 'iamdoctor@yahoo.com', '14:00:00', '17:30:00'),
-(81, 'Dr. iamdoctor iamdoctor iamdoctor', '2017-08-14', '8 AM', '11 AM', '2017-08-14T08:00:00', '2017-08-14T11:00:00', 'iamdoctor@yahoo.com', '08:00:00', '11:00:00'),
-(83, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-12', '10 AM', '3 PM', '2017-08-12T10:00:00', '2017-08-12T15:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '15:00:00'),
-(86, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-19', '8 AM', '11 AM', '2017-08-19T08:30:00', '2017-08-19T11:30:00', 'cabugajeddahlyn@gmail.com', '08:30:00', '11:30:00');
+(87, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-14', '10 AM', '2 PM', '2017-08-14T10:00:00', '2017-08-14T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00'),
+(88, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-16', '10 AM', '2 PM', '2017-08-16T10:00:00', '2017-08-16T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00'),
+(89, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-18', '10 AM', '2 PM', '2017-08-18T10:00:00', '2017-08-18T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00'),
+(90, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-21', '10 AM', '2 PM', '2017-08-21T10:00:00', '2017-08-21T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00'),
+(91, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-23', '10 AM', '2 PM', '2017-08-23T10:00:00', '2017-08-23T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00'),
+(92, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-25', '10 AM', '2 PM', '2017-08-25T10:00:00', '2017-08-25T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00');
 
 -- --------------------------------------------------------
 
@@ -187,16 +189,12 @@ INSERT INTO `doctor_rating` (`id`, `doctor_name`, `specialization`, `ratings`, `
 CREATE TABLE `doctor_upload` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `filename` varchar(255) NOT NULL
+  `patient_name` varchar(255) NOT NULL,
+  `patient_email` varchar(255) NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  `reference_code` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `doctor_upload`
---
-
-INSERT INTO `doctor_upload` (`id`, `email`, `filename`) VALUES
-(36, 'cabugajeddahlyn@gmail.com', 'female.jpg'),
-(37, 'cabugajeddahlyn@gmail.com', 'appointment.php');
 
 -- --------------------------------------------------------
 
@@ -275,7 +273,13 @@ INSERT INTO `logins` (`id`, `fid`, `dt`) VALUES
 (33, '25', '2017-08-12 04:19:44'),
 (34, '25', '2017-08-12 06:38:31'),
 (35, '25', '2017-08-12 06:42:38'),
-(36, '25', '2017-08-12 06:43:52');
+(36, '25', '2017-08-12 06:43:52'),
+(37, '25', '2017-08-12 10:56:49'),
+(38, '25', '2017-08-12 11:00:33'),
+(39, '25', '2017-08-12 11:55:25'),
+(40, '25', '2017-08-12 17:22:50'),
+(41, '25', '2017-08-12 18:34:27'),
+(42, '25', '2017-08-12 18:40:13');
 
 -- --------------------------------------------------------
 
@@ -601,7 +605,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `audit`
 --
@@ -611,7 +615,7 @@ ALTER TABLE `audit`
 -- AUTO_INCREMENT for table `availability`
 --
 ALTER TABLE `availability`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 --
 -- AUTO_INCREMENT for table `comments`
 --
@@ -631,12 +635,12 @@ ALTER TABLE `doctor_rating`
 -- AUTO_INCREMENT for table `doctor_upload`
 --
 ALTER TABLE `doctor_upload`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 --
 -- AUTO_INCREMENT for table `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `patient`
 --

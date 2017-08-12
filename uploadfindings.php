@@ -1,12 +1,16 @@
 <?php 
 session_start();
-if(empty($_SESSION['session_email'])){
-	header('location: index.php');
-}
+$email = $_SESSION['session_email'];
 include 'cn.php';
+$id = $_GET['id'];
+$_SESSION['patient_id'] = $id;
+$query = $db->query("SELECT * FROM appointment WHERE id = $id");
+$row = $query->fetch_object();
+$patient_name = $row->patient_name;
+$reference_code = $row->reference_code;
+$patient_email = $row->patient_email;
+$purpose = $row->purpose;
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +22,7 @@ include 'cn.php';
     <meta name="author" content="">
     <link rel="icon" href="img/1.png">
 
-    <title>Online Appointment</title>
+    <title>Lagger's Lane</title>
 
 
     <link href="bt/css/bootstrap.min.css" rel="stylesheet">
@@ -29,19 +33,12 @@ include 'cn.php';
 	<link href="css/panels.css" rel="stylesheet">
 	<link href="css/hrs.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
-<link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
-
-  <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
-  <link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
-
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/base/jquery-ui.css">
-
 	<link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css" rel="stylesheet">
 
     <script src="bt/assets/js/ie-emulation-modes-warning.js"></script>
 
@@ -148,7 +145,7 @@ include 'cn.php';
 			
             <li><a href="main.php" class="active">Home</a></li>
             <li><a href="main.php?p=about">About </a></li>
-            <li><a href="main.php?p=doctors_list">Doctors</a></li>
+            <li><a href="doctor_list.php">Doctors</a></li>
             <li><a href="main.php?p=news">News/Annoucements</a></li>
             <li><a href="main.php?p=contact_us">Contact Us</a></li>
             <li><a href="main.php?p=faq">Doctor Ratings/Feedbacks</a></li>
@@ -164,91 +161,48 @@ include 'cn.php';
 	</head>
 <body>
       <div class="row row-offcanvas row-offcanvas-left">
-	        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-		<div class="panel panel-primary">
-						 <div class="panel_title">Doctor</div>
-					
-				 <div class="panel-body" style="background: linear-gradient(to bottom, #eeeeef 0%, #c7c7cb 98%); background-image: -webkit-gradient(linear, left top, left bottom, from(#eeeeef), to(#98));
-  background-image: -webkit-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);
-  background-image:      -o-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);">
-				<div  class="list-group" >
-			
-            <a href="main.php" >Doctor Information</a>
-            <a href="my_availability.php">My Availability</a>
-            <a href="view_appointment.php" >View Appointments</a>
-            <a href="patient_history.php" >Patient History</a>
-			<a href="generate_report.php" >Generate Report</a>
-			<a href="my_uploads.php" >My Uploads</a>
-            <a href="pages/logout.php" >Logout</a>
-			
-			
-			
-
-		 
-	</br>
-	</br>
-	</div>
-	
-	
-
-      <!--/.sidebar-offcanvas-->
-				</div>	
-		</div>
-      </div><!--/row-->
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm12">
           <p class="pull-left visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><<<</button>
           </p>
             <div class="panel panel-primary">
 				 <div class="panel_title" id="div_title"></div>
 				<div  class="panel-body" id="leftcontent">
-                <div id="divnav" style="background:;">
-                    <div class="form-group">
-                        <input type="button" data-toggle="modal" data-target="#myModal" value="Add New" class="btn btn-sm btn-warning" />
-                    </div>
-                </div>
-                    <!-- start -->
-                    <div id="ShowAvailability"></div>
-                    <!-- end -->
 
-                  
+        <!-- start -->  
+
+        
+                    <div class="form-group">
+                    <a href="my_uploads.php" class="btn btn-info">Back</a>
+                    <button id="uploadedfiles" class="btn btn-primary">Show  Files</button>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <p class="">Patient Name: <?php echo $patient_name?></p>
+                        </div>
+
+                        <div class="form-group">
+                          <p class="">Purpose: <?php echo $purpose?></p>
+                        </div>
+                      </div>
+                    </div>
+                    <form action="pages/showuploads.php" id="uploads" name="files" method="POST" enctype="multipart/form-data" class="dropzone">
+
+                    <input type="hidden" name="email" value="<?php echo $patient_email?>">
+                    <input type="hidden" name="name" value="<?php echo $patient_name?>">
+                    <input type="hidden" name="reference_code" value="<?php echo $reference_code?>">
+                    </form>
+                    
+                      <br />
+
+
+                    <div id="showuploads"></div>
+                    <!-- end -->                    
+
 				</div>	
 			</div> 
         </div><!--/.col-xs-12.col-sm-9-->
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add Availability</h4>
-                    </div>
-                    <div class="modal-body">
-                    <form method="POST">
-			<div class="form-group">
-				<label for="day">Day</label>
-				<input type="text" name="day" id="day" class="form-control" >
-			</div>
 
-			<div id="datepairExample">	
-				<div class="form-group clockpickerfrom">
-					<label for="from">From</label>
-					<input type="text" class="form-control time start" id="from">
-				</div>
-
-				<div class="form-group">
-					<label for="to">To</label>
-					<input type="text" class="form-control timepicker time end" id="to">
-				</div>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" onclick="AddAvailability()" class="btn btn-primary" >Add</button>
-			</div>
-        </form>
-                    </div>
-                </div>
-            </div> 
-        </div>
 
 </div>
       <hr>
@@ -260,6 +214,7 @@ include 'cn.php';
 
   </body>
 </html>			
+
 
 					</div>
 				</div>
@@ -279,13 +234,6 @@ include 'cn.php';
 		<script type="text/javascript" src="js/y_crud_template.js"></script>
 	 <script src="bt/js/offcanvas.js"></script>
 	 	
-
-<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-
-<script type="text/javascript" src="bt/js/jquery.timepicker.min.js"></script>
-<script type="text/javascript" src="bt/js/jquery.datepair.min.js"></script>
-<script src="https://jonthornton.github.io/jquery-timepicker/jquer  y.timepicker.js"></script>
-<script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
 	</body>
 <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -299,97 +247,28 @@ include 'cn.php';
 <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+
 <script>
-
-$( "#day" ).datepicker({
-		buttonImageOnly: true,
-		dateFormat:'yy-mm-dd',
-		changeYear: true,
-		changeMonth: true,
-		minDate: 0
-	});
-
-
-    // initialize input widgets first
-    $('#datepairExample .time').timepicker({
-        'showDuration': true,
-        'timeFormat': 'h:i A',
-		'minTime' : '08:00:00',
-		'maxTime' : '22:00:00'
-    });
-
-
-    // initialize datepair
-    $('#datepairExample').datepair();
-
-    function AddAvailability() {
-		var day = $('#day').val();
-		var from = $('#from').val();
-		var to = $('#to').val();
-
-		$.ajax({
-			type: 'POST',
-			url: 'pages/AddAvailabilityExecution.php',
-			data: { action: 'add', day: day, from: from, to: to },
-			success:function(){
-				ShowAvailability()
-			}
-		});
-	}
-
-	function DeleteAvailability($id) {
-		var id = $id;
-		$.ajax({
-			type: 'POST',
-			url: 'pages/AddAvailabilityExecution.php',
-			data: { action: 'delete', id: id},
-			success:function(){
-				ShowAvailability()
-			}
-		});
-	}
-
 	
-function ShowAvailability() {
-		$.ajax({
-			url: 'pages/ShowAvailability.php',
-			cache:false,
-			success:function(data){
-				$('#ShowAvailability').html(data);
-			}
-		});
-	}
+    $('#uploadedfiles').click(function(){
+        $.ajax({
+            url : 'pages/showfiles.php',
+            success:function(data){
+                $('#showuploads').html(data);
+            }
+        })  
+    })
 
 
-	function show_patient_history() {
-		$.ajax({
-			url: 'pages/show_patient_history.php',
-			cache:false,
-			success:function(data){
-				$('#show_patient_history').html(data);
-			}
-		});
-	}
-show_patient_history();
+    $.ajax({
+            url : 'pages/showfiles.php',
+            success:function(data){
+                $('#showuploads').html(data);
+            }
+        })  
 
-
-function notify(id) {
-  $('#notify'+id).html('Please Wait').attr('disabled',true);
-  $.ajax({
-    type: 'POST',
-    url: 'pages/notify_patient.php',
-    cache: false,
-    data: { action : 'declined', id : id },
-    success:function() {
-      alert('An email has been sent');
-      $('#notify'+id).html('Notify Patient').attr('disabled',false);
-    }
-  });
-}
-ShowAvailability();
 </script>
-
 
 </html>
 

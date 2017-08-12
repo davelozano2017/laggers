@@ -6,8 +6,12 @@
             session_start();
             include '../cn.php';
             $email = $_SESSION['session_email'];
-
-            $query = $db->query("SELECT * FROM doctor_upload WHERE email = '$email'");
+            $id = $_SESSION['patient_id'];
+            $q = $db->query("SELECT * FROM appointment WHERE id = $id");
+            $row = $q->fetch_object();
+            $patient_email = $row->patient_email;
+            $reference_code = $row->reference_code;
+            $query = $db->query("SELECT * FROM doctor_upload WHERE email = '$email' AND reference_code = '$reference_code'");
             foreach($query as $row) : ?>
                 <div class="col-md-4">
                     <div class="well">
