@@ -167,7 +167,8 @@
 	?>
 			<hr class="hr2" style="margin:0px"/>
 			<a onclick="show_page('profile_admin','0')" >Profile</a>
-           <a onclick="show_page('visits','0')" class="list-group-items">Logins</a>
+			<a onclick="show_page('visits','0')" class="list-group-items">Logins</a>
+			<a onclick="show_page('count_appointment','0')" class="list-group-items">Total Appointments</a>
 		   <a onclick="show_page('patientpending/y','1')" class="list-group-items">Patient Permission</a>
 		   <hr class="hr2" style="margin:0px"/>
 		    <a onclick="show_page('doctors/y','1')" class="list-group-items">Doctors</a>
