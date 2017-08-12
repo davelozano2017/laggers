@@ -24,8 +24,10 @@ include '../cn.php';
     $id = $row['id'];
     $myDate = new DateTime($row['date']);
     $date = $myDate->format('D, M d, Y');
+    $purpose = $row['purpose'];
     $patient_name = $row['patient_name'];
     $patient_email = $row['patient_email'];
+    $reference_code = $row['reference_code'];
     $appointment = $date. ' '.date('g:i A', strtotime($row['chosentime']));
 
     
@@ -36,7 +38,7 @@ include '../cn.php';
             <td><?php echo $patient_name?></td>
             <td><?php echo $patient_email?></td>
             <td><?php echo $appointment?></td>
-            <td><button class="btn btn-primary" onclick="showmodal('<?php echo $id?>','<?php echo $patient_name?>','<?php echo $patient_email?>','<?php echo $appointment?>')">Modify</button></td>
+            <td><button class="btn btn-primary" onclick="showmodal('<?php echo $id?>','<?php echo $patient_name?>','<?php echo $patient_email?>','<?php echo $appointment?>','<?php echo $purpose?>','<?php echo $reference_code?>')">Modify</button></td>
         </tr>
     
 

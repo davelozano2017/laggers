@@ -201,6 +201,7 @@ include 'cn.php';
             <a href="#" onclick="show_page('profile','0')" >Personal Information</a>
             <a href="appointment.php" >View Appointments</a>
             <a href="my_history.php">My History</a>
+            <a href="billing.php">Billing</a>
             <a href="pages/logout.php" >Logout</a>
 			
 			
@@ -262,10 +263,15 @@ include 'cn.php';
                         <input type="text" class="form-control timepicker" id="chosentime">
                     </div>
 
+                    <div class="form-group">
+                        <label for="">Purpose</label>
+                        <input type="text" class="form-control" id="purpose">
+                    </div>
+
                 </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="submit">Submit</button>
+                <button type="button" class="bt n btn-primary" id="submit">Submit</button>
             </div>
             </form>
         </div><!-- /.modal-content -->
@@ -397,12 +403,17 @@ include 'cn.php';
             var hiddenid = $('#hiddenid').val();
             var day = $('#day').val();
             var chosentime = $('#chosentime').val();
+            var purpose = $('#purpose').val();
             $.ajax({
                 type: 'POST',
                 url : 'function_appointment.php',
                 cache:false,
                 dataType: 'json',
-                data: { action : 'submit', hiddenid : hiddenid, day : day, doctor_email : doctor_email, chosentime : chosentime },
+                data: { 
+                    action : 'submit', hiddenid : hiddenid, 
+                    day : day, doctor_email : doctor_email,
+                    chosentime : chosentime, purpose : purpose 
+                },
                 success:function(response){
                     if(response.success == true) {
                         alert(response.message)

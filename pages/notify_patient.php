@@ -34,5 +34,4 @@ if($_POST['action'] == 'declined') {
     } else {
     echo 'Successfully Sent';
     }
-
 }

@@ -29,6 +29,14 @@ include 'cn.php';
 	<link href="css/panels.css" rel="stylesheet">
 	<link href="css/hrs.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
+<link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
+
+  <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/base/jquery-ui.css">
+
 	<link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
@@ -169,7 +177,7 @@ include 'cn.php';
             <a href="my_availability.php">My Availability</a>
             <a href="view_appointment.php" >View Appointments</a>
             <a href="patient_history.php" >Patient History</a>
-            <a href="generate_report.php" >Generate Report</a>
+			<a href="generate_report.php" >Generate Report</a>
             <a href="pages/logout.php" >Logout</a>
 			
 			
@@ -193,16 +201,53 @@ include 'cn.php';
             <div class="panel panel-primary">
 				 <div class="panel_title" id="div_title"></div>
 				<div  class="panel-body" id="leftcontent">
-
+                <div id="divnav" style="background:;">
+                    <div class="form-group">
+                        <input type="button" data-toggle="modal" data-target="#myModal" value="Add New" class="btn btn-sm btn-warning" />
+                    </div>
+                </div>
                     <!-- start -->
-								<div id="show_patient_history"></div>
+                    <div id="ShowAvailability"></div>
                     <!-- end -->
 
-
+                  
 				</div>	
 			</div> 
         </div><!--/.col-xs-12.col-sm-9-->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Availability</h4>
+                    </div>
+                    <div class="modal-body">
+                    <form method="POST">
+			<div class="form-group">
+				<label for="day">Day</label>
+				<input type="text" name="day" id="day" class="form-control" >
+			</div>
 
+			<div id="datepairExample">	
+				<div class="form-group clockpickerfrom">
+					<label for="from">From</label>
+					<input type="text" class="form-control time start" id="from">
+				</div>
+
+				<div class="form-group">
+					<label for="to">To</label>
+					<input type="text" class="form-control timepicker time end" id="to">
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" onclick="AddAvailability()" class="btn btn-primary" >Add</button>
+			</div>
+        </form>
+                    </div>
+                </div>
+            </div> 
+        </div>
 
 </div>
       <hr>
@@ -214,55 +259,6 @@ include 'cn.php';
 
   </body>
 </html>			
-
-<!-- Modal -->
-<div id="MyModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Patient Information</h4>
-      </div>
-      <div class="modal-body">
-		
-          <div class="form-group">
-            <label for="">Name</label>
-            <input type="hidden" id="hiddenid" class="form-control">
-            <input type="hidden" id="patient_name" class="form-control">
-            <input type="hidden" id="patient_email" class="form-control">
-            <input type="hidden" id="purpose" class="form-control">
-            <input type="hidden" id="reference_code" class="form-control">
-            <p id="display_patient_name" class="form-control"></p>
-          </div>
-
-          <div class="form-group">
-            <label for="">Email</label>
-                <p id="display_patient_email" class="form-control"></p>
-          </div>
-
-          <div class="form-group">
-          <label for="">Purpose</label>
-              <p id="display_purpose" class="form-control"></p>
-        </div>
-
-          <div class="form-group">
-            <label for="">Amount</label>
-            <input type="text" min=1 id="amount" class="form-control" required>
-          </div>
-            
-            </div>
-            <div class="modal-footer">
-              <div class="btn-group">
-            <button type="button" class="btn btn-primary" id="send">Send Payment</button>
-          </div>
-            </div>
-          </div>
-
-      </div>
-</div>
-<!-- end modal -->
 
 					</div>
 				</div>
@@ -282,6 +278,13 @@ include 'cn.php';
 		<script type="text/javascript" src="js/y_crud_template.js"></script>
 	 <script src="bt/js/offcanvas.js"></script>
 	 	
+
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+
+<script type="text/javascript" src="bt/js/jquery.timepicker.min.js"></script>
+<script type="text/javascript" src="bt/js/jquery.datepair.min.js"></script>
+<script src="https://jonthornton.github.io/jquery-timepicker/jquer  y.timepicker.js"></script>
+<script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
 	</body>
 <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -298,43 +301,77 @@ include 'cn.php';
   
 <script>
 
-function sendpayment(id) {
-  
-  $.ajax({
-    type: 'POST',
-    url: 'pages/retrievedata.php',
-    cache:false,
-    data: { action : 'sendpayment', id : id },
-    dataType: 'json',
-    success:function(response) {
-      if(response.success == true) {
-        $('#MyModal').modal('show');
-        $('#MyModal').find('#hiddenid').val(response.id);
-        $('#MyModal').find('#patient_name').val(response.patient_name);
-        $('#MyModal').find('#patient_email').val(response.patient_email);
-        $('#MyModal').find('#purpose').text(response.purpose);
-        $('#MyModal').find('#reference_code').val(response.reference_code);
-
-        $('#MyModal').find('#display_patient_name').text(response.patient_name);
-        $('#MyModal').find('#display_patient_email').text(response.patient_email);
-        $('#MyModal').find('#display_purpose').text(response.purpose);
+$( "#day" ).datepicker({
+		buttonImageOnly: true,
+		dateFormat:'yy-mm-dd',
+		changeYear: true,
+		changeMonth: true,
+		minDate: 0
+	});
 
 
-      }
-    }
-  });
-  
-}
+    // initialize input widgets first
+    $('#datepairExample .time').timepicker({
+        'showDuration': true,
+        'timeFormat': 'h:i A',
+		'minTime' : '08:00:00',
+		'maxTime' : '22:00:00'
+    });
 
-function show_patient_history() {
-  $.ajax({
-    url: 'pages/show_patient_history.php',
-    cache:false,
-    success:function(data){
-      $('#show_patient_history').html(data);
-    }
-  });
-}
+
+    // initialize datepair
+    $('#datepairExample').datepair();
+
+    function AddAvailability() {
+		var day = $('#day').val();
+		var from = $('#from').val();
+		var to = $('#to').val();
+
+		$.ajax({
+			type: 'POST',
+			url: 'pages/AddAvailabilityExecution.php',
+			data: { action: 'add', day: day, from: from, to: to },
+			success:function(){
+				ShowAvailability()
+			}
+		});
+	}
+
+	function DeleteAvailability($id) {
+		var id = $id;
+		$.ajax({
+			type: 'POST',
+			url: 'pages/AddAvailabilityExecution.php',
+			data: { action: 'delete', id: id},
+			success:function(){
+				ShowAvailability()
+			}
+		});
+	}
+
+	
+function ShowAvailability() {
+		$.ajax({
+			url: 'pages/ShowAvailability.php',
+			cache:false,
+			success:function(data){
+				$('#ShowAvailability').html(data);
+			}
+		});
+	}
+
+
+	function show_patient_history() {
+		$.ajax({
+			url: 'pages/show_patient_history.php',
+			cache:false,
+			success:function(data){
+				$('#show_patient_history').html(data);
+			}
+		});
+	}
+show_patient_history();
+
 
 function notify(id) {
   $('#notify'+id).html('Please Wait').attr('disabled',true);
@@ -349,46 +386,9 @@ function notify(id) {
     }
   });
 }
-
-function send() {
-  $('#send').click(function(e){
-    $('#send').html('Please Wait').attr('disabled',true);
-    e.preventDefault();
-    var hiddenid = $('#hiddenid').val();
-    var patient_name = $('#patient_name').val();
-    var patient_email = $('#patient_email').val();
-    var amount = $('#amount').val();
-    var reference_code = $('#reference_code').val();
-    $.ajax({
-      type: 'POST',
-      url: 'pages/sendpayment.php',
-      data: {
-        action : 'sendpayment', id : hiddenid, patient_name : patient_name, 
-        patient_email : patient_email, amount : amount, reference_code : reference_code 
-      },
-      dataType: 'json',
-      cache: false,
-      success:function(response){
-        if(response.success == true) {
-          $('#send').html('Send Payment').attr('disabled',false);
-          alert('Payment has been sent to patient ' + patient_name);
-          $('#MyModal').modal('hide');
-        } else if(response.success == 'falses') {
-          $('#send').html('Send Payment').attr('disabled',false);
-          alert('Amount is empty');
-        }else {
-          $('#send').html('Send Payment').attr('disabled',false);
-          alert('This patient was already received an email for payment');
-          $('#MyModal').modal('hide');
-        }
-      }
-    });
-  })
-}
-
-send();
-show_patient_history();
-
+ShowAvailability();
 </script>
+
+
 </html>
 

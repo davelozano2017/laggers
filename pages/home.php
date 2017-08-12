@@ -153,7 +153,7 @@
             <a href="#" onclick="show_page('profile','0')" >Personal Information</a>
             <a href="appointment.php">View Appointments</a>
             <a href="my_history.php">My History</a>
-           
+						<a href="billing.php">Billing</a>
             <a href="pages/logout.php" >Logout</a>
 			
 			
@@ -187,9 +187,10 @@
 			
 	?>
 	   <a  onclick="show_page('profile_doctor','0')" >Doctor Information</a>
-	   <a  onclick="show_page('my_availability','0')" >My Availability</a>
+	   <a href="my_availability.php">My Availability</a>
 	   <a href="view_appointment.php">View Appointment</a>
 	   <a href="patient_history.php">Patient History</a>
+		 <a href="generate_report.php" >Generate Report</a>
      <a href="pages/logout.php" >Logout</a>
 	
 	<?php			

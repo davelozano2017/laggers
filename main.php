@@ -279,15 +279,7 @@ include "function/enc.php";
 		});
 	}
 
-	function ShowAvailability() {
-		$.ajax({
-			url: 'pages/ShowAvailability.php',
-			cache:false,
-			success:function(data){
-				$('#ShowAvailability').html(data);
-			}
-		});
-	}
+	
 
 	
 	

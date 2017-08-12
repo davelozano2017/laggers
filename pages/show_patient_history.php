@@ -29,12 +29,11 @@ include '../cn.php';
     $appointment = $date. ' '.date('g:i A', strtotime($row['chosentime']));
     $status = $row['status'] == 1 ? '<label class="label label-primary">Approved</label>' : '<label class="label label-danger">Declined</label>';
 
-    $button = $row['status'] == 1 ? '' : '<button id="notify'.$id.'" onclick="notify('.$id.')" class="btn btn-danger">Notify Patient</button>';
+    $button = $row['status'] == 1 ? '<button id="sendpayment'.$id.'" onclick="sendpayment('.$id.')" class="btn btn-primary">Send Payment</button>' : '<button id="notify'.$id.'" onclick="notify('.$id.')" class="btn btn-danger">Notify Patient</button>';
     
     
 ?>
 
-        <input type="hidden" id="hiddenid" value="<?php echo $id?>">
         <tr>
             <td><?php echo $patient_name . count($query)?></td>
             <td><?php echo $patient_email?></td>

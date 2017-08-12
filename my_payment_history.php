@@ -2,48 +2,39 @@
 <?php 
 session_start();
 $email = $_SESSION['session_email'];
-include '../cn.php';
+include 'cn.php';
 ?>
- <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+ <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th>Patient Name</th>
-        <th>Patient Email</th>
-        <th>Status</th>
+        <th>Doctor Name</th>
+        <th>Amount</th>
+        <th>Reference Code</th>
+        <th>Date</th>
     </tr>
     </thead>
     <tbody>
     <?php 
     
-    $query = $db->query("SELECT * FROM appointment WHERE patient_email = '$email'");
+    $query = $db->query("SELECT * FROM payment WHERE patient_email = '$email'");
     if($query->num_rows == 0) {
         echo '<tr><td colspan=4 style="text-align:center">No record found.</td></tr>';
     } 
     foreach($query as $row) :
-    $id = $row['id'];
-    $myDate = new DateTime($row['date']);
-    $date = $myDate->format('D, M d, Y');
-    $patient_name = $row['patient_name'];
-    $patient_email = $row['patient_email'];
-    $appointment = $date. ' '.date('g:i A', strtotime($row['chosentime']));
-    if($row['status'] == 0) {
-        $status = '<label class="label label-warning">Pending</label>';
-    } elseif($row['status'] == 1) {
-        $status = '<label class="label label-primary">Approved</label>';
-    } elseif($row['status'] == 2) {
-        $status = '<label class="label label-primary">Declined</label>';
-    }
-
+    $doctor_name = $row['doctor_name'];
+    $amount = $row['amount'];
+    $reference_code = $row['reference_code'];
+    $date = $row['date'];
+    
 ?>
 
-        <input type="hidden" id="hiddenid" value="<?php echo $id?>">
         <tr>
-            <td><?php echo $patient_name . count($query)?></td>
-            <td><?php echo $patient_email?></td>
-            <td><?php echo $status?></td>
+        <td><?php echo "Dr. ".$doctor_name?></td>
+        <td><?php echo "&#8369;".number_format($amount,2,'.',',')?></td>
+        <td><?php echo $reference_code?></td>
+        <td><?php echo $date?></td>
         </tr>
     
-
 
     <?php  endforeach;  ?>
     </tbody>

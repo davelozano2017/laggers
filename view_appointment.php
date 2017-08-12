@@ -1,5 +1,8 @@
 <?php 
 session_start();
+if(empty($_SESSION['session_email'])){
+	header('location: index.php');
+}
 include 'cn.php';
 ?>
 
@@ -163,9 +166,10 @@ include 'cn.php';
 				<div  class="list-group" >
 			
             <a href="main.php" >Doctor Information</a>
-            <a href="main.php" >My Availability</a>
+            <a href="my_availability.php" >My Availability</a>
             <a href="view_appointment.php" >View Appointments</a>
             <a href="patient_history.php" >Patient History</a>
+						<a href="generate_report.php" >Generate Report</a>
             <a href="pages/logout.php" >Logout</a>
 			
 			
@@ -225,7 +229,7 @@ include 'cn.php';
 		
 		<div class="form-group">
 			<label for="">Name</label>
-	        <input type="hidden" id="hiddenid" class="form-control">
+	        <input type="hidden" id="hiddenid">
 	        <p id="patient_name" class="form-control"></p>
 		</div>
 
@@ -235,10 +239,15 @@ include 'cn.php';
 		</div>
 
 		<div class="form-group">
-			<label for="">Appointed Date</label>
-	        <p id="appointment" class="form-control"></p>
+				<label for="">Appointed Date</label>
+				<p id="appointment" class="form-control"></p>
 		</div>
-       
+
+		<div class="form-group">
+			<label for="">Purpose</label>
+			<p id="purpose" class="form-control"></p>
+		</div>
+
       </div>
       <div class="modal-footer">
         <div class="btn-group">
@@ -319,24 +328,27 @@ include 'cn.php';
 			}
 		});
 	}
-show_appointment();
+	show_appointment()
 
-	function showmodal($id,$patient_name,$patient_email,$appointment) {
+	function showmodal($id,$patient_name,$patient_email,$appointment,$purpose) {
 		var id = $id;
 		var patient_name = $patient_name;
 		var patient_email = $patient_email;
 		var appointment = $appointment;
+		var purpose = $purpose;
 		$('#MyModal').modal('show');
 		$('#MyModal').find('#hiddenid').val(id);
 		$('#MyModal').find('#patient_name').html(patient_name);
 		$('#MyModal').find('#patient_email').html(patient_email);
 		$('#MyModal').find('#appointment').html(appointment);
+		$('#MyModal').find('#purpose').html(purpose);
 	}
 
 	function approveordecline() {
 		$('#approve').click(function(e){
 			e.preventDefault();
 			var hiddenid = $('#hiddenid').val();
+			var reference_code = $('#reference_code').val();
 			$.ajax({
 				type: 'POST',
 				url : 'function_appointment.php',

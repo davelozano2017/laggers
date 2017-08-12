@@ -18,7 +18,7 @@ include 'cn.php';
     <meta name="author" content="">
     <link rel="icon" href="img/1.png">
 
-    <title>Online Appointment</title>
+    <title>Lagger's Lane</title>
 
 
     <link href="bt/css/bootstrap.min.css" rel="stylesheet">
@@ -195,7 +195,31 @@ include 'cn.php';
 				<div  class="panel-body" id="leftcontent">
 
                     <!-- start -->
-								<div id="show_patient_history"></div>
+                    <table style="width:100%" id="datatable-buttons" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Patient Name</th>
+                        <th>Patient Email</th>
+                        <th>Amount</th>
+                        <th>Reference Code</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                      <?php 
+                      $query = $db->query("SELECT * FROM payment WHERE doctor_email = '".$_SESSION['session_email']."'");
+                      foreach($query as $row): ?>
+                    <tbody>
+                            <tr>
+                            <td><?php echo $row['patient_name']?></td>
+                            <td><?php echo $row['patient_email']?></td>
+                            <td><?php echo "&#8369;".number_format($row['amount'],2,'.',',')?></td>
+                            <td><?php echo $row['reference_code']?></td>
+                            <td><?php echo $row['date']?></td>
+                            </tr>
+                    </tbody>
+                        <?php endforeach; ?>
+                  </table>
+
                     <!-- end -->
 
 
@@ -215,54 +239,6 @@ include 'cn.php';
   </body>
 </html>			
 
-<!-- Modal -->
-<div id="MyModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Patient Information</h4>
-      </div>
-      <div class="modal-body">
-		
-          <div class="form-group">
-            <label for="">Name</label>
-            <input type="hidden" id="hiddenid" class="form-control">
-            <input type="hidden" id="patient_name" class="form-control">
-            <input type="hidden" id="patient_email" class="form-control">
-            <input type="hidden" id="purpose" class="form-control">
-            <input type="hidden" id="reference_code" class="form-control">
-            <p id="display_patient_name" class="form-control"></p>
-          </div>
-
-          <div class="form-group">
-            <label for="">Email</label>
-                <p id="display_patient_email" class="form-control"></p>
-          </div>
-
-          <div class="form-group">
-          <label for="">Purpose</label>
-              <p id="display_purpose" class="form-control"></p>
-        </div>
-
-          <div class="form-group">
-            <label for="">Amount</label>
-            <input type="text" min=1 id="amount" class="form-control" required>
-          </div>
-            
-            </div>
-            <div class="modal-footer">
-              <div class="btn-group">
-            <button type="button" class="btn btn-primary" id="send">Send Payment</button>
-          </div>
-            </div>
-          </div>
-
-      </div>
-</div>
-<!-- end modal -->
 
 					</div>
 				</div>
@@ -297,35 +273,6 @@ include 'cn.php';
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
   
 <script>
-
-function sendpayment(id) {
-  
-  $.ajax({
-    type: 'POST',
-    url: 'pages/retrievedata.php',
-    cache:false,
-    data: { action : 'sendpayment', id : id },
-    dataType: 'json',
-    success:function(response) {
-      if(response.success == true) {
-        $('#MyModal').modal('show');
-        $('#MyModal').find('#hiddenid').val(response.id);
-        $('#MyModal').find('#patient_name').val(response.patient_name);
-        $('#MyModal').find('#patient_email').val(response.patient_email);
-        $('#MyModal').find('#purpose').text(response.purpose);
-        $('#MyModal').find('#reference_code').val(response.reference_code);
-
-        $('#MyModal').find('#display_patient_name').text(response.patient_name);
-        $('#MyModal').find('#display_patient_email').text(response.patient_email);
-        $('#MyModal').find('#display_purpose').text(response.purpose);
-
-
-      }
-    }
-  });
-  
-}
-
 function show_patient_history() {
   $.ajax({
     url: 'pages/show_patient_history.php',
@@ -336,59 +283,79 @@ function show_patient_history() {
   });
 }
 
-function notify(id) {
-  $('#notify'+id).html('Please Wait').attr('disabled',true);
-  $.ajax({
-    type: 'POST',
-    url: 'pages/notify_patient.php',
-    cache: false,
-    data: { action : 'declined', id : id },
-    success:function() {
-      alert('An email has been sent');
-      $('#notify'+id).html('Notify Patient').attr('disabled',false);
-    }
-  });
-}
 
-function send() {
-  $('#send').click(function(e){
-    $('#send').html('Please Wait').attr('disabled',true);
-    e.preventDefault();
-    var hiddenid = $('#hiddenid').val();
-    var patient_name = $('#patient_name').val();
-    var patient_email = $('#patient_email').val();
-    var amount = $('#amount').val();
-    var reference_code = $('#reference_code').val();
-    $.ajax({
-      type: 'POST',
-      url: 'pages/sendpayment.php',
-      data: {
-        action : 'sendpayment', id : hiddenid, patient_name : patient_name, 
-        patient_email : patient_email, amount : amount, reference_code : reference_code 
-      },
-      dataType: 'json',
-      cache: false,
-      success:function(response){
-        if(response.success == true) {
-          $('#send').html('Send Payment').attr('disabled',false);
-          alert('Payment has been sent to patient ' + patient_name);
-          $('#MyModal').modal('hide');
-        } else if(response.success == 'falses') {
-          $('#send').html('Send Payment').attr('disabled',false);
-          alert('Amount is empty');
-        }else {
-          $('#send').html('Send Payment').attr('disabled',false);
-          alert('This patient was already received an email for payment');
-          $('#MyModal').modal('hide');
-        }
-      }
-    });
-  })
-}
+$(document).ready(function() {
+        var handleDataTableButtons = function() {
+          if ($("#datatable-buttons").length) {
+            $("#datatable-buttons").DataTable({
+              dom: "Bfrtip",
+              buttons: [
+                {
+                  extend: "copy",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "csv",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "excel",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "pdfHtml5",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "print",
+                  className: "btn-sm"
+                },
+              ],
+              responsive: true
+            });
+          }
+        };
 
-send();
-show_patient_history();
+        TableManageButtons = function() {
+          "use strict";
+          return {
+            init: function() {
+              handleDataTableButtons();
+            }
+          };
+        }();
 
-</script>
+        $('#datatable').dataTable();
+
+        $('#datatable-keytable').DataTable({
+          keys: true
+        });
+
+        $('#datatable-responsive').DataTable();
+
+
+        $('#datatable-fixed-header').DataTable({
+          fixedHeader: true
+        });
+
+        var $datatable = $('#datatable-checkbox');
+
+        $datatable.dataTable({
+          'order': [[ 1, 'asc' ]],
+          'columnDefs': [
+            { orderable: false, targets: [0] }
+          ]
+        });
+        $datatable.on('draw.dt', function() {
+          $('input').iCheck({
+            checkboxClass: 'icheckbox_flat-green'
+          });
+        });
+
+        TableManageButtons.init();
+      });
+    </script>
+
+
 </html>
 

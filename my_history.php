@@ -165,6 +165,7 @@ include 'cn.php';
             <a href="#" onclick="show_page('profile','0')" >Personal Information</a>
             <a href="appointment.php" >View Appointments</a>
             <a href="my_history.php">My History</a>
+            <a href="billing.php">Billing</a>
             <a href="pages/logout.php" >Logout</a>
 			
 			
