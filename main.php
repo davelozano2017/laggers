@@ -35,7 +35,7 @@ include "function/enc.php";
 <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
 <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
 <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 <script src="bt/assets/js/ie-emulation-modes-warning.js"></script>
 
 	<style>
@@ -194,7 +194,7 @@ color:orange;
 	</center>
 			</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="bt/js/bootstrap.min.js"></script>
 <script src="bt/assets/js/ie10-viewport-bug-workaround.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
@@ -215,6 +215,7 @@ color:orange;
 <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 <script>
 function UpdateSpecialization(id) {
@@ -273,7 +274,10 @@ function DeleteAvailability($id) {
 }
 
 
-
+$(".specialization").select2({
+		placeholder: "Select Doctor's Specialization",
+		allowClear: true
+});
 
 
 

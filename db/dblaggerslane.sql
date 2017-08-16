@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2017 at 08:42 PM
+-- Generation Time: Aug 16, 2017 at 11:53 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -46,7 +46,7 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`id`, `email`, `chosentime`, `purpose`, `patient_name`, `patient_email`, `status`, `reference_code`, `date`, `datetime`) VALUES
-(55, 'cabugajeddahlyn@gmail.com', '10:00:00', 'check up', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 0, 'AEYIEZAZFD', '2017-08-21', '2017-08-12 18:40:53');
+(55, 'cabugajeddahlyn@gmail.com', '10:00:00', 'check up', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, 'AEYIEZAZFD', '2017-08-21', '2017-08-12 18:58:57');
 
 -- --------------------------------------------------------
 
@@ -177,8 +177,7 @@ CREATE TABLE `doctor_rating` (
 --
 
 INSERT INTO `doctor_rating` (`id`, `doctor_name`, `specialization`, `ratings`, `ip`) VALUES
-(9, 'Jeddahlyn Linzag Cabuga ', 'cabugajeddahlyn@gmail.com', '5', '::1'),
-(10, 'iamdoctor iamdoctor iamdoctor iamdoctor', 'iamdoctor@yahoo.com', '5', '::1');
+(18, 'Jeddahlyn Linzag Cabuga ', 'endocrinology', '5', '::1');
 
 -- --------------------------------------------------------
 
@@ -279,7 +278,10 @@ INSERT INTO `logins` (`id`, `fid`, `dt`) VALUES
 (39, '25', '2017-08-12 11:55:25'),
 (40, '25', '2017-08-12 17:22:50'),
 (41, '25', '2017-08-12 18:34:27'),
-(42, '25', '2017-08-12 18:40:13');
+(42, '25', '2017-08-12 18:40:13'),
+(43, '25', '2017-08-16 20:06:23'),
+(44, '25', '2017-08-16 20:41:37'),
+(45, '25', '2017-08-16 21:50:29');
 
 -- --------------------------------------------------------
 
@@ -360,7 +362,7 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`id`, `patient_name`, `patient_email`, `doctor_name`, `doctor_email`, `amount`, `reference_code`, `date`) VALUES
-(15, 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 'Jeddahlyn Linzag Cabuga', 'cabugajeddahlyn@gmail.com', 222, 'RITFFOUZYW', 'August 12,  2017 11:50 AM');
+(17, 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 'Jeddahlyn Linzag Cabuga', 'cabugajeddahlyn@gmail.com', 1000, 'AEYIEZAZFD', 'August 13,  2017 02:59 AM');
 
 -- --------------------------------------------------------
 
@@ -630,7 +632,7 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT for table `doctor_rating`
 --
 ALTER TABLE `doctor_rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `doctor_upload`
 --
@@ -640,7 +642,7 @@ ALTER TABLE `doctor_upload`
 -- AUTO_INCREMENT for table `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT for table `patient`
 --
@@ -650,7 +652,7 @@ ALTER TABLE `patient`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `specialization`
 --

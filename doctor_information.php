@@ -6,7 +6,7 @@ $query = $db->query("SELECT * FROM doctor  WHERE id = $id");
 $row = $query->fetch_object();
 $email = $row->email;
 $doctor_name = $row->FN. ' '.$row->MN. ' '.$row->LN. ' '.$row->SN;
-$specialization = $row->email;
+$specialization = $row->SPECIALIZATION;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,6 +96,42 @@ $specialization = $row->email;
 	background-image:url(img/nav_bg_hover.png);
 	color:orange;
 }
+
+.star-rating s:hover {
+    color: red;
+}
+.star-rating s,
+.star-rating-rtl s {
+    color: black;
+    font-size: 50px;
+    cursor: default;
+    text-decoration: none;
+    line-height: 50px;
+}
+.star-rating {
+    padding: 2px;
+}
+.star-rating-rtl {
+    background: #555;
+    display: inline-block;
+    border: 2px solid #444;
+}
+.star-rating-rtl s {
+    color: yellow;
+}
+.star-rating s:hover:before{
+    content: "\2605";
+}
+.star-rating s:before {
+    content: "\2606";
+}
+.star-rating-rtl s:hover:after{
+    content: "\2605";
+}
+.star-rating-rtl s:after {
+    content: "\2606";
+}
+
 </style>
 		
 	</head>
@@ -193,29 +229,35 @@ $specialization = $row->email;
                     </div>
 
                     <?php 
-
-                    if(empty($_SESSION['session_iname']) && empty($_SESSION['session_email'])) {
+                    $patient_email = @$_SESSION['session_email'];
+                    $patient_name = @$_SESSION['session_iname'];
+                    if(empty($patient_name) && empty($patient_email)) {
                         
                     } else {
-                        echo 
-                        '
+                      $query = $db->query("SELECT * FROM appointment WHERE 
+                      email = '$email' AND patient_name = '$patient_name' AND patient_email = '$patient_email'");
+                      $check = $query->num_rows;
+                      if($check > 0) { ?>
                         <div class="col-md-12">
                           <div class="form-group">
                             <div class="clearfix"></div>
                               <div class="col-md-1"></div>
                               <div class="alert alert-info col-md-2 col-sm-12 text-center">Very Disatisfied - 1</div>
                               <div class="alert alert-info col-md-2 col-sm-12 text-center">Disatisfied - 2</div>
-                              <div class="alert alert-info col-md-2 col-sm-12 text-center">Ok - 3</div>
+                              <div class="alert alert-info col-md-2 col-sm-12 text-center">Average - 3</div>
                               <div class="alert alert-info col-md-2 col-sm-12 text-center">Satisfied - 4</div>
                               <div class="alert alert-info col-md-2 col-sm-12 text-center">Very Satisfied - 5</div>
                               <div class="col-md-1"></div>
                               <div class="clearfix"></div>
                               <center>
                               <label for="">Rate</label>
-                              <input type="number" id="rating-empty-clearable" class="rating" data-clearable required/>
+                              <div class="star-rating" ><s><s><s><s><s></s></s></s></s></s></div>
                               </center>
                           </div>
-                        </div>';
+                        </div>
+                     <?php  } else {
+
+                      }
                     }
                     ?>
 
@@ -246,12 +288,13 @@ $specialization = $row->email;
                         </div>
                     </div>
 
+
+
                     
               <div class="modal fade" tabindex="-1" role="dialog" data-toggle="modal" data-target="#form-content">
                   <div class="modal-dialog" role="document">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                               <h4 class="modal-title">Rating</h4>
                           </div>
                               <div class="modal-body">
@@ -262,14 +305,14 @@ $specialization = $row->email;
 
                               </div>
                           <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-default" id="close">Close</button>
                               <button type="button" class="btn btn-primary" id="submit">Submit</button>
                           </div>
                       </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->
               </div><!-- /.modal -->
 
-                   
+ 
                     <!-- end -->
 
 
@@ -324,46 +367,47 @@ $specialization = $row->email;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rating-input/0.4.0/bootstrap-rating-input.min.js"></script>
 <script>
 
-     $(function(){
+$(function() {
+    $("div.star-rating > s, div.star-rating-rtl > s").on("click", function(e) {
+        var ratings = $(e.target).parentsUntil("div").length+1;
+        $('.modal').modal({ backdrop: 'static', keyboard: false })
+
+        $('#output').html(ratings);
         var doctor_name = $('#doctor_name').val();
         var specialization = $('#specialization').val();
-        $('input').on('change', function(){
-          var ratings = $(this).val();
-            
-          $('.modal').find('#output').html(ratings);
-          if(output == 0) {
-            $('.modal').modal('hide');
-          } else {
-            $('.modal').modal('show');
-          }
-          $('#submit').click(function(){
-              $('#submit').html('Please Wait').attr('disabled',true);
-              $.ajax({
-                type: 'POST',
-                url: 'pages/doctor_rate.php',
-                data: {
-                  action: 'rate', doctor_name : doctor_name, specialization : specialization, rate : ratings
-                },
-                dataType: 'json',
-                success:function(response) {
-                  if(response.success == true) {
-                    alert('your rate has been saved.');
-                    $('#submit').html('Submit').attr('disabled',false);
-                    $('.modal').modal('show');
-                  } else {
-                    alert('you already cast your rate');
-                    $('#submit').html('Submit').attr('disabled',false);
-                  }
-                }
-              });
-            });
+        $('#submit').click(function(){
+          $('#submit').html('Please Wait').attr('disabled',true);
+          $.ajax({
+            type: 'POST',
+            url: 'pages/doctor_rate.php',
+            data: {
+              action: 'rate', doctor_name : doctor_name, specialization : specialization, rate : ratings
+            },
+            dataType: 'json',
+            success:function(response) {
+              if(response.success == true) {
+                window.location.reload();
+                alert('your rate has been saved.');
+                $('#submit').html('Submit').attr('disabled',false);
+                $('.modal').modal({ backdrop: 'static', keyboard: false })
+              } else {
+                window.location.reload();
+                alert('you already cast your rate');
+                $('#submit').html('Submit').attr('disabled',false);
+              }
+            }
+          });
         });
+    });
+});
 
-          
+$('#close').click(function(){
+  window.location.reload();
+});
 
 
-      });
-    
+
+
 
 $(document).ready(function() {
   

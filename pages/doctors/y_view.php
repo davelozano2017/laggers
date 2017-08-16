@@ -80,6 +80,7 @@ $result1 = $query->fetchAll();
 						<tr><td class="table_field">Contact Number:</td><td><input id="<?php echo $form_name;?>CN<?php echo $tbl_id;?>" style="width:100%;" type="text" value="<?php echo $d['CN'];?>" class="form-control"/></td></tr>
 						<tr><td class="table_field">Email:</td><td><input id="<?php echo $form_name;?>email<?php echo $tbl_id;?>" style="width:100%;" type="text" value="<?php echo $d['email'];?>" class="form-control"/></td></tr>
 						<tr><td class="table_field">Remaining Attempts:</td><td> <p class="form-control"/><?php echo $attempts;?></p></td></tr>	
+						<tr><td class="table_field"></td><td><a href="view_ratings.php?id=<?php echo $d['id']?>">View Ratings </a></td></tr>	
 
 						
 					</table>

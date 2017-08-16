@@ -14,7 +14,17 @@ include 'cn.php';
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="img/1.png">
+<style>
+.disabled .fc-day-content {
 
+    background-color: #123959;
+
+    color: #FFFFFF;
+
+    cursor: default;
+
+}
+</style>
     <title>Online Appointment</title>
 
     <link href="bt/css/bootstrap.min.css" rel="stylesheet">
@@ -241,7 +251,7 @@ include 'cn.php';
             </div>
         </div>
     </div>
-    
+    <input type="text" name="today" id="today" value="<?php echo date('Y-m-d')?>">
     <div id="calendarshow"></div>
     <div id="calendarerror" class=""></div>
 
@@ -311,7 +321,7 @@ include 'cn.php';
     });
 
 
-
+var today = $('#today').val();
 
 
     function search() {
@@ -335,10 +345,21 @@ include 'cn.php';
                             center: 'title',
                             right: 'month,agendaWeek,agendaDay'
                         },
+                        
                         defaultDate: new Date(),
                         navLinks: true,  
                         selectable: true,
                         select: function(start, end) {
+                            if(start.isBefore(moment())) {
+                                $('#calendar').fullCalendar('unselect');
+                                return false;
+                            } 
+
+                            if(start.isAfter(moment())) {
+                                $('#calendar').fullCalendar('unselect');
+                                return false;
+                            } 
+                            
                             $('.modal').modal({ backdrop: 'static', keyboard: false })
                             $('.modal').find('#title').text('');
                             $('.modal').find('#from').text('');
@@ -349,10 +370,15 @@ include 'cn.php';
                             $('.modal').find('#chosentime').val('');
                             $('#submit').attr('disabled',true);
                             $('.timepicker').timepicker('remove');
+                            $('#submit').attr('disabled',true);
                         },
-
+                        
                         eventClick: function(event, element) {
-
+                            if(today > event.day) {                               
+                                $('#submit').hide();
+                            } else {
+                                $('#submit').show();
+                            }
                             $('.timepicker').timepicker({ 
                                 'timeFormat': 'g:i A',
                                 minTime:  event.time_base_from,
@@ -369,8 +395,6 @@ include 'cn.php';
                             $('.modal').find('#day').val(event.day);
                             $('.modal').find('#chosentime').val('');
 
-                            
-                            $('#submit').attr('disabled',false);
                         
                         },
                             editable: false,
@@ -380,18 +404,16 @@ include 'cn.php';
                     });
                     $('#calendarerror').hide();
                     
-                    
                     // end calendar
                 },error:function() {
                 $('#calendarerror').show();
                 $('#calendarerror').html('No result found').addClass('alert alert-danger');
-
                 }
             });
             // end ajax
         })
     }
-
+   
     search();
 
     function showcalendar() {

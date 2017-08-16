@@ -13,4 +13,4 @@ if($_POST['action'] == 'search') {
     } else {
         return false;
     }
-} 
+}

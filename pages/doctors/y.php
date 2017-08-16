@@ -5,9 +5,6 @@ include "../../cn.php";
 <html lang="en">
 
 <head>
-
-
-
 </head>
 <body>
 <table width="100%" cellpadding=6 cellspacing=6>
@@ -56,6 +53,7 @@ include "../../cn.php";
 		?>
 		<td>
 		<select name="specialization" id="SPECIALIZATION" class="form-control">
+				<option value="" selected></option>
 			<?php foreach ($result as $row): ?>
 				<option value='<?php echo $row['specialization']?>'><?php echo $row['specialization']?></option>
 			<?php endforeach;?>

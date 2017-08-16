@@ -29,6 +29,7 @@ include 'cn.php';
     <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
     <script src="bt/assets/js/ie-emulation-modes-warning.js"></script>
 
@@ -158,29 +159,26 @@ include 'cn.php';
 				 <div class="panel_title" id="div_title"></div>
 				<div  class="panel-body" id="leftcontent">
 
+
+        <div class="row">
+          <div class="col-md-12">
+              <div class="form-group">
+                  <label for="specialization">Search by Specialization</label>
+                  <select class="form-control specialization" id="search" style="width:100%">
+                      <option value="" selected></option>
+                      <?php $query = $db->query("SELECT * FROM specialization");
+                      foreach ($query as $row) : ?>
+                          <option value="<?php echo $row['specialization']?>"><?php echo $row['specialization']?></option>
+                      <?php endforeach;?>
+                  </select>
+              </div>
+          </div>
+        </div>  
+
+  <hr>
                     <!-- start -->
-        <table style="width:100%" id="datatable-buttons" class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Specialization</th>
-              <th>Years of Experience</th>
-              <th style="width:1%"></th>
-            </tr>
-          </thead>
-            <?php $query = $db->query("SELECT * FROM doctor");
-            $i = 0;
-            foreach($query as $row):   $id = $row['id']; ?>
-            
-              <tr>
-                  <td style="width:1%"><?php echo ++$i?></td>
-                  <td><?php echo 'Dr. '.$row['FN']. ' ' . $row['MN'] . ' ' . $row['LN'] . ' ' .$row['SN']?></td>
-                  <td><?php echo $row['SPECIALIZATION']?></td>
-                  <td><?php echo $row['YEARS']?></td>
-                  <td style="width:1%"><a class="btn btn-primary" href='doctor_information.php?id=<?php echo $id?>'>More</a>  </td>
-            <?php endforeach ?>
-        </table>
+
+                  <div id="showdoctors"></div>
 
                     <!-- end -->
 
@@ -233,55 +231,51 @@ include 'cn.php';
 <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 <script>
-$(document).ready(function() {
-        var handleDataTableButtons = function() {
-          if ($("#datatable-buttons").length) {
-            $("#datatable-buttons").DataTable({
-              responsive: true
+
+$(".specialization").select2({
+          placeholder: "Select Doctor's Specialization",
+          allowClear: true
+    });
+    
+
+    function search() {
+        
+        $('#search').change(function(e){
+        e.preventDefault();
+        var search = $('#search').val();
+            // start ajax
+            $.ajax({
+                type:'POST',
+                url : 'showdoctors.php',
+                data: { action : 'search', specialization : search },
+                success:function(data){
+                    // start calendar
+                    $('#showdoctors').html(data)
+                   
+                    // end calendar
+                },error:function(){
+                   $('#showdoctors').hide();
+
+                }
             });
-          }
-        };
+            // end ajax
+        })
+    }
+   
+    search();
 
-        TableManageButtons = function() {
-          "use strict";
-          return {
-            init: function() {
-              handleDataTableButtons();
+    function showdoctors() {
+        $.ajax({
+            url : 'showdoctors.php',
+            success:function(data){
+              $('#showdoctors').html(data)
             }
-          };
-        }();
-
-        $('#datatable').dataTable();
-
-        $('#datatable-keytable').DataTable({
-          keys: true
         });
-
-        $('#datatable-responsive').DataTable();
-
-
-        $('#datatable-fixed-header').DataTable({
-          fixedHeader: true
-        });
-
-        var $datatable = $('#datatable-checkbox');
-
-        $datatable.dataTable({
-          'order': [[ 1, 'asc' ]],
-          'columnDefs': [
-            { orderable: false, targets: [0] }
-          ]
-        });
-        $datatable.on('draw.dt', function() {
-          $('input').iCheck({
-            checkboxClass: 'icheckbox_flat-green'
-          });
-        });
-
-        TableManageButtons.init();
-      });
+    }
+    
     </script>
 
 
