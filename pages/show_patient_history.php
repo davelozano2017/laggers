@@ -1,4 +1,3 @@
-
 <?php 
 session_start();
 $email = $_SESSION['session_email'];

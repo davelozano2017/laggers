@@ -1,21 +1,13 @@
-<?php
-
+<?php 
+ob_start();
 $uploaded_files_path = "../../uploads/jQuery-File-Upload-9.8.0/server/php/files/";
-
 $dsn = "mysql:host=localhost;dbname=dblaggerslane;charset=utf8";
 $opt = array(
      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_EMULATE_PREPARES => false
 );
 $pdo = new PDO($dsn,'root','', $opt);
-
-
-
-
 $db = new mysqli('localhost','root','','dblaggerslane');
-
-
-
 //----------Search Keyword-----------//
 
 function hws($string, $word){
@@ -64,11 +56,4 @@ function load_dropdown_from_textfile($filename){
 	} 
 	fclose($handle);
 }
-
-
-
-
-
-?>
-
 

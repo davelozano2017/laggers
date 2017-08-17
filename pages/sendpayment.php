@@ -18,39 +18,46 @@ if($_POST['action'] == 'sendpayment') {
     } else if($check = $query->num_rows > 0) {
         echo json_encode(array('success' => false));
     }else {
-
-        $mailer = new PHPMailer();
-        $mailer->IsSMTP();
-        $mailer->Host = 'smtp.gmail.com:465'; 
-        $mailer->SMTPAuth = TRUE;
-        $mailer->Port = 465;
-        $mailer->mailer="smtp";
-        $mailer->SMTPSecure = 'ssl'; 
-        $mailer->IsHTML(true);
-        $mailer->SMTPOptions = array('ssl' => array(
-                                'verify_peer' => false, 
-                                'verify_peer_name' => false, 
-                                'allow_self_signed' => true)
-                                );
-        $mailer->Username = 'metrocakeshop@gmail.com';
-        $mailer->Password = 'password!@#$';
-        $mailer->From = 'admin@noreply.com'; 
-        $mailer->FromName = 'admin@laggerslane.tk';
-        $mailer->Body =  'Message para sa pag inform na nasend na sa kanya yung  payment niya kong mag kano etc etc.';
-        $mailer->Subject = 'Lagger\'s Lane Appointment System - Status';
-        $mailer->AddAddress($patient_email);
-        if(!$mailer->send()) {
-        echo 'Message could not be sent.';
-        } else {
-        $query = $db->query("INSERT INTO payment
-        (patient_name,patient_email,doctor_name,doctor_email,amount,reference_code,date) 
-        VALUES 
-        ('$patient_name','$patient_email','$doctor_name','$doctor_email','$amount','$reference_code','$date')");
-        if($query) {
-            echo json_encode(array('success' => true));
+        
+        $send = mail($patient_email, 'Lagger\'s Lane Appointment System - Status', 
+        'Message para sa pag inform na nasend na sa kanya yung  payment niya kong mag kano etc etc.',
+        "To: '$patient_name' <$patient_email>n" .
+        "From: Administrator <laggerslane.tk>n" .
+        "X-Mailer: PHP 4.x");
+        if($send) {
+            $query = $db->query("INSERT INTO payment
+            (patient_name,patient_email,doctor_name,doctor_email,amount,reference_code,date) 
+            VALUES 
+            ('$patient_name','$patient_email','$doctor_name','$doctor_email','$amount','$reference_code','$date')");
+            if($query) {
+                echo json_encode(array('success' => true));
             }
         }
-    }
 
-    
+        // $mailer = new PHPMailer();
+        // // $mailer->IsSMTP();
+        // $mailer->Host = 'smtp.gmail.com:465'; 
+        // $mailer->SMTPAuth = TRUE;
+        // $mailer->Port = 465;
+        // $mailer->mailer="smtp";
+        // $mailer->SMTPSecure = 'ssl'; 
+        // $mailer->IsHTML(true);
+        // $mailer->SMTPOptions = array('ssl' => array(
+        //                         'verify_peer' => false, 
+        //                         'verify_peer_name' => false, 
+        //                         'allow_self_signed' => true)
+        //                         );
+        // $mailer->Username = 'metrocakeshop@gmail.com';
+        // $mailer->Password = 'password!@#$';
+        // $mailer->From = 'admin@noreply.com'; 
+        // $mailer->FromName = 'admin@laggerslane.tk';
+        // $mailer->Body =  'Message para sa pag inform na nasend na sa kanya yung  payment niya kong mag kano etc etc.';
+        // $mailer->Subject = 'Lagger\'s Lane Appointment System - Status';
+        // $mailer->AddAddress($patient_email);
+        // if(!$mailer->send()) {
+        // echo 'Message could not be sent.';
+        // } else {
+        
+    // }
+    }
 }

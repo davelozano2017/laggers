@@ -1,10 +1,12 @@
-
+<?php
+session_start();
+include '../cn.php';
+?>
 <div class="row">
     <div class="col-sm-12">
         <div class="row">
+           
             <?php
-            session_start();
-            include '../cn.php';
             $email = $_SESSION['session_email'];
             $id = $_SESSION['patient_id'];
             $q = $db->query("SELECT * FROM appointment WHERE id = $id");

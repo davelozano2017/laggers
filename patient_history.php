@@ -4,6 +4,7 @@ if(empty($_SESSION['session_email'])){
 	header('location: index.php');
 }
 include 'cn.php';
+ob_start();
 ?>
 
 

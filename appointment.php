@@ -251,7 +251,7 @@ include 'cn.php';
             </div>
         </div>
     </div>
-    <input type="text" name="today" id="today" value="<?php echo date('Y-m-d')?>">
+    <input type="hidden" name="today" id="today" value="<?php echo date('Y-m-d')?>">
     <div id="calendarshow"></div>
     <div id="calendarerror" class=""></div>
 

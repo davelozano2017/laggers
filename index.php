@@ -6,6 +6,7 @@ if(isset($_SESSION['session_iid'])){
 
 
  }
+ob_start();
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,5 +1,5 @@
-
 <?php
+ob_start();
 if(isset($_REQUEST["file"])){
     // Get parameters
     $file = urldecode($_REQUEST["file"]); // Decode URL-encoded string

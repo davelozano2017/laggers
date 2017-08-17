@@ -1,21 +1,24 @@
-
 <?php 
 session_start();
+ob_start();
 $email = $_SESSION['session_email'];
 include '../cn.php';
 ?>
  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th>Patient Name</th>
-        <th>Patient Email</th>
+        <th>Doctor</th>
+        <th>Reference Code</th>
+        <th>Findings</th>
+        <th>Date</th>
         <th>Status</th>
     </tr>
     </thead>
     <tbody>
     <?php 
     
-    $query = $db->query("SELECT * FROM appointment WHERE patient_email = '$email'");
+    
+    $query = $db->query("SELECT * FROM appointment WHERE patient_email = '$email' AND status = 1");
     if($query->num_rows == 0) {
         echo '<tr><td colspan=4 style="text-align:center">No record found.</td></tr>';
     } 
@@ -23,8 +26,8 @@ include '../cn.php';
     $id = $row['id'];
     $myDate = new DateTime($row['date']);
     $date = $myDate->format('D, M d, Y');
-    $patient_name = $row['patient_name'];
-    $patient_email = $row['patient_email'];
+    $reference_code = $row['reference_code'];
+    $email = $row['email'];
     $appointment = $date. ' '.date('g:i A', strtotime($row['chosentime']));
     if($row['status'] == 0) {
         $status = '<label class="label label-warning">Pending</label>';
@@ -33,13 +36,23 @@ include '../cn.php';
     } elseif($row['status'] == 2) {
         $status = '<label class="label label-primary">Declined</label>';
     }
+    
+    $q = $db->query("SELECT * FROM doctor WHERE EMAIL = '$email'");
+    $r = $q->fetch_object();
+    $doctor_name = "Dr. ".$r->FN.' '.$r->MN. ' '.$r->LN. ' '.$r->SN;
+    
+    $fin = $db->query("SELECT * FROM doctor_upload WHERE reference_code = '$reference_code'");
+    $qfin = $fin->fetch_object();
+    $findings = @$qfin->findings;
+    
 
 ?>
 
-        <input type="hidden" id="hiddenid" value="<?php echo $id?>">
         <tr>
-            <td><?php echo $patient_name?></td>
-            <td><?php echo $patient_email?></td>
+            <td><?php echo $doctor_name?></td>
+            <td><?php echo $reference_code?></td>
+            <td><?php echo $findings?></td>
+            <td><?php echo $date?></td>
             <td><?php echo $status?></td>
         </tr>
     

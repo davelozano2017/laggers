@@ -185,12 +185,24 @@ $purpose = $row->purpose;
                           <p class="">Purpose: <?php echo $purpose?></p>
                         </div>
                       </div>
+                      
+                      <div class="col-md-12">
+                            <label>Findings</label>
+                            <div class="form-group">
+                                <textarea class="form-control" id="findings-source" name="findings"></textarea>
+                            </div>
+                        </div>
+                        
                     </div>
+                    
+                    
                     <form action="pages/showuploads.php" id="uploads" name="files" method="POST" enctype="multipart/form-data" class="dropzone">
-
+                    
+                    
                     <input type="hidden" name="email" value="<?php echo $patient_email?>">
                     <input type="hidden" name="name" value="<?php echo $patient_name?>">
                     <input type="hidden" name="reference_code" value="<?php echo $reference_code?>">
+                    <input type="hidden" name="findings" id="findings">
                     </form>
                     
                       <br />
@@ -250,6 +262,14 @@ $purpose = $row->purpose;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
 
 <script>
+
+    $('#findings-source').keyup(function(){
+        var f = $('#findings-source').val();
+        
+        $('#findings').val(f);
+        
+        
+    })
 	
     $('#uploadedfiles').click(function(){
         $.ajax({

@@ -1,8 +1,6 @@
-
-
 <?php
 session_start();
-
+ob_start();
 include "cn.php";
 
 	$username = $_POST['username'];
