@@ -10,7 +10,6 @@ include "../../cn.php";
 		
 	</head>
 <body>
-<!--
 <table width="100%" cellpadding=6 cellspacing=6>
 
 	<tr>
@@ -46,7 +45,6 @@ include "../../cn.php";
 		</div>
 	</div>
 </center>
--->
 
 
 

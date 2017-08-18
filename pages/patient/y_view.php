@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 session_start();
 $form_name = "patient";
 
@@ -103,4 +103,4 @@ $result = $stmt->fetchAll();
 <input type="hidden" id="txtnoofrecords" value="<?php echo $stmt->rowCount();?>" />
 <div id="green" style="margin: 0px;padding:0px;width:100%;"></div>
 </body>
-</html> -->
+</html>

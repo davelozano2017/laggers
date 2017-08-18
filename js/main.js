@@ -763,9 +763,6 @@ function newaccountins(){
 		}
 
 		
-		
-
-	
 		xmlhttp.open("GET","pages/new/accounts_save.php?UN=" + $('#usern').val() + "&PW=" + $('#passw').val() + 
 		
 		"&UG=" + $('#lblugrad').val() + 
@@ -784,23 +781,16 @@ function newaccountins(){
 		"&BLOODTYPE=" + $('#bloodtype').val() +
 		"&CONTACT_NUMBER=" + $('#cn').val() +
 		"&EMAIL=" + $('#email').val() +
-		"&ZIPCODE=" + $('#zipcode').val() +
 		"&ADDRESS=" + $('#ad').val() +
+		"&condominium=" + $('#condominium').val() +
+		"&barangay=" + $('#barangay').val() +
+		"&city=" + $('#city').val() +
 		"&secq1=" + sec1 +
 		"&secq2=" + sec2 + 
 		"&emaccount=" + $('#remail').val()
 		, true); 
 		xmlhttp.send();	
-	
-
-
 }
-
-
-
-
-
-
 /*  _________ACCOUNT __________________  */
 
 

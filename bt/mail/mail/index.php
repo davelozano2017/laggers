@@ -40,8 +40,7 @@ require 'PHPMailerAutoload.php';
                 
                 <div style='width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;'>
                   <div align='center'>
-                    <a href='www.sei.dost.gov.ph/tracer'><img src='http://www.sei.dost.gov.ph/tracer/img/logo1.png' height='88' width='88' alt='PHPMailer rocks'></a>
-                	
+             
                 			 <h5>Laggers Lane</h5>
                 			
                   </div>

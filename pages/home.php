@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-		<meta charset="utf-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=euc-jp">
+		
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -414,7 +414,7 @@
 
 			
 				<a href="https://www.facebook.com/rap.deborja?ref=br_rs" target="_blank"><img src="img/social/fb.png" style="height:38px; width:38px;"/></a>
-				<a href="https://twitter.com/MochaUson" target="_blank"><img src="img/social/twit.png" style="height:38px; width:38px;"/></a>
+				<a href="https://twitter.com/ralphdeborja" target="_blank"><img src="img/social/twit.png" style="height:38px; width:38px;"/></a>
 
 		
 		</div>
@@ -583,36 +583,43 @@
                 </div>
               </div>
 			</div>
-			
-			
-			
-			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>Zipcode:</label>
-			<div class='col-md-6'>
-			  <div class='form-group'>
-                <div class='col-md-11'>
-                  <input  required type="text" name="zipcode" id="zipcode" placeholder="Enter Zipcode" class="form-control"/>
-                </div>
-              </div>
-			</div>
-			
+
 			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>Address:</label>
 			<div class='col-md-6'>
 			  <div class='form-group'>
-                <div class='col-md-11'>
-                  <input  required type="text" name="ad" id="ad" placeholder="Enter Address" class="form-control"/>
-                </div>
-				
-              </div>
-			  
+					<div class='col-md-11'>
+						<input  required type="text" name="ad" id="ad" placeholder="Enter Address" class="form-control"/>
+					</div>
+				</div>
 			</div>
-			
 
-			
-		
-			
-			
-	
-		
+			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>Condominium:</label>
+			<div class='col-md-6'>
+			  <div class='form-group'>
+					<div class='col-md-11'>
+						<input  required type="text" name="condominium" id="condominium" placeholder="Condominium" class="form-control"/>
+					</div>
+				</div>
+			</div>
+
+			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>City:</label>
+			<div class='col-md-6'>
+			  <div class='form-group'>
+					<div class='col-md-11'>
+						<input  required type="text" name="city" id="city" placeholder="City" class="form-control"/>
+					</div>
+				</div>
+			</div>
+
+			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>Barangay:</label>
+			<div class='col-md-6'>
+			  <div class='form-group'>
+					<div class='col-md-11'>
+						<input  required type="text" name="barangay" id="barangay" placeholder="Barangay" class="form-control"/>
+					</div>
+				</div>
+			</div>
+
 		
 		
 		</div>	<hr class="hr2"/>	 

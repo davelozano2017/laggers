@@ -230,7 +230,8 @@ include 'cn.php';
 		
 		<div class="form-group">
 			<label for="">Name</label>
-	        <input type="hidden" id="hiddenid">
+			<input type="hidden" id="hiddenid">
+			<input type="hidden" id="patients_email">
 	        <p id="patient_name" class="form-control"></p>
 		</div>
 
@@ -341,6 +342,7 @@ include 'cn.php';
 		$('#MyModal').find('#hiddenid').val(id);
 		$('#MyModal').find('#patient_name').html(patient_name);
 		$('#MyModal').find('#patient_email').html(patient_email);
+		$('#MyModal').find('#patients_email').val(patient_email);
 		$('#MyModal').find('#appointment').html(appointment);
 		$('#MyModal').find('#purpose').html(purpose);
 	}
@@ -350,13 +352,14 @@ include 'cn.php';
 			e.preventDefault();
 			var hiddenid = $('#hiddenid').val();
 			var reference_code = $('#reference_code').val();
+			var patients_email = $('#patients_email').val();
 			$.ajax({
 				type: 'POST',
 				url : 'function_appointment.php',
-				data: { action : 'approve', id : hiddenid },
+				data: { action : 'approve', id : hiddenid, patients_email : patients_email },
 				success:function(){
 					show_appointment();
-					alert('Approved');
+					alert('An email has been sent to ' + patients_email);
 					$('#MyModal').modal('hide');
 				}
 			})

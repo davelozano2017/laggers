@@ -3,11 +3,12 @@ session_start();
 $email = $_SESSION['session_email'];
 include '../cn.php';
 ?>
- <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+<table style="width:100%" id="datatable-buttons" class="table table-striped table-bordered">
     <thead>
     <tr>
         <th>Patient Name</th>
-        <th>Patient Email</th>
+        <th>Reference Code</th>
+        <th>Date</th>
         <th>Status</th>
         <th>Action</th>
     </tr>
@@ -24,7 +25,9 @@ include '../cn.php';
     $myDate = new DateTime($row['date']);
     $date = $myDate->format('D, M d, Y');
     $patient_name = $row['patient_name'];
-    $patient_email = $row['patient_email'];
+    $reference_code = $row['reference_code'];
+    $myDate = new DateTime($row['date']);
+    $date = $myDate->format('D, M d, Y');
     $appointment = $date. ' '.date('g:i A', strtotime($row['chosentime']));
     $status = $row['status'] == 1 ? '<label class="label label-primary">Approved</label>' : '<label class="label label-danger">Declined</label>';
 
@@ -34,8 +37,9 @@ include '../cn.php';
 ?>
 
         <tr>
-            <td><?php echo $patient_name . count($query)?></td>
-            <td><?php echo $patient_email?></td>
+            <td><?php echo $patient_name?></td>
+            <td><?php echo $reference_code?></td>
+            <td><?php echo $date?></td>
             <td><?php echo $status?></td>
             <td><?php echo $button?></td>
         </tr>
@@ -46,3 +50,53 @@ include '../cn.php';
     </tbody>
 </table>
 
+<script style="text/javascript">
+$(document).ready(function() {
+        var handleDataTableButtons = function() {
+          if ($("#datatable-buttons").length) {
+            $("#datatable-buttons").DataTable({
+             
+              responsive: true
+            });
+          }
+        };
+
+        TableManageButtons = function() {
+          "use strict";
+          return {
+            init: function() {
+              handleDataTableButtons();
+            }
+          };
+        }();
+
+        $('#datatable').dataTable();
+
+        $('#datatable-keytable').DataTable({
+          keys: true
+        });
+
+        $('#datatable-responsive').DataTable();
+
+
+        $('#datatable-fixed-header').DataTable({
+          fixedHeader: true
+        });
+
+        var $datatable = $('#datatable-checkbox');
+
+        $datatable.dataTable({
+          'order': [[ 1, 'asc' ]],
+          'columnDefs': [
+            { orderable: false, targets: [0] }
+          ]
+        });
+        $datatable.on('draw.dt', function() {
+          $('input').iCheck({
+            checkboxClass: 'icheckbox_flat-green'
+          });
+        });
+
+        TableManageButtons.init();
+      });
+    </script>

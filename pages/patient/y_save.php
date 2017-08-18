@@ -3,7 +3,7 @@ session_start();
 include "../../cn.php";
 
 
-	$stm = $pdo->prepare("insert into patient (id, LN, FN, MN, SN, GENDER, WEIGHT, HEIGHT, BIRTHDAY, BIRTHPLACE, CIVILSTATUS, NATIONALITY, ZIPCODE, RELIGION, ADDRESS, BLOOD_TYPE, CONTACT_NUMBER, EMAIL) 
+	$stm = $pdo->prepare("insert into patient (id, LN, FN, MN, SN, GENDER, WEIGHT, HEIGHT, BIRTHDAY, BIRTHPLACE, CIVILSTATUS, NATIONALITY, RELIGION, ADDRESS, CONDOMINIUM, BARANGAY, CITY, BLOOD_TYPE, CONTACT_NUMBER, EMAIL) 
 	VALUES (:UG,
 	:LAST_NAME,
 	:FIRST_NAME, 
@@ -16,9 +16,11 @@ include "../../cn.php";
 	:BIRTHPLACE, 
 	:CIVILSTATUS, 
 	:NATIONALITY, 
-	:ZIPCODE, 
 	:RELIGION, 
 	:ADDRESS, 
+	:CONDOMINIUM, 
+	:BARANGAY, 
+	:CITY, 
 	:BLOOD_TYPE, 
 	:CONTACT_NUMBER, 
 	:EMAIL)"); 
@@ -46,7 +48,9 @@ include "../../cn.php";
 	$stm->bindParam(':NATIONALITY', $_GET['NATIONALITY'], PDO::PARAM_STR);
 	$stm->bindParam(':RELIGION', $_GET['RELIGION'], PDO::PARAM_STR);
 	$stm->bindParam(':ADDRESS', $_GET['ADDRESS'], PDO::PARAM_STR);
-	$stm->bindParam(':ZIPCODE', $_GET['ZIPCODE'], PDO::PARAM_STR);
+	$stm->bindParam(':CONDOMINIUM', $_GET['condominium'], PDO::PARAM_STR);
+	$stm->bindParam(':BARANGAY', $_GET['barangay'], PDO::PARAM_STR);
+	$stm->bindParam(':CITY', $_GET['city'], PDO::PARAM_STR);
 	$stm->bindParam(':BLOOD_TYPE', $_GET['BLOOD_TYPE'], PDO::PARAM_STR);
 	$stm->bindParam(':CONTACT_NUMBER', $_GET['CONTACT_NUMBER'], PDO::PARAM_STR);
 	$stm->bindParam(':EMAIL', $_GET['EMAIL'], PDO::PARAM_STR);

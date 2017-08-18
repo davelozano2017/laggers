@@ -189,7 +189,7 @@ hr.hr2 {
     </div>
 
 
-<!-------------------------  PERSONAL INFORMATION  ------------------------->
+<!---  PERSONAL INFORMATION -->
 
 
 <hr class="hr2"/>

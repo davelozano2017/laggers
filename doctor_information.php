@@ -299,7 +299,7 @@ $specialization = $row->SPECIALIZATION;
                           </div>
                               <div class="modal-body">
                                   
-                                <label> blablablablabla </label> <label id="output"></label>
+                                <label> Please rate your doctor service </label> </label>
                                 <input type="hidden" value="<?php echo $doctor_name?>" id="doctor_name">
                                 <input type="hidden" value="<?php echo $specialization?>" id="specialization">
 

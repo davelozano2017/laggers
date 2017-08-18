@@ -384,6 +384,7 @@ var today = $('#today').val();
                                 minTime:  event.time_base_from,
                                 maxTime: event.time_base_to
                                 
+                                
                             });
                             // Display the modal and set the values to the event values.
                             $('.modal').modal({ backdrop: 'static', keyboard: false })

@@ -67,9 +67,11 @@ function InitYcrud(page){
 			y_fields.push('BIRTHPLACE');
 			y_fields.push('CIVILSTATUS');
 			y_fields.push('NATIONALITY');
-			y_fields.push('ZIPCODE');
 			y_fields.push('RELIGION');
 			y_fields.push('ADDRESS');
+			y_fields.push('CONDOMINIUM');
+			y_fields.push('BARANGAY');
+			y_fields.push('CITY');
 			y_fields.push('BLOOD_TYPE');
 			y_fields.push('CONTACT_NUMBER');
 			y_fields.push('EMAIL');

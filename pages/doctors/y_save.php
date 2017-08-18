@@ -3,8 +3,8 @@ session_start();
 include "../../cn.php";
    // perform a case-Insensitive search for the word "Vi"
    
-if (preg_match("/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/", $_GET['password'], $match)){
-
+   if (preg_match("/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/", $_GET['password'], $match)){
+    
 $stmt2 = $pdo->prepare("Insert into doctor values ('',:LN, :FN, :MN, :SN, :GENDER, :YEARS, :SPECIALIZATION, :CN, :email, 3)"); 
 
 $stmt2->bindParam(':LN', $_GET['LN'], PDO::PARAM_STR);

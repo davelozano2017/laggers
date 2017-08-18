@@ -31,7 +31,7 @@ include "../../cn.php";
 						<td colspan=2>
 						
 							<table width=100% border=0>
-								<tr><td class="table_field">Last Name:</td><td><input   required type="text" name="LN" id="LN" placeholder="Enter Last Name" class="form-control"></td></tr>
+						<tr><td class="table_field">Last Name:</td><td><input   required type="text" name="LN" id="LN" placeholder="Enter Last Name" class="form-control"></td></tr>
 						<tr><td class="table_field">First Name:</td><td> <input   required type="text" name="FN" id="FN" placeholder="Enter First Name" class="form-control"/></td></tr>
 						<tr><td class="table_field">Middle Name:</td><td> <input   required type="text" name="MN" id="MN" placeholder="Enter Middle Name" class="form-control"/></td></tr>
 						<tr><td class="table_field">Suffix Name:</td><td> <input   required type="text" name="SN" id="SN" placeholder="Enter Suffix Name" class="form-control"/></td></tr>
