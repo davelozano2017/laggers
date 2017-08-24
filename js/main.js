@@ -210,7 +210,7 @@ function UpdateProfile(){
 
 			
 		
-		xmlhttp.open("GET","pages/profile_update.php?LAST_NAME=" + $('#lname').val() + "&FIRST_NAME=" + $('#fname').val() + "&MIDDLE_NAME=" + $('#mname').val() + "&SUFFIX_NAME=" + $('#sname').val() + "&SEX=" + $('#gender').val() + "&WEIGHT=" + $('#weight').val() + "&HEIGHT=" + $('#height').val() +  "&BIRTHDAY=" + $('#bday').val() +  "&BIRTHPLACE=" + $('#bplace').val() + "&CIVIL_STATUS=" + $('#cstat').val() + "&NATIONALITY=" + $('#nat').val() + "&RELIGION=" + $('#rel').val() +  "&ZIPCODE=" + $('#zipcode').val() + "&ADDRESS=" + $('#ad').val() + "&BLOOD_TYPE=" + $('#bloodtype').val() + "&CONTACT_NUMBER=" + $('#cn').val() + "&EMAIL=" + $('#email').val() ,true);
+		xmlhttp.open("GET","pages/profile_update.php?LAST_NAME=" + $('#lname').val() + "&FIRST_NAME=" + $('#fname').val() + "&MIDDLE_NAME=" + $('#mname').val() + "&SUFFIX_NAME=" + $('#sname').val() + "&SEX=" + $('#gender').val() + "&WEIGHT=" + $('#weight').val() + "&HEIGHT=" + $('#height').val() +  "&BIRTHDAY=" + $('#bday').val() +  "&BIRTHPLACE=" + $('#bplace').val() + "&CIVIL_STATUS=" + $('#cstat').val() + "&NATIONALITY=" + $('#nat').val() + "&RELIGION=" + $('#rel').val() + "&ADDRESS=" + $('#ad').val() + "&CONDOMINIUM=" + $('#CONDOMINIUM').val() + "&BARANGAY=" + $('#BARANGAY').val() + "&CITY=" + $('#CITY').val() + "&BLOOD_TYPE=" + $('#bloodtype').val() + "&CONTACT_NUMBER=" + $('#cn').val() + "&EMAIL=" + $('#email').val() ,true);
 		xmlhttp.send();
 
 }

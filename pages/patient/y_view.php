@@ -9,7 +9,6 @@ $q = "SELECT * FROM patient WHERE LN LIKE '%".$_GET['search']."%' OR
 					SN LIKE '%".$_GET['search']."%' OR 
 					GENDER LIKE '%".$_GET['search']."%' OR 
 					BIRTHDAY LIKE '%".$_GET['search']."%' OR 
-					ZIPCODE LIKE '%".$_GET['search']."%' OR 
 					ADDRESS LIKE '%".$_GET['search']."%' OR 
 					CONTACT_NUMBER LIKE '%".$_GET['search']."%' OR 
 					EMAIL LIKE '%".$_GET['search']."%'";			
@@ -39,7 +38,8 @@ $result = $stmt->fetchAll();
 		$email = $d['EMAIL'];
 		$query = $db->query("SELECT * FROM user WHERE EMAIL = '$email'");
 		$row = $query->fetch_object();
-        $attempts = $row->attempts;
+		$attempts = $row->attempts;
+		
 		?>
 		<tr>
 			<td>
@@ -87,8 +87,10 @@ $result = $stmt->fetchAll();
 						<tr><td class="table_field">Blood Type:</td><td> <input  id="<?php echo $form_name;?>BLOOD_TYPE<?php echo $tbl_id;?>" required type="text"  placeholder="Enter bloodtype" value="<?php echo $d['BLOOD_TYPE'];?>" class="form-control"/></td></tr>	
 						<tr><td class="table_field">Contact Number:</td><td> <input id="<?php echo $form_name;?>CONTACT_NUMBER<?php echo $tbl_id;?>"  required type="text" placeholder="Enter Contact Number" value="<?php echo $d['CONTACT_NUMBER'];?>" class="form-control"/></td></tr>	
 						<tr><td class="table_field">Email:</td><td> <input id="<?php echo $form_name;?>EMAIL<?php echo $tbl_id;?>"  required type="text"  placeholder="Enter Email" value="<?php echo $d['EMAIL'];?>" class="form-control"/></td></tr>	
-						<tr><td class="table_field">Zipcode:</td><td> <input id="<?php echo $form_name;?>ZIPCODE<?php echo $tbl_id;?>"  required type="text"  placeholder="Enter Zipcode" value="<?php echo $d['ZIPCODE'];?>" class="form-control"/></td></tr>	
-						<tr><td class="table_field">Address:</td><td> <input id="<?php echo $form_name;?>ADDRESS<?php echo $tbl_id;?>"  required type="text" placeholder="Enter Address" value="<?php echo $d['ADDRESS'];?>" class="form-control"/></td></tr>	
+						<tr><td class="table_field">Address:</td><td> <input id="<?php echo $form_name;?>ADDRESS<?php echo $tbl_id;?>"  required type="text" placeholder="Enter Address" value="<?php echo $d['ADDRESS'];?>" class="form-control"/></td></tr>
+						<tr><td class="table_field">Condominium:</td><td> <input id="<?php echo $form_name;?>CONDOMINIUM<?php echo $tbl_id;?>"  required type="text" placeholder="Enter Condominium" value="<?php echo $d['CONDOMINIUM'];?>" class="form-control"/></td></tr>
+						<tr><td class="table_field">Barangay:</td><td> <input id="<?php echo $form_name;?>BARANGAY<?php echo $tbl_id;?>"  required type="text" placeholder="Enter barnagay" value="<?php echo $d['BARANGAY'];?>" class="form-control"/></td></tr>
+						<tr><td class="table_field">City:</td><td> <input id="<?php echo $form_name;?>CITY<?php echo $tbl_id;?>"  required type="text" placeholder="Enter Address" value="<?php echo $d['CITY'];?>" class="form-control"/></td></tr>	
 						<tr><td class="table_field">Remaining Attempts:</td><td> <p class="form-control"/><?php echo $attempts;?></p></td></tr>	
 					</table>
 					

@@ -53,19 +53,19 @@
 				<div class="col-md-5">	
 				<div class="row">			
 							<span class="h1_branches"><a href="pages/contact_map_bicutan.php" target="frameMap">Bicutan </a></span><br/>
-							<b>Address:</b>  Bicutan, Taguig City 1631<br/>
+							<b>Address:</b>  Mandaluyong<br/>
 							<b>Email:</b> kwakkwak@gmail.com / asdasd@gmail.com<br/>
-							<b>Tel. no.:</b> (+632) 837-1925; /(+632) 839-0083; /(+632) 837-1333; / (+632) 837-2071 local 2382<br/>
-							<b>Fax no. :</b> (+632) 839-0086<br/><br/>
+							<b>Tel. no.:</b> (+632) 888-888<br/>
+							<b>Fax no. :</b> (+632) 888-888<br/><br/>
 				     		
 				<hr class="hr2"/></div>
 				
 				<div class="row">			
 							<span class="h1_branches"><a href="pages/contact_map_region1.php" target="frameMap">Region I </a></span><br/>
-							<b>Address:</b>  DMMMSU-MLU Campus, San Fernando City, 2500, La Union<br/>
+							<b>Address:</b> Pasig<br/>
 							<b>Email:</b> asdads@gmail.com <br/>
-							<b>Tel. no.:</b> (072) 888-3399<br/>
-							<b>Fax no. :</b> (072) 700-2372<br/><br/>
+							<b>Tel. no.:</b> 888-8888<br/>
+							<b>Fax no. :</b> 888-8888<br/><br/>
 				     		
 				<hr class="hr2"/></div>
 				

@@ -15,7 +15,7 @@ include '../cn.php';
     <tbody>
     <?php 
     
-    $query = $db->query("SELECT * FROM appointment WHERE email = '$email' AND status = 0");
+    $query = $db->query("SELECT * FROM appointment WHERE email = '$email'");
     if($query->num_rows == 0) {
         echo '<tr><td colspan=4 style="text-align:center">No record found.</td></tr>';
     } 
@@ -29,6 +29,10 @@ include '../cn.php';
     $reference_code = $row['reference_code'];
     $appointment = $date. ' '.date('g:i A', strtotime($row['chosentime']));
 
+    $show = $row['status'] == 5 ? 'cancelmodal' : 'showmodal';
+    $modify = $row['status'] == 5 ? 'Confirm Cancellation' : 'Modify';
+    $class = $row['status'] == 5 ? 'danger' : 'primary';
+    
     
 ?>
 
@@ -37,7 +41,7 @@ include '../cn.php';
             <td><?php echo $patient_name?></td>
             <td><?php echo $patient_email?></td>
             <td><?php echo $appointment?></td>
-            <td><button class="btn btn-primary" onclick="showmodal('<?php echo $id?>','<?php echo $patient_name?>','<?php echo $patient_email?>','<?php echo $appointment?>','<?php echo $purpose?>','<?php echo $reference_code?>')">Modify</button></td>
+            <td><button class="btn btn-<?php echo $class?>" onclick="<?php echo $show?>('<?php echo $id?>','<?php echo $patient_name?>','<?php echo $patient_email?>','<?php echo $appointment?>','<?php echo $purpose?>','<?php echo $reference_code?>')"><?php echo $modify?></button></td>
         </tr>
     
 

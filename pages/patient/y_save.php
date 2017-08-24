@@ -48,19 +48,21 @@ include "../../cn.php";
 	$stm->bindParam(':NATIONALITY', $_GET['NATIONALITY'], PDO::PARAM_STR);
 	$stm->bindParam(':RELIGION', $_GET['RELIGION'], PDO::PARAM_STR);
 	$stm->bindParam(':ADDRESS', $_GET['ADDRESS'], PDO::PARAM_STR);
-	$stm->bindParam(':CONDOMINIUM', $_GET['condominium'], PDO::PARAM_STR);
-	$stm->bindParam(':BARANGAY', $_GET['barangay'], PDO::PARAM_STR);
-	$stm->bindParam(':CITY', $_GET['city'], PDO::PARAM_STR);
+	$stm->bindParam(':CONDOMINIUM', $_GET['CONDOMINIUM'], PDO::PARAM_STR);
+	$stm->bindParam(':BARANGAY', $_GET['BARANGAY'], PDO::PARAM_STR);
+	$stm->bindParam(':CITY', $_GET['CITY'], PDO::PARAM_STR);
 	$stm->bindParam(':BLOOD_TYPE', $_GET['BLOOD_TYPE'], PDO::PARAM_STR);
 	$stm->bindParam(':CONTACT_NUMBER', $_GET['CONTACT_NUMBER'], PDO::PARAM_STR);
 	$stm->bindParam(':EMAIL', $_GET['EMAIL'], PDO::PARAM_STR);
 	
 	
     $insertedugrad = $stm->execute();
-	
+	$username = rand(111111,999999);
 	if($insertedugrad){
-
-									echo "<label style='color:green;'>Successfully saved</label>";
+		$query = $db->query("INSERT INTO user
+		(UN,PW,Type,EMAIL,st,attempts) VALUES 
+		('$username',12345,'Patient','".$_GET['EMAIL']."','Not Yet Verified',3)");
+		echo "<label style='color:green;'>Successfully saved</label>";
 	}
 	
 ?>

@@ -3,6 +3,7 @@ include 'cn.php';
 session_start();
 $patient_email = $_SESSION['session_email'];
 $patient_name = $_SESSION['session_iname'];
+$patient_number = $_SESSION['session_icontact'];
 function generateRandomString($length = 10) {
     $characters = 'QWERTYUIOPASDFGHJKLXCVBNMZXCVZBNMFGDHJKSLTYRUEIOWQWEYTIYQWTEPQIUEYQWETYPADGASJFLASJFSDLZXCASDBCBVXNCBAJHASDUYQUW';
     $charactersLength = strlen($characters);
@@ -32,9 +33,9 @@ if($_POST['action'] == 'submit') {
             echo json_encode(array('success' => false, 'message' => 'You can set an appointment once a day'));
         } else {
         $query = $db->query("INSERT INTO appointment
-        (email,chosentime,purpose,patient_name,patient_email,status,reference_code,date) 
+        (email,chosentime,purpose,patient_name,patient_email,patient_number,status,reference_code,date) 
         VALUES
-        ('$doctor_email','$chosentime','$purpose','$patient_name','$patient_email',0,'$reference_code','$day')");
+        ('$doctor_email','$chosentime','$purpose','$patient_name','$patient_email','$patient_number',0,'$reference_code','$day')");
         if($query) {
             echo json_encode(array('success' => true, 'message' => 'success'));
         }
@@ -61,4 +62,18 @@ if($_POST['action'] == 'submit') {
     if($query) {
         echo 'Declined';
     }
-} 
+} elseif($_POST['action'] == 'approve cancellation') {
+    $id = $_POST['id'];
+    $email = $_POST['patient_email'];
+    $subject = 'Lagger\'s Lane Appointment System - Appointment Cancellation';
+    $message = "<b>your appointment has been cancelled.</b>";
+    $to = $email;
+    $headers = "From: Administrator <laggerslane.tk>"."\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $send = mail($to, $subject, $message, $headers);
+        if($send) {
+            $query = $db->query("DELETE  FROM appointment WHERE id = $id");
+        } 
+    }
+

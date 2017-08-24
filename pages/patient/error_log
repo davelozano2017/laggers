@@ -4,3 +4,53 @@
 [14-Aug-2017 10:42:51 UTC] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/laggersl/public_html/pages/patient/y_view.php:1) in /home/laggersl/public_html/pages/patient/y_view.php on line 2
 [14-Aug-2017 10:43:15 UTC] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/laggersl/public_html/pages/patient/y_view.php:1) in /home/laggersl/public_html/pages/patient/y_view.php on line 2
 [14-Aug-2017 10:44:09 UTC] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/laggersl/public_html/pages/patient/y_view.php:1) in /home/laggersl/public_html/pages/patient/y_view.php on line 2
+[18-Aug-2017 03:54:00 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ZIPCODE' in 'where clause' in /home/laggersl/public_html/pages/patient/y_view.php:17
+Stack trace:
+#0 /home/laggersl/public_html/pages/patient/y_view.php(17): PDO->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patient/y_view.php on line 17
+[18-Aug-2017 03:54:21 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ZIPCODE' in 'where clause' in /home/laggersl/public_html/pages/patient/y_view.php:17
+Stack trace:
+#0 /home/laggersl/public_html/pages/patient/y_view.php(17): PDO->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patient/y_view.php on line 17
+[18-Aug-2017 06:07:18 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ZIPCODE' in 'where clause' in /home/laggersl/public_html/pages/patient/y_view.php:17
+Stack trace:
+#0 /home/laggersl/public_html/pages/patient/y_view.php(17): PDO->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patient/y_view.php on line 17
+[18-Aug-2017 06:19:23 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ZIPCODE' in 'where clause' in /home/laggersl/public_html/pages/patient/y_view.php:17
+Stack trace:
+#0 /home/laggersl/public_html/pages/patient/y_view.php(17): PDO->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patient/y_view.php on line 17
+[23-Aug-2017 07:46:36 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ZIPCODE' in 'where clause' in /home/laggersl/public_html/pages/patient/y_view.php:17
+Stack trace:
+#0 /home/laggersl/public_html/pages/patient/y_view.php(17): PDO->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patient/y_view.php on line 17
+[23-Aug-2017 07:47:04 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ZIPCODE' in 'where clause' in /home/laggersl/public_html/pages/patient/y_view.php:17
+Stack trace:
+#0 /home/laggersl/public_html/pages/patient/y_view.php(17): PDO->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patient/y_view.php on line 17
+[23-Aug-2017 07:50:41 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ZIPCODE' in 'where clause' in /home/laggersl/public_html/pages/patient/y_view.php:17
+Stack trace:
+#0 /home/laggersl/public_html/pages/patient/y_view.php(17): PDO->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patient/y_view.php on line 17
+[23-Aug-2017 07:53:25 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ZIPCODE' in 'where clause' in /home/laggersl/public_html/pages/patient/y_view.php:17
+Stack trace:
+#0 /home/laggersl/public_html/pages/patient/y_view.php(17): PDO->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patient/y_view.php on line 17
+[23-Aug-2017 10:04:32 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ZIPCODE' in 'where clause' in /home/laggersl/public_html/pages/patient/y_view.php:17
+Stack trace:
+#0 /home/laggersl/public_html/pages/patient/y_view.php(17): PDO->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patient/y_view.php on line 17
+[24-Aug-2017 05:54:27 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ZIPCODE' in 'where clause' in /home/laggersl/public_html/pages/patient/y_view.php:17
+Stack trace:
+#0 /home/laggersl/public_html/pages/patient/y_view.php(17): PDO->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patient/y_view.php on line 17

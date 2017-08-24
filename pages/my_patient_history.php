@@ -18,7 +18,7 @@ include '../cn.php';
     <?php 
     
     
-    $query = $db->query("SELECT * FROM appointment WHERE patient_email = '$email' AND status = 1");
+    $query = $db->query("SELECT * FROM appointment WHERE patient_email = '$email' AND status != 5");
     if($query->num_rows == 0) {
         echo '<tr><td colspan=4 style="text-align:center">No record found.</td></tr>';
     } 
@@ -30,7 +30,7 @@ include '../cn.php';
     $email = $row['email'];
     $appointment = $date. ' '.date('g:i A', strtotime($row['chosentime']));
     if($row['status'] == 0) {
-        $status = '<label class="label label-warning">Pending</label>';
+        $status = '<label class="label label-warning">Pending</label><a onclick="cancel_appointment('.$id.')" class="btn">Cancel</a>';
     } elseif($row['status'] == 1) {
         $status = '<label class="label label-primary">Approved</label>';
     } elseif($row['status'] == 2) {
@@ -61,6 +61,30 @@ include '../cn.php';
     <?php  endforeach;  ?>
     </tbody>
 </table>
+
+
+<div id="cancel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cancel Appointment</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="hidden_id">
+        <p> Are you sure you want to cancel this appointment?
+      </div>
+      <div class="modal-footer">
+        <a class="btn" data-dismiss="modal">No</a>
+        <button type="button" id="confirm_cancellation" class="btn btn-primary">Yes</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 <script>  
       
@@ -135,4 +159,28 @@ $(document).ready(function() {
         TableManageButtons.init();
       });
 
+      function cancel_appointment(id) {
+        $('#cancel').modal('show');
+        $('#cancel').find('#hidden_id').val(id);
+      }
+
+      function confirm_cancellation() {
+        $('#confirm_cancellation').click(function(e){
+            e.preventDefault();
+            var id = $('#hidden_id').val();
+            $.ajax({
+                type: 'POST',
+                url : 'pages/cancellation.php',
+                data: { action : 'cancellation', id : id },
+                dataType: 'json',
+                success:function(response) {
+                  if(response.success == true){
+                    alert('Cancellation message here');
+                    location.href="http://localhost/laggers/my_history.php";
+                  }
+                }
+            })
+        })
+      }
+      confirm_cancellation()
 </script>

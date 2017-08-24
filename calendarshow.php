@@ -1,4 +1,3 @@
-
 <div id='calendar' class="calendar"></div>
 <div id='datepicker'></div>
 

@@ -64,8 +64,10 @@ include "../../cn.php";
 						<tr><td class="table_field">Blood Type:</td><td> <input   required type="text" name="BLOOD_TYPE" id="BLOOD_TYPE" placeholder="Enter bloodtype" class="form-control"/></td></tr>	
 						<tr><td class="table_field">Contact Number:</td><td> <input   required type="text" name="CONTACT_NUMBER" id="CONTACT_NUMBER" placeholder="Enter Contact Number" class="form-control"/></td></tr>	
 						<tr><td class="table_field">Email:</td><td> <input   required type="text" name="EMAIL" id="EMAIL" placeholder="Enter Email" class="form-control"/></td></tr>	
-						<tr><td class="table_field">Zipcode:</td><td> <input   required type="text" name="ZIPCODE" id="ZIPCODE" placeholder="Enter Zipcode" class="form-control"/></td></tr>	
-						<tr><td class="table_field">Address:</td><td> <input   required type="text" name="ADDRESS" id="ADDRESS" placeholder="Enter Address" class="form-control"/></td></tr>	
+						<tr><td class="table_field">Address:</td><td> <input   required type="text" name="ADDRESS" id="ADDRESS" placeholder="Enter Address" class="form-control"/></td></tr>
+						<tr><td class="table_field">Condominium:</td><td> <input   required type="CONDOMINIUM" name="ADDRESS" id="CONDOMINIUM" placeholder="Enter Condominium" class="form-control"/></td></tr>
+						<tr><td class="table_field">Barangay:</td><td> <input   required type="text" name="BARANGAY" id="BARANGAY" placeholder="Enter Barangay" class="form-control"/></td></tr>
+						<tr><td class="table_field">City:</td><td> <input   required type="text" name="CITY" id="CITY" placeholder="Enter City" class="form-control"/></td></tr>	
 							
 							</table>
 						

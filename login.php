@@ -8,7 +8,7 @@ include "cn.php";
 
 	if($_POST){
 		
-		$sql = "SELECT * From user Where UN = '$username' And PW='$password' AND attempts >= 1";
+		$sql = "SELECT * From user Where UN = '$username' And PW='$password' AND attempts >= 1 AND st = 'Verified'";
 		if ($res = $pdo->query($sql)) {
 			
 			  if ($res->rowCount() == 1) {
@@ -64,7 +64,7 @@ include "cn.php";
 							$_SESSION['session_iid']=$d['fid'];				
 							$_SESSION['session_iname']=$names;
 							$_SESSION['session_iaddress']="";
-							$_SESSION['session_icontact']="";
+							$_SESSION['session_icontact']= $d3['CONTACT_NUMBER'];
 							$_SESSION['session_email']= $d3['EMAIL'];
 							$_SESSION['session_username']=$d['UN'];
 							
@@ -95,7 +95,6 @@ include "cn.php";
 							$_SESSION['session_ipid'] = $d3['id'];
 							$_SESSION['session_i'] = $d['fid'];
 							$_SESSION['session_itype']=$d['Type'];
-							$_SESSION['session_ipass']=$d['PW'];
 							$_SESSION['session_iuser']=$d['fid'];
 							$_SESSION['session_iid']=$d['fid'];				
 							$_SESSION['session_iname']=$names;

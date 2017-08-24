@@ -14,10 +14,12 @@ $stmt2 = $pdo->prepare("Update patient Set
 							,BIRTHDAY = :BIRTHDAY
 							,BIRTHPLACE = :BIRTHPLACE
 							,ADDRESS = :ADDRESS
+							,CONDOMINIUM = :CONDOMINIUM
+							,BARANGAY = :BARANGAY
+							,CITY = :CITY
 							,BLOOD_TYPE = :BLOOD_TYPE
 							,CONTACT_NUMBER = :CONTACT_NUMBER
 							,NATIONALITY = :NATIONALITY
-							,ZIPCODE = :ZIPCODE
 							,RELIGION = :RELIGION
 							,EMAIL = :EMAIL
 							,CIVILSTATUS = :CIVILSTATUS
@@ -38,9 +40,11 @@ $stmt2 = $pdo->prepare("Update patient Set
 	
 	$stmt2->bindParam(':BIRTHPLACE', $_GET['BIRTHPLACE'], PDO::PARAM_STR);
 	$stmt2->bindParam(':NATIONALITY', $_GET['NATIONALITY'], PDO::PARAM_STR);
-	$stmt2->bindParam(':ZIPCODE', $_GET['ZIPCODE'], PDO::PARAM_STR);
 	$stmt2->bindParam(':RELIGION', $_GET['RELIGION'], PDO::PARAM_STR);
 	$stmt2->bindParam(':ADDRESS', $_GET['ADDRESS'], PDO::PARAM_STR);
+	$stmt2->bindParam(':CONDOMINIUM', $_GET['CONDOMINIUM'], PDO::PARAM_STR);
+	$stmt2->bindParam(':BARANGAY', $_GET['BARANGAY'], PDO::PARAM_STR);
+	$stmt2->bindParam(':CITY', $_GET['CITY'], PDO::PARAM_STR);
 	$stmt2->bindParam(':CIVILSTATUS', $_GET['CIVILSTATUS'], PDO::PARAM_STR);
 	$stmt2->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
 	$insert = $stmt2->execute();

@@ -4,7 +4,8 @@ $form_name = "patientpending";
 
 include "../../cn.php";
 
-$q = "select patient.*, user.st from patient, user where user.st ='Not Yet Verified' and user.fid=patient.id";			
+$q = "SELECT * FROM patient INNER JOIN user ON patient.EMAIL = user.EMAIL WHERE user.st = 'Not Yet Verified';
+";			
 
 $stmt  = $pdo->query($q);
 $result = $stmt->fetchAll();
@@ -28,6 +29,10 @@ $result = $stmt->fetchAll();
 	foreach( $result as $d ) {
 		$count = $count + 1;
 		$tbl_id = $d['id'];
+		$email = $d['EMAIL'];
+		$pquery = $db->query("SELECT * FROM patient WHERE EMAIL = '$email'");
+		$prow = $pquery->fetch_object();
+		$pid = $prow->id;
 		?>
 		<tr>
 			<td>
@@ -35,7 +40,7 @@ $result = $stmt->fetchAll();
 					</br>
 					<div class="div_button_actions">
 						<span class="span_count"><i>User Awaiting Approval #: <?php echo $count;?></i></span>
-						<span class="label label-default" onclick="DeleteY('<?php echo $tbl_id;?>')" title="Delete">Delete</span>
+						<span class="label label-default" onclick="DeleteY('<?php echo $pid;?>')" title="Delete">Delete</span>
 						<span class="label label-default" onclick="UpdateY('<?php echo $tbl_id;?>')" title="Save Changes">Verify User</span>
 
 						<span class="span_update_status" id="span_update_status<?php echo $tbl_id;?>"></span>

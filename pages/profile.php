@@ -3,11 +3,11 @@ session_start();
 include "../cn.php";
 $form_name = "Profile";
 
-$sql = "Select * From patient Where ID = '".$_SESSION['session_iid']."'";
+$sql = "Select * From patient Where id = '".$_SESSION['session_ipid']."'";
 if ($qi = $pdo->query($sql)) { 
  $d = $qi->fetch( PDO::FETCH_ASSOC ); }
-
- $sql2 = "Select * From user Where fid = '".$_SESSION['session_iid']."'";
+$email = $d['EMAIL'];
+ $sql2 = "Select * From user Where EMAIL = '$email'";
  if ($qi2 = $pdo->query($sql2)) { 
   $d2 = $qi2->fetch( PDO::FETCH_ASSOC ); }
 ?>
@@ -180,20 +180,46 @@ if ($qi = $pdo->query($sql)) {
               </div>
 			</div>
 			
-			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>Zipcode:</label>
-			<div class='col-md-6'>
-			  <div class='form-group'>
-                <div class='col-md-11'>
-                  <input  value="<?php echo  $d['ZIPCODE'];?>" required type="text" name="zipcode" id="zipcode" placeholder="Enter Zipcode" class="form-control"/>
-                </div>
-              </div>
-			</div>
-			
 			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>Address:</label>
 			<div class='col-md-6'>
 			  <div class='form-group'>
                 <div class='col-md-11'>
                   <input value="<?php echo  $d['ADDRESS'];?>"  required type="text" name="ad" id="ad" placeholder="Enter Address" class="form-control"/>
+                </div>
+				
+              </div>
+			  
+			</div>
+			
+			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>Condominium:</label>
+			<div class='col-md-6'>
+			  <div class='form-group'>
+                <div class='col-md-11'>
+                  <input value="<?php echo  $d['CONDOMINIUM'];?>"  required type="text" name="condominium" id="CONDOMINIUM" placeholder="Enter Condominium" class="form-control"/>
+                </div>
+				
+              </div>
+			  
+			</div>
+			
+
+			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>Barangay:</label>
+			<div class='col-md-6'>
+			  <div class='form-group'>
+                <div class='col-md-11'>
+                  <input value="<?php echo  $d['BARANGAY'];?>"  required type="text" name="barangay" id="BARANGAY" placeholder="Enter Barangay" class="form-control"/>
+                </div>
+				
+              </div>
+			  
+			</div>
+			
+
+			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>City:</label>
+			<div class='col-md-6'>
+			  <div class='form-group'>
+                <div class='col-md-11'>
+                  <input value="<?php echo  $d['CITY'];?>"  required type="text" name="city" id="CITY" placeholder="Enter City" class="form-control"/>
                 </div>
 				
               </div>
@@ -216,7 +242,7 @@ if ($qi = $pdo->query($sql)) {
 			
 		<hr class="hr2"/><br/>
 		<div class='form-group'>
-		 <div class='col-md-offset-4 col-md-5'><b>ACCOUNT INFORMATION</b></div>
+		 <div class='col-md-offset-4 col-md-5'><b>ACCOUNT INFORMATION </b></div>
 		</div>
 		
 		<div class='form-group'>

@@ -218,6 +218,54 @@ include 'cn.php';
 
 <!-- Modal -->
 <div id="MyModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Patient Information</h4>
+		</div>
+		<div class="modal-body">
+	
+	<div class="form-group">
+		<label for="">Name</label>
+		<input type="hidden" id="hiddenid">
+		<input type="hidden" id="patients_email">
+				<p id="patient_name" class="form-control"></p>
+	</div>
+
+	<div class="form-group">
+		<label for="">Email</label>
+				<p id="patient_email" class="form-control"></p>
+	</div>
+
+	<div class="form-group">
+			<label for="">Appointed Date</label>
+			<p id="appointment" class="form-control"></p>
+	</div>
+
+	<div class="form-group">
+		<label for="">Purpose</label>
+		<p id="purpose" class="form-control"></p>
+	</div>
+
+		</div>
+		<div class="modal-footer">
+			<div class="btn-group">
+		<button type="button" class="btn btn-primary" id="approve">Approve</button>
+		<button type="button" class="btn btn-danger" id="decline">Decline</button>
+	</div>
+		</div>
+	</div>
+
+</div>
+</div>
+<!-- end modal -->
+
+
+<!-- Modal -->
+<div id="cancel" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -230,14 +278,14 @@ include 'cn.php';
 		
 		<div class="form-group">
 			<label for="">Name</label>
-			<input type="hidden" id="hiddenid">
+			<input type="hidden" id="hiddenids">
 			<input type="hidden" id="patients_email">
 	        <p id="patient_name" class="form-control"></p>
 		</div>
 
 		<div class="form-group">
 			<label for="">Email</label>
-	        <p id="patient_email" class="form-control"></p>
+	        <p id="emails" class="form-control"></p>
 		</div>
 
 		<div class="form-group">
@@ -250,11 +298,15 @@ include 'cn.php';
 			<p id="purpose" class="form-control"></p>
 		</div>
 
+		<div class="form-group">
+			<label for="">Note</label>
+			<p  class="form-control"> Are you sure you want to accept this cancellation?</p>
+		</div>
+
       </div>
       <div class="modal-footer">
         <div class="btn-group">
-			<button type="button" class="btn btn-primary" id="approve">Approve</button>
-			<button type="button" class="btn btn-danger" id="decline">Decline</button>
+			<button type="button" class="btn btn-primary" id="cancel_approve">Yes</button>
 		</div>
       </div>
     </div>
@@ -288,6 +340,8 @@ include 'cn.php';
   </div>
 </div>
 <!-- end modal -->
+
+
 					</div>
 				</div>
 				
@@ -347,6 +401,23 @@ include 'cn.php';
 		$('#MyModal').find('#purpose').html(purpose);
 	}
 
+	function cancelmodal($id,$patient_name,$patient_email,$appointment,$purpose) {
+		var id = $id;
+		var patient_name = $patient_name;
+		var patient_email = $patient_email;
+		var appointment = $appointment;
+		var purpose = $purpose;
+		$('#cancel').modal('show');
+		$('#cancel').find('#hiddenids').val(id);
+		$('#cancel').find('#patient_name').html(patient_name);
+		$('#cancel').find('#emails').html(patient_email);
+		$('#cancel').find('#patients_email').val(patient_email);
+		$('#cancel').find('#appointment').html(appointment);
+		$('#cancel').find('#purpose').html(purpose);
+	}
+
+	
+
 	function approveordecline() {
 		$('#approve').click(function(e){
 			e.preventDefault();
@@ -365,6 +436,24 @@ include 'cn.php';
 			})
 		})
 
+	function cancelapprove() {
+		$('#cancel_approve').click(function(e){
+			e.preventDefault();
+			var hiddenids = $('#hiddenids').val();
+			var emails = $('#emails').html();
+			$.ajax({
+				type: 'POST',
+				url: 'function_appointment.php',
+				data: {action : 'approve cancellation', id : hiddenids, patient_email : emails },
+				success:function(){
+					show_appointment();
+					alert('An email has been sent to ' + emails);
+					$('#cancel').modal('hide');
+				}
+			})
+		})
+	}
+	cancelapprove();
 		$('#decline').click(function(e){
 			e.preventDefault();
 			$('#MyModal').modal('hide');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2017 at 11:53 PM
+-- Generation Time: Aug 24, 2017 at 02:14 AM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -35,7 +35,9 @@ CREATE TABLE `appointment` (
   `purpose` varchar(1000) NOT NULL,
   `patient_name` varchar(255) NOT NULL,
   `patient_email` varchar(255) NOT NULL,
+  `patient_number` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
+  `notify` int(11) NOT NULL,
   `reference_code` varchar(255) NOT NULL,
   `date` varchar(255) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -45,8 +47,8 @@ CREATE TABLE `appointment` (
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`id`, `email`, `chosentime`, `purpose`, `patient_name`, `patient_email`, `status`, `reference_code`, `date`, `datetime`) VALUES
-(55, 'cabugajeddahlyn@gmail.com', '10:00:00', 'check up', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 1, 'AEYIEZAZFD', '2017-08-21', '2017-08-12 18:58:57');
+INSERT INTO `appointment` (`id`, `email`, `chosentime`, `purpose`, `patient_name`, `patient_email`, `patient_number`, `status`, `notify`, `reference_code`, `date`, `datetime`) VALUES
+(90, 'cabugajeddahlyn@gmail.com', '09:30:00', 'check up', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', '9555773952', 5, 0, 'EWHYFGLQUQ', '2017-08-31', '2017-08-23 23:59:25');
 
 -- --------------------------------------------------------
 
@@ -96,10 +98,49 @@ CREATE TABLE `availability` (
 INSERT INTO `availability` (`id`, `title`, `day`, `time_from`, `time_to`, `start`, `end`, `email`, `time_base_from`, `time_base_to`) VALUES
 (87, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-14', '10 AM', '2 PM', '2017-08-14T10:00:00', '2017-08-14T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00'),
 (88, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-16', '10 AM', '2 PM', '2017-08-16T10:00:00', '2017-08-16T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00'),
-(89, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-18', '10 AM', '2 PM', '2017-08-18T10:00:00', '2017-08-18T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00'),
-(90, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-21', '10 AM', '2 PM', '2017-08-21T10:00:00', '2017-08-21T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00'),
-(91, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-23', '10 AM', '2 PM', '2017-08-23T10:00:00', '2017-08-23T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00'),
-(92, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-25', '10 AM', '2 PM', '2017-08-25T10:00:00', '2017-08-25T14:00:00', 'cabugajeddahlyn@gmail.com', '10:00:00', '14:00:00');
+(107, 'Dr. iamdoctor iamdoctor iamdoctor', '2017-08-16', '10 AM', '2 PM', '2017-08-16T10:00:00', '2017-08-16T14:00:00', 'iamdoctor@yahoo.com', '10:00:00', '14:00:00'),
+(108, 'Dr. demo demo demo', '2017-08-16', '10 AM', '2 PM', '2017-08-16T10:00:00', '2017-08-16T14:00:00', 'demo@yahoo.com', '10:00:00', '14:00:00'),
+(109, 'Dr. Rosalito Perez De Borja', '2017-08-16', '8 AM', '1 PM', '2017-08-16T08:00:00', '2017-08-16T13:00:00', 'itoy_deborja@yahoo.com', '08:00:00', '13:00:00'),
+(110, 'Dr. Rosalito Perez De Borja', '2017-08-16', '3 PM', '6 PM', '2017-08-16T03:00:00', '2017-08-16T18:00:00', 'itoy_deborja@yahoo.com', '15:00:00', '18:00:00'),
+(111, 'Dr. Rosalito Perez De Borja', '2017-08-17', '3 PM', '6 PM', '2017-08-17T03:00:00', '2017-08-17T18:00:00', 'itoy_deborja@yahoo.com', '15:00:00', '18:00:00'),
+(112, 'Dr. Rosalito Perez De Borja', '2017-08-17', '8 AM', '11 AM', '2017-08-17T08:00:00', '2017-08-17T11:00:00', 'itoy_deborja@yahoo.com', '08:00:00', '11:00:00'),
+(113, 'Dr. Marife Ponce De Borja', '2017-08-16', '8 AM', '1 PM', '2017-08-16T08:00:00', '2017-08-16T13:00:00', 'fe_deborja@yahoo.com', '08:00:00', '13:00:00'),
+(114, 'Dr. Marife Ponce De Borja', '2017-08-16', '4 PM', '9 PM', '2017-08-16T04:30:00', '2017-08-16T21:00:00', 'fe_deborja@yahoo.com', '16:30:00', '21:00:00'),
+(115, 'Dr. Marife Ponce De Borja', '2017-08-17', '8 AM', '1 PM', '2017-08-17T08:00:00', '2017-08-17T13:30:00', 'fe_deborja@yahoo.com', '08:00:00', '13:30:00'),
+(116, 'Dr. Carl Adriel Yamat Santos', '2017-08-16', '8 AM', '1 PM', '2017-08-16T08:00:00', '2017-08-16T13:30:00', 'chad_santos15@yahoo.com', '08:00:00', '13:30:00'),
+(117, 'Dr. Carl Adriel Yamat Santos', '2017-08-16', '3 PM', '6 PM', '2017-08-16T03:30:00', '2017-08-16T18:30:00', 'chad_santos15@yahoo.com', '15:30:00', '18:30:00'),
+(118, 'Dr. Carl Adriel Yamat Santos', '2017-08-17', '8 AM', '12 PM', '2017-08-17T08:00:00', '2017-08-17T12:00:00', 'chad_santos15@yahoo.com', '08:00:00', '12:00:00'),
+(119, 'Dr. Jazz Reyes Reyes', '2017-08-16', '8 AM', '4 PM', '2017-08-16T08:00:00', '2017-08-16T16:00:00', 'jazzreyes16@gmail.com', '08:00:00', '16:00:00'),
+(120, 'Dr. Jazz Reyes Reyes', '2017-08-17', '8 AM', '10 AM', '2017-08-17T08:00:00', '2017-08-17T10:00:00', 'jazzreyes16@gmail.com', '08:00:00', '10:00:00'),
+(121, 'Dr. Cedrick Balboa Garbosa', '2017-08-16', '12 PM', '8 PM', '2017-08-16T12:30:00', '2017-08-16T20:30:00', 'cedrickdalegarbosa@gmail.com', '12:30:00', '20:30:00'),
+(122, 'Dr. Cedrick Balboa Garbosa', '2017-08-17', '8 AM', '1 PM', '2017-08-17T08:00:00', '2017-08-17T13:00:00', 'cedrickdalegarbosa@gmail.com', '08:00:00', '13:00:00'),
+(123, 'Dr. Jolet Fransisco Bondoc', '2017-08-16', '10 AM', '1 PM', '2017-08-16T10:00:00', '2017-08-16T13:30:00', 'jolet_bondoc@yahoo.com', '10:00:00', '13:30:00'),
+(124, 'Dr. Jolet Fransisco Bondoc', '2017-08-16', '5 PM', '9 PM', '2017-08-16T05:00:00', '2017-08-16T21:00:00', 'jolet_bondoc@yahoo.com', '17:00:00', '21:00:00'),
+(125, 'Dr. Jolet Fransisco Bondoc', '2017-08-17', '8 AM', '11 AM', '2017-08-17T08:00:00', '2017-08-17T11:00:00', 'jolet_bondoc@yahoo.com', '08:00:00', '11:00:00'),
+(126, 'Dr. Miguel Sabandal Canon', '2017-08-16', '8 AM', '10 AM', '2017-08-16T08:00:00', '2017-08-16T10:30:00', 'miguelangelocanon@gmail.com', '08:00:00', '10:30:00'),
+(128, 'Dr. Miguel Sabandal Canon', '2017-08-17', '3 PM', '6 PM', '2017-08-17T03:00:00', '2017-08-17T18:00:00', 'miguelangelocanon@gmail.com', '15:00:00', '18:00:00'),
+(129, 'Dr. Gem Tan Latumbo', '2017-08-16', '8 AM', '12 PM', '2017-08-16T08:00:00', '2017-08-16T12:00:00', 'gemadrianlatumbo@gmail.com', '08:00:00', '12:00:00'),
+(130, 'Dr. Gem Tan Latumbo', '2017-08-16', '3 PM', '7 PM', '2017-08-16T03:00:00', '2017-08-16T19:30:00', 'gemadrianlatumbo@gmail.com', '15:00:00', '19:30:00'),
+(131, 'Dr. Gem Tan Latumbo', '2017-08-17', '3 PM', '7 PM', '2017-08-17T03:00:00', '2017-08-17T19:30:00', 'gemadrianlatumbo@gmail.com', '15:00:00', '19:30:00'),
+(132, 'Dr. Lita Flores Ponce', '2017-08-16', '8 AM', '10 AM', '2017-08-16T08:00:00', '2017-08-16T10:30:00', 'litaponce1023@gmail.com', '08:00:00', '10:30:00'),
+(133, 'Dr. Lita Flores Ponce', '2017-08-16', '3 PM', '7 PM', '2017-08-16T03:00:00', '2017-08-16T19:00:00', 'litaponce1023@gmail.com', '15:00:00', '19:00:00'),
+(134, 'Dr. Oyie Noriel Dimatulach', '2017-08-16', '8 AM', '12 PM', '2017-08-16T08:00:00', '2017-08-16T12:00:00', 'oyiedimatulach@yahoo.com', '08:00:00', '12:00:00'),
+(135, 'Dr. Oyie Noriel Dimatulach', '2017-08-17', '8 AM', '12 PM', '2017-08-17T08:00:00', '2017-08-17T12:00:00', 'oyiedimatulach@yahoo.com', '08:00:00', '12:00:00'),
+(136, 'Dr. Oyie Noriel Dimatulach', '2017-08-18', '8 AM', '12 PM', '2017-08-18T08:00:00', '2017-08-18T12:00:00', 'oyiedimatulach@yahoo.com', '08:00:00', '12:00:00'),
+(138, 'Dr. Marcus Dabandan Marticio', '2017-08-16', '8 AM', '11 AM', '2017-08-16T08:00:00', '2017-08-16T11:30:00', 'chillman907@gmail.com', '08:00:00', '11:30:00'),
+(140, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-21', '8 AM', '10 AM', '2017-08-21T08:00:00', '2017-08-21T10:00:00', 'cabugajeddahlyn@gmail.com', '08:00:00', '10:00:00'),
+(141, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-22', '8 AM', '10 AM', '2017-08-22T08:00:00', '2017-08-22T10:00:00', 'cabugajeddahlyn@gmail.com', '08:00:00', '10:00:00'),
+(142, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-23', '8 AM', '10 AM', '2017-08-23T08:00:00', '2017-08-23T10:00:00', 'cabugajeddahlyn@gmail.com', '08:00:00', '10:00:00'),
+(143, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-25', '8 AM', '10 AM', '2017-08-25T08:00:00', '2017-08-25T10:00:00', 'cabugajeddahlyn@gmail.com', '08:00:00', '10:00:00'),
+(144, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-28', '8 AM', '10 AM', '2017-08-28T08:00:00', '2017-08-28T10:00:00', 'cabugajeddahlyn@gmail.com', '08:00:00', '10:00:00'),
+(145, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-30', '8 AM', '10 AM', '2017-08-30T08:00:00', '2017-08-30T10:00:00', 'cabugajeddahlyn@gmail.com', '08:00:00', '10:00:00'),
+(146, 'Dr. Jeddahlyn Linzag Cabuga', '2017-08-31', '8 AM', '10 AM', '2017-08-31T08:00:00', '2017-08-31T10:00:00', 'cabugajeddahlyn@gmail.com', '08:00:00', '10:00:00'),
+(147, 'Dr. Fake  Doctor', '2017-09-04', '8 AM', '2 PM', '2017-09-04T08:00:00', '2017-09-04T14:00:00', 'fakedoctor@gmail.com', '08:00:00', '14:00:00'),
+(149, 'Dr. Fake  Doctor', '2017-09-08', '8 AM', '2 PM', '2017-09-08T08:00:00', '2017-09-08T14:00:00', 'fakedoctor@gmail.com', '08:00:00', '14:00:00'),
+(150, 'Dr. Fake  Doctor', '2017-09-12', '9 AM', '1 PM', '2017-09-12T09:00:00', '2017-09-12T13:00:00', 'fakedoctor@gmail.com', '09:00:00', '13:00:00'),
+(151, 'Dr. Fake  Doctor', '2017-09-14', '9 AM', '1 PM', '2017-09-14T09:00:00', '2017-09-14T13:00:00', 'fakedoctor@gmail.com', '09:00:00', '13:00:00'),
+(152, 'Dr. Fake  Doctor', '2017-08-30', '8 AM', '12 PM', '2017-08-30T08:30:00', '2017-08-30T12:30:00', 'fakedoctor@gmail.com', '08:30:00', '12:30:00'),
+(153, 'Dr. Fake  Doctor', '2017-08-28', '8 AM', '12 PM', '2017-08-28T08:30:00', '2017-08-28T12:30:00', 'fakedoctor@gmail.com', '08:30:00', '12:30:00');
 
 -- --------------------------------------------------------
 
@@ -156,7 +197,19 @@ CREATE TABLE `doctor` (
 
 INSERT INTO `doctor` (`id`, `LN`, `FN`, `MN`, `SN`, `GENDER`, `YEARS`, `SPECIALIZATION`, `CN`, `email`, `attempts`) VALUES
 (45, 'iamdoctor', 'iamdoctor', 'iamdoctor', 'iamdoctor', 'Male', '5', 'adult pulmonary medicine', '1233123', 'iamdoctor@yahoo.com', 3),
-(46, 'Cabuga', 'Jeddahlyn', 'Linzag', '', 'Female', '15', 'endocrinology', '095448484844', 'cabugajeddahlyn@gmail.com', 3);
+(46, 'Cabuga', 'Jeddahlyn', 'Linzag', '', 'Female', '15', 'endocrinology', '095448484844', 'cabugajeddahlyn@gmail.com', 3),
+(48, 'De Borja', 'Rosalito', 'Perez', '', 'Male', '5', 'endocrinology', '09279582440', 'itoy_deborja@yahoo.com', 3),
+(49, 'De Borja', 'Marife', 'Ponce', '', 'Female', '4', 'endocrinology', '09420001787', 'fe_deborja@yahoo.com', 3),
+(50, 'Santos', 'Carl Adriel', 'Yamat', '', 'Male', '5', 'endocrinology', '09257280238', 'chad_santos15@yahoo.com', 3),
+(51, 'Reyes', 'Jazz', 'Reyes', '', 'Male', '7', 'endocrinology', '09062313617', 'jazzreyes16@gmail.com', 3),
+(52, 'Garbosa', 'Cedrick', 'Balboa', '', 'Male', '7', 'endocrinology', '09123453254', 'cedrickdalegarbosa@gmail.com', 3),
+(53, 'Bondoc', 'Jolet', 'Fransisco', '', 'Male', '9', 'endocrinology', '09124560192', 'jolet_bondoc@yahoo.com', 3),
+(54, 'Canon', 'Miguel', 'Sabandal', '', 'Male', '8', 'endocrinology', '09234501029', 'miguelangelocanon@gmail.com', 3),
+(55, 'Latumbo', 'Gem', 'Tan', '', 'Male', '6', 'endocrinology', '09150929283', 'gemadrianlatumbo@gmail.com', 3),
+(56, 'Ponce', 'Lita', 'Flores', '', 'Female', '12', 'endocrinology', '09220941203', 'litaponce1023@gmail.com', 3),
+(57, 'Dimatulach', 'Oyie', 'Noriel', '', 'Male', '5', 'endocrinology', '09234569192', 'oyiedimatulach@yahoo.com', 3),
+(58, 'Marticio', 'Marcus', 'Dabandan', '', 'Male', '7', 'adult pulmonary medicine', '09970797547', 'chillman907@gmail.com', 3),
+(59, 'Doctor', 'Fake', '', '', 'Male', '5', 'dermatology', '09261588384', 'fakedoctor@gmail.com', 3);
 
 -- --------------------------------------------------------
 
@@ -177,7 +230,9 @@ CREATE TABLE `doctor_rating` (
 --
 
 INSERT INTO `doctor_rating` (`id`, `doctor_name`, `specialization`, `ratings`, `ip`) VALUES
-(18, 'Jeddahlyn Linzag Cabuga ', 'endocrinology', '5', '::1');
+(18, 'Jeddahlyn Linzag Cabuga ', 'endocrinology', '5', '::1'),
+(19, 'Jeddahlyn Linzag Cabuga ', 'endocrinology', '5', '110.54.220.186'),
+(20, 'Marcus Dabandan Marticio ', 'adult pulmonary medicine', '1', '110.54.220.186');
 
 -- --------------------------------------------------------
 
@@ -192,8 +247,19 @@ CREATE TABLE `doctor_upload` (
   `patient_email` varchar(255) NOT NULL,
   `filename` varchar(255) NOT NULL,
   `reference_code` varchar(255) NOT NULL,
+  `findings` varchar(1000) NOT NULL,
   `date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `doctor_upload`
+--
+
+INSERT INTO `doctor_upload` (`id`, `email`, `patient_name`, `patient_email`, `filename`, `reference_code`, `findings`, `date`) VALUES
+(72, 'cabugajeddahlyn@gmail.com', 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 'adminpicture1.png', 'QJHQVGPLNX', 'test', '08-14-2017'),
+(73, 'cabugajeddahlyn@gmail.com', 'Ralph Joseph Ponce De Borja', 'ralph_deborja@yahoo.com', 'YDXJ2507.jpg', 'YSAQYGLYEH', '', '08-14-2017'),
+(74, 'jazzreyes16@gmail.com', 'Ralph Joseph Ponce De Borja', 'ralph_deborja@yahoo.com', 'YDXJ2309.jpg', 'BSDDUOHPCA', 'ralphjoseph', '08-15-2017'),
+(75, 'chillman907@gmail.com', 'Ralph Joseph Ponce De Borja', 'ralph_deborja@yahoo.com', 'De Borja.docx', 'BSYVZJGQAE', 'Pogi pogi mo', '08-15-2017');
 
 -- --------------------------------------------------------
 
@@ -218,7 +284,7 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `LN`, `FN`, `MN`, `SN`, `POSITION`, `DEPARTMENT`, `EMAIL`, `CN`) VALUES
-('admin', 'Jor', 'JorS', 'Jor', '', 'Programmer', 'IT', 'lewjordenjulve@gmail.com', '');
+('admin', 'Laggers', 'Lane', '', '', 'Programmer', 'IT', 'laggerslane@gmail.com', '');
 
 -- --------------------------------------------------------
 
@@ -281,7 +347,67 @@ INSERT INTO `logins` (`id`, `fid`, `dt`) VALUES
 (42, '25', '2017-08-12 18:40:13'),
 (43, '25', '2017-08-16 20:06:23'),
 (44, '25', '2017-08-16 20:41:37'),
-(45, '25', '2017-08-16 21:50:29');
+(45, '25', '2017-08-16 21:50:29'),
+(46, '25', '2017-08-14 03:21:14'),
+(47, '25', '2017-08-14 03:21:40'),
+(48, '25', '2017-08-14 03:21:51'),
+(49, '25', '2017-08-14 03:33:36'),
+(50, '25', '2017-08-14 03:53:00'),
+(51, '25', '2017-08-14 04:40:28'),
+(52, '25', '2017-08-14 05:06:06'),
+(53, '28', '2017-08-14 08:16:00'),
+(54, '25', '2017-08-14 09:28:36'),
+(55, '25', '2017-08-14 09:41:43'),
+(56, '25', '2017-08-14 09:43:25'),
+(57, '25', '2017-08-14 09:46:37'),
+(58, '25', '2017-08-14 09:50:42'),
+(59, '25', '2017-08-14 09:57:05'),
+(60, '25', '2017-08-14 10:44:38'),
+(61, '28', '2017-08-14 13:18:16'),
+(62, '25', '2017-08-14 15:13:09'),
+(63, '25', '2017-08-14 15:57:47'),
+(64, '28', '2017-08-15 02:39:32'),
+(65, '28', '2017-08-15 02:41:08'),
+(66, '28', '2017-08-15 02:46:19'),
+(67, '28', '2017-08-15 02:48:51'),
+(68, '28', '2017-08-15 02:59:13'),
+(69, '28', '2017-08-15 02:59:53'),
+(70, '28', '2017-08-15 06:12:57'),
+(71, '28', '2017-08-15 06:14:36'),
+(72, '28', '2017-08-15 06:19:37'),
+(73, '28', '2017-08-15 06:27:55'),
+(74, '28', '2017-08-15 06:36:30'),
+(75, '28', '2017-08-15 07:13:35'),
+(76, '28', '2017-08-15 07:17:23'),
+(77, '28', '2017-08-15 07:35:18'),
+(78, '25', '2017-08-17 16:36:53'),
+(79, '25', '2017-08-18 03:30:29'),
+(80, '25', '2017-08-18 03:42:25'),
+(81, '25', '2017-08-18 08:00:55'),
+(82, '29', '2017-08-18 10:27:05'),
+(83, '25', '2017-08-18 10:37:25'),
+(84, '25', '2017-08-16 23:31:18'),
+(85, '28', '2017-08-17 02:23:04'),
+(86, '45', '2017-08-17 02:26:06'),
+(87, '28', '2017-08-17 02:30:00'),
+(88, '25', '2017-08-17 07:30:11'),
+(89, '28', '2017-08-18 05:02:20'),
+(90, '28', '2017-08-18 06:13:47'),
+(91, '25', '2017-08-19 17:21:59'),
+(92, '25', '2017-08-19 17:23:24'),
+(93, '25', '2017-08-19 17:38:01'),
+(94, '28', '2017-08-20 05:53:38'),
+(95, '46', '2017-08-20 06:03:22'),
+(96, '28', '2017-08-23 07:43:28'),
+(97, '47', '2017-08-23 07:55:52'),
+(98, '47', '2017-08-23 07:59:55'),
+(99, '47', '2017-08-24 02:25:39'),
+(100, '47', '2017-08-24 02:39:11'),
+(101, '47', '2017-08-24 05:47:12'),
+(102, '47', '2017-08-24 05:59:04'),
+(103, '47', '2017-08-24 06:02:01'),
+(104, '25', '2017-08-23 22:58:07'),
+(105, '25', '2017-08-23 23:01:44');
 
 -- --------------------------------------------------------
 
@@ -325,9 +451,11 @@ CREATE TABLE `patient` (
   `BIRTHPLACE` varchar(50) NOT NULL,
   `CIVILSTATUS` varchar(50) NOT NULL,
   `NATIONALITY` varchar(50) NOT NULL,
-  `ZIPCODE` int(8) NOT NULL,
   `RELIGION` varchar(50) NOT NULL,
   `ADDRESS` text NOT NULL,
+  `CONDOMINIUM` varchar(255) NOT NULL,
+  `BARANGAY` varchar(255) NOT NULL,
+  `CITY` varchar(255) NOT NULL,
   `BLOOD_TYPE` varchar(15) NOT NULL,
   `CONTACT_NUMBER` varchar(11) NOT NULL,
   `EMAIL` varchar(50) NOT NULL
@@ -337,8 +465,12 @@ CREATE TABLE `patient` (
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`id`, `LN`, `FN`, `MN`, `SN`, `GENDER`, `WEIGHT`, `HEIGHT`, `BIRTHDAY`, `BIRTHPLACE`, `CIVILSTATUS`, `NATIONALITY`, `ZIPCODE`, `RELIGION`, `ADDRESS`, `BLOOD_TYPE`, `CONTACT_NUMBER`, `EMAIL`) VALUES
-(25, 'Lozano', 'John David', 'Sadia', '', 'Male', '176', '5\'6', '1994-03-31', 'Quezon City', 'Married', 'Filipino', 1211, 'Islam', 'Quezon City', 'AB Positive', '09555773952', 'lozanojohndavid@gmail.com');
+INSERT INTO `patient` (`id`, `LN`, `FN`, `MN`, `SN`, `GENDER`, `WEIGHT`, `HEIGHT`, `BIRTHDAY`, `BIRTHPLACE`, `CIVILSTATUS`, `NATIONALITY`, `RELIGION`, `ADDRESS`, `CONDOMINIUM`, `BARANGAY`, `CITY`, `BLOOD_TYPE`, `CONTACT_NUMBER`, `EMAIL`) VALUES
+(25, 'Lozano', 'John David', 'Sadia', '', 'Male', '176', '5\'6', '1994-03-31', 'Quezon City', 'Married', 'Filipino', 'Islam', 'Quezon City', '', '', '', 'AB Positive', '9555773952', 'lozanojohndavid@gmail.com'),
+(28, 'De Borja', 'Ralph Joseph', 'Ponce', '', 'Male', '176', '5\'8', '1993-10-17', 'Pateros', 'Single', 'Filipino', 'Catholic', '953 P. Herrera St. Pateros M.M', '', '', '', 'A ', '09163453220', 'ralph_deborja@yahoo.com'),
+(45, 'De Borja', 'Ross Joshua', 'Ponce', '', 'Male', '140', '5\'9', '1991-10-31', 'Pateros', 'Single', 'Filipino', 'Catholic', '953 P. Herrera St', '', 'Aguho', 'Metro Manila', 'A', '09163423250', 'ralphjosephdeborja11@gmail.com'),
+(46, 'demo', 'demo', 'demo', 'demo', 'Male', 'demo', 'demo', '1993-10-17', 'demo', 'Single', 'demo', 'demo', 'demo', 'demo', 'demo', 'demo', 'demo', 'demo', 'demo'),
+(47, 'Paganpan', 'Jaycee', '', '', 'Male', '60', '5.2', '1996-10-13', 'Manila', 'Single', 'Filipino', 'INC', '2546 Kasarinlan st', '', '883', 'Manila', 'A', '09261588384', 'jayceepaganpan@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -362,7 +494,14 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`id`, `patient_name`, `patient_email`, `doctor_name`, `doctor_email`, `amount`, `reference_code`, `date`) VALUES
-(17, 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 'Jeddahlyn Linzag Cabuga', 'cabugajeddahlyn@gmail.com', 1000, 'AEYIEZAZFD', 'August 13,  2017 02:59 AM');
+(17, 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 'Jeddahlyn Linzag Cabuga', 'cabugajeddahlyn@gmail.com', 1000, 'AEYIEZAZFD', 'August 13,  2017 02:59 AM'),
+(19, 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 'Jeddahlyn Linzag Cabuga', 'cabugajeddahlyn@gmail.com', 3000, 'QJHQVGPLNX', 'August 14,  2017 11:50 AM'),
+(20, 'John David Sadia Lozano', 'lozanojohndavid@gmail.com', 'Jeddahlyn Linzag Cabuga', 'cabugajeddahlyn@gmail.com', 500, 'PBOBFATDOC', 'August 14,  2017 05:30 PM'),
+(21, 'Ralph Joseph Ponce De Borja', 'ralph_deborja@yahoo.com', 'Jazz Reyes Reyes', 'jazzreyes16@gmail.com', 500, 'BSDDUOHPCA', 'August 15,  2017 10:43 AM'),
+(22, 'Ralph Joseph Ponce De Borja', 'ralph_deborja@yahoo.com', 'Marcus Dabandan Marticio', 'chillman907@gmail.com', 500, 'BSYVZJGQAE', 'August 15,  2017 02:16 PM'),
+(23, 'Ralph Joseph Ponce De Borja', 'ralph_deborja@yahoo.com', 'Marcus Dabandan Marticio', 'chillman907@gmail.com', 500, 'JEAYWLYWTN', 'August 15,  2017 02:42 PM'),
+(24, 'Jaycee  Paganpan', 'jayceepaganpan@gmail.com', 'Jeddahlyn Linzag Cabuga', 'cabugajeddahlyn@gmail.com', 500, 'CECLXAADLF', 'August 24,  2017 10:43 AM'),
+(25, 'Jaycee  Paganpan', 'jayceepaganpan@gmail.com', 'Jeddahlyn Linzag Cabuga', 'cabugajeddahlyn@gmail.com', 600, 'TACHTLPQVJ', 'August 24,  2017 10:43 AM');
 
 -- --------------------------------------------------------
 
@@ -432,53 +571,6 @@ INSERT INTO `specialization` (`id`, `specialization`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `test`
---
-
-CREATE TABLE `test` (
-  `id` int(11) NOT NULL,
-  `start` varchar(255) NOT NULL,
-  `end` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `body` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `test`
---
-
-INSERT INTO `test` (`id`, `start`, `end`, `title`, `body`) VALUES
-(1, '2017-8-8 8:30', '2017-8-8 14:0', 'asd', 'asdasd'),
-(2, '', '', '', ''),
-(3, '', '', '', ''),
-(4, '', '', '', ''),
-(5, '', '', '', ''),
-(6, '2017-8-8 8:0', '2017-8-8 20:30', 'asd', 'dddd'),
-(7, '2017-8-8 8:0', '2017-8-8 20:30', 'asd', 'dddd'),
-(8, '2017-8-8 8:0', '2017-8-8 20:30', 'asd', 'dddd'),
-(9, '2017-8-8 8:0', '2017-8-8 20:30', 'asd', 'dddd'),
-(10, '', '', '', ''),
-(11, '2017-8-8 9:30', '2017-8-8 10:30', '', ''),
-(12, '2017-8-8 10:0', '2017-8-8 11:0', '', ''),
-(13, '2017-8-8 10:0', '2017-8-8 11:0', '', ''),
-(14, '', '', '', ''),
-(15, '2017-8-9 10:30', '2017-8-9 11:30', '', ''),
-(16, '2017-8-9 10:30', '2017-8-9 11:30', '', ''),
-(17, '', '', '', ''),
-(18, '2017-8-8 9:0', '2017-8-8 10:0', '', ''),
-(19, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
-(20, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
-(21, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
-(22, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
-(23, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
-(24, '2017-8-8 9:0', '2017-8-8 10:0', 'asdadads', 'asdasd'),
-(25, '2017-8-9 13:0', '2017-8-9 14:0', '', ''),
-(26, '2017-8-9 13:0', '2017-8-9 14:0', 'asdasd', 'asdasdas'),
-(27, '2017-8-7 9:0', '2017-8-7 17:30', 'asdasd', 'asasdad');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user`
 --
 
@@ -500,10 +592,28 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `UN`, `PW`, `Type`, `SQ1`, `SQ2`, `EMAIL`, `fid`, `st`, `attempts`) VALUES
-(2, 'admin', 'admin', 'Administrator', '', '', '', 'admin', '', 3),
+(2, 'admin', 'admin', 'Administrator', '', '', '', 'admin', 'Verified', 3),
 (31, 'iamdoctor', '@passworD1234', 'Doctor', '', '', 'iamdoctor@yahoo.com', '', 'Verified', 3),
 (33, 'jeddahlyncabuga', '@passworD1234', 'Doctor', '', '', 'cabugajeddahlyn@gmail.com', '', 'Verified', 3),
-(34, 'dave.lozano2016', 'dave.lozano2016', 'Patient', 'kisses', 'dave', 'lozanojohndavid@gmail.com', '', 'Not Yet Verified', 3);
+(34, 'dave.lozano2016', '12345123', 'Patient', 'kisses', 'dave', 'lozanojohndavid@gmail.com', '', 'Verified', 2),
+(37, 'ralphdeborja', 'ralph123', 'Patient', 'bimon', 'rap', 'jayceepaganpan@gmail.com', '', 'Verified', 1),
+(38, 'demo', '@passworD1234', 'Doctor', '', '', 'demo@yahoo.com', '', 'Verified', 3),
+(39, 'itoydeborja', '@passworD1234', 'Doctor', '', '', 'itoy_deborja@yahoo.com', '', 'Verified', 3),
+(40, 'fedeborja', '@passworD1234', 'Doctor', '', '', 'fe_deborja@yahoo.com', '', 'Verified', 3),
+(41, 'chadsantos', '@passworD1234', 'Doctor', '', '', 'chad_santos15@yahoo.com', '', 'Verified', 3),
+(42, 'jazzreyes', '@passworD1234', 'Doctor', '', '', 'jazzreyes16@gmail.com', '', 'Verified', 3),
+(43, 'cedrickgarbosa', '@passworD1234', 'Doctor', '', '', 'cedrickdalegarbosa@gmail.com', '', 'Verified', 3),
+(44, 'joletbondoc', '@passworD1234', 'Doctor', '', '', 'jolet_bondoc@yahoo.com', '', 'Verified', 3),
+(45, 'miguelcanon', '@passworD1234', 'Doctor', '', '', 'miguelangelocanon@gmail.com', '', 'Verified', 3),
+(46, 'gemlatumbo', '@passworD1234', 'Doctor', '', '', 'gemadrianlatumbo@gmail.com', '', 'Verified', 3),
+(47, 'litaponce', '@passworD1234', 'Doctor', '', '', 'litaponce1023@gmail.com', '', 'Verified', 3),
+(48, 'oyiedimatulach', '@passworD1234', 'Doctor', '', '', 'oyiedimatulach@yahoo.com', '', 'Verified', 3),
+(49, 'DocMarcus', 'Surfsterss@7', 'Doctor', '', '', 'chillman907@gmail.com', '', 'Verified', 3),
+(50, 'EmjayMarticio', 'Surfsterss@07', 'Patient', 'rapp', 'mj', 'martinjohnmarticio@gmail.com', '', 'Not Yet Verified', 3),
+(76, 'rossdeborja', '@passworD1234', 'Patient', 'bimon', 'ro', 'ralphjosephdeborja11@gmail.com', '', 'Verified', 3),
+(77, 'demodemodemo', '@passworD1234', 'Patient', 'demo', 'demo', 'demo', '', 'Verified', 3),
+(78, 'Jaycee', 'Lyr@0131', 'Patient', 'dawg', 'blue', 'jayceepaganpan@gmail.com', '', 'Verified', 3),
+(79, 'fakedoctor', 'F@k3doctor', 'Doctor', '', '', 'fakedoctor@gmail.com', '', 'Verified', 3);
 
 --
 -- Indexes for dumped tables
@@ -588,12 +698,6 @@ ALTER TABLE `specialization`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `test`
---
-ALTER TABLE `test`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -607,7 +711,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT for table `audit`
 --
@@ -617,7 +721,7 @@ ALTER TABLE `audit`
 -- AUTO_INCREMENT for table `availability`
 --
 ALTER TABLE `availability`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
 --
 -- AUTO_INCREMENT for table `comments`
 --
@@ -627,47 +731,42 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `doctor_rating`
 --
 ALTER TABLE `doctor_rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `doctor_upload`
 --
 ALTER TABLE `doctor_upload`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 --
 -- AUTO_INCREMENT for table `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `specialization`
 --
 ALTER TABLE `specialization`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
--- AUTO_INCREMENT for table `test`
---
-ALTER TABLE `test`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
---
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;COMMIT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
