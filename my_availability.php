@@ -35,7 +35,7 @@ include 'cn.php';
   <link rel="stylesheet" type="text/css" href="bt/css/jquery.timepicker.css" />
   <link rel="stylesheet" type="text/css" href="bt/css/bootstrap-datepicker.css" />
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
 
 	<link href="vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -278,14 +278,13 @@ include 'cn.php';
 		<script type="text/javascript" src="js/y_crud.js"></script>
 		<script type="text/javascript" src="js/y_crud_template.js"></script>
 	 <script src="bt/js/offcanvas.js"></script>
+
+     <script src="js/jquery-1.8.2.js"></script>
 	 	
-
-<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-
 <script type="text/javascript" src="bt/js/jquery.timepicker.min.js"></script>
 <script type="text/javascript" src="bt/js/jquery.datepair.min.js"></script>
 <script src="https://jonthornton.github.io/jquery-timepicker/jquer  y.timepicker.js"></script>
-<script src="http://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+<script src="js/jquery-ui.js"></script>
 	</body>
 <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

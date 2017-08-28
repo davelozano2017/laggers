@@ -7,7 +7,7 @@ $sql = "Select * From doctor Where email = '".$_SESSION['session_email']."'";
 if ($qi = $pdo->query($sql)) { 
  $d = $qi->fetch( PDO::FETCH_ASSOC ); }
 
- $sql2 = "Select * From user Where fid = '".$_SESSION['session_iid']."'";
+ $sql2 = "Select * From user Where id = '".$_SESSION['session_ipid']."'";
  if ($qi2 = $pdo->query($sql2)) { 
   $d2 = $qi2->fetch( PDO::FETCH_ASSOC ); }
 ?>

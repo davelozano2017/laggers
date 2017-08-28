@@ -15,7 +15,7 @@ include '../cn.php';
     <tbody>
     <?php 
     
-    $query = $db->query("SELECT * FROM appointment WHERE email = '$email'");
+    $query = $db->query("SELECT * FROM appointment WHERE email = '$email' AND status = 0");
     if($query->num_rows == 0) {
         echo '<tr><td colspan=4 style="text-align:center">No record found.</td></tr>';
     } 

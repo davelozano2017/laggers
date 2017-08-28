@@ -1,4 +1,4 @@
-<?php 
+l<?php 
 session_start();
 ob_start();
 $email = $_SESSION['session_email'];
@@ -176,7 +176,7 @@ $(document).ready(function() {
                 success:function(response) {
                   if(response.success == true){
                     alert('Cancellation message here');
-                    location.href="http://localhost/laggers/my_history.php";
+                    location.href="http://laggers.tk/my_history.php";
                   }
                 }
             })

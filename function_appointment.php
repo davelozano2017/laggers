@@ -20,7 +20,6 @@ if($_POST['action'] == 'submit') {
     $purpose = $db->real_escape_string($_POST['purpose']);
     $doctor_email = $db->real_escape_string($_POST['doctor_email']);
     $reference_code = generateRandomString();
-    $date = date('Y-m-d');
     $q = $db->query("SELECT * FROM appointment WHERE 
     email = '$doctor_email' AND patient_email = '$patient_email' AND chosentime = '$chosentime' ");
     $count = $q->num_rows;
@@ -58,7 +57,7 @@ if($_POST['action'] == 'submit') {
         } 
     }elseif($_POST['action'] == 'decline') {
     $id = $_POST['id'];
-    $query = $db->query("UPDATE appointment SET status = 2 WHERE id = $id");
+    $query = $db->query("UPDATE appointment SET status = 2 WHERE id = '$id'");
     if($query) {
         echo 'Declined';
     }

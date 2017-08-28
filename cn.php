@@ -2,7 +2,10 @@
 ob_start();
 $uploaded_files_path = "../../uploads/jQuery-File-Upload-9.8.0/server/php/files/";
 
-// hosting credential  = 'localhost','laggersl','27qzCnYn70','laggersl_ane';
+// $host 	= "localhost";
+// $user 	= "laggersl";
+// $pass 	= "27qzCnYn70";
+// $dbname	= "laggersl_ane";
 
 $host 	= "localhost";
 $user 	= "root";

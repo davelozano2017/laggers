@@ -200,19 +200,28 @@ include 'cn.php';
                     <thead>
                       <tr>
                         <th>Patient Name</th>
-                        <th>Patient Email</th>
+                        <th>Schedule</th>
                         <th>Amount</th>
                         <th>Reference Code</th>
                         <th>Date</th>
                       </tr>
                     </thead>
                       <?php 
-                      $query = $db->query("SELECT * FROM payment WHERE doctor_email = '".$_SESSION['session_email']."'");
-                      foreach($query as $row): ?>
+                      $query = $db->query("SELECT * FROM payment WHERE 
+                      doctor_email = '".$_SESSION['session_email']."'");
+                      foreach($query as $row): 
+                      $query1 = $db->query("SELECT * FROM appointment WHERE 
+                      reference_code = '".$row['reference_code']."'");
+                      $row1 = $query1->fetch_object();
+                      $schedule = $row1->date;
+                      $chosentime = $row1->chosentime;
+                      
+                      ?>
                     <tbody>
                             <tr>
                             <td><?php echo $row['patient_name']?></td>
-                            <td><?php echo $row['patient_email']?></td>
+                            <td><?php echo date('M d Y ', strtotime($schedule)). 
+                            date('h:i A ', strtotime($chosentime)) ?></td>
                             <td><?php echo "&#8369;".number_format($row['amount'],2,'.',',')?></td>
                             <td><?php echo $row['reference_code']?></td>
                             <td><?php echo $row['date']?></td>

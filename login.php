@@ -92,7 +92,7 @@ include "cn.php";
 							$d3 = $ressch->fetch( PDO::FETCH_ASSOC );
 							$names = $d3['FN'] .  " " .  $d3['MN'] . " "  . $d3['LN'];	
 
-							$_SESSION['session_ipid'] = $d3['id'];
+							$_SESSION['session_ipid'] = $id;
 							$_SESSION['session_i'] = $d['fid'];
 							$_SESSION['session_itype']=$d['Type'];
 							$_SESSION['session_iuser']=$d['fid'];

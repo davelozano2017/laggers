@@ -1,0 +1,28 @@
+[28-Aug-2017 16:59:53 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [2002] No such file or directory' in /home/laggersl/public_html/cn.php:12
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(12): PDO->__construct('mysql:host=loca...', 'laggersl', '27qzCnYn70')
+#1 /home/laggersl/public_html/main.php(6): include('/home/laggersl/...')
+#2 /home/laggersl/public_html/index.php(85): include('/home/laggersl/...')
+#3 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 12
+[28-Aug-2017 16:59:53 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [2002] No such file or directory' in /home/laggersl/public_html/cn.php:12
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(12): PDO->__construct('mysql:host=loca...', 'laggersl', '27qzCnYn70')
+#1 /home/laggersl/public_html/main.php(6): include('/home/laggersl/...')
+#2 /home/laggersl/public_html/index.php(85): include('/home/laggersl/...')
+#3 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 12
+[28-Aug-2017 16:59:58 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [2002] No such file or directory' in /home/laggersl/public_html/cn.php:12
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(12): PDO->__construct('mysql:host=loca...', 'laggersl', '27qzCnYn70')
+#1 /home/laggersl/public_html/main.php(6): include('/home/laggersl/...')
+#2 /home/laggersl/public_html/index.php(85): include('/home/laggersl/...')
+#3 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 12
+[28-Aug-2017 17:00:03 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [2002] No such file or directory' in /home/laggersl/public_html/cn.php:12
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(12): PDO->__construct('mysql:host=loca...', 'laggersl', '27qzCnYn70')
+#1 /home/laggersl/public_html/main.php(6): include('/home/laggersl/...')
+#2 /home/laggersl/public_html/index.php(85): include('/home/laggersl/...')
+#3 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 12
