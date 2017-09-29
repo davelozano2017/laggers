@@ -1,4 +1,4 @@
-l<?php 
+<?php 
 session_start();
 ob_start();
 $email = $_SESSION['session_email'];
@@ -12,6 +12,7 @@ include '../cn.php';
         <th>Findings</th>
         <th>Date</th>
         <th>Status</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -19,15 +20,13 @@ include '../cn.php';
     
     
     $query = $db->query("SELECT * FROM appointment WHERE patient_email = '$email' AND status != 5");
-    if($query->num_rows == 0) {
-        echo '<tr><td colspan=4 style="text-align:center">No record found.</td></tr>';
-    } 
     foreach($query as $row) :
     $id = $row['id'];
     $myDate = new DateTime($row['date']);
     $date = $myDate->format('D, M d, Y');
     $reference_code = $row['reference_code'];
     $email = $row['email'];
+    $patient_email = $row['patient_email'];
     $appointment = $date. ' '.date('g:i A', strtotime($row['chosentime']));
     if($row['status'] == 0) {
         $status = '<label class="label label-warning">Pending</label><a onclick="cancel_appointment('.$id.')" class="btn">Cancel</a>';
@@ -42,18 +41,26 @@ include '../cn.php';
     $doctor_name = "Dr. ".$r->FN.' '.$r->MN. ' '.$r->LN. ' '.$r->SN;
     
     $fin = $db->query("SELECT * FROM doctor_upload WHERE reference_code = '$reference_code'");
-    $qfin = $fin->fetch_object();
-    $findings = @$qfin->findings;
-    
-
+   
+    $check = $fin->num_rows;
+    if($check > 0) {
+        $qfin = $fin->fetch_object();
+        $findings = $qfin->findings;
+        $download = '';
+    } else {
+        $findings = '';
+        $download = '';
+    }
+   
 ?>
 
         <tr>
             <td><?php echo $doctor_name?></td>
             <td><?php echo $reference_code?></td>
-            <td><?php echo $findings?></td>
+            <td><textarea class="form-control" disabled style="border:none;outline:none;resize:none;width:100%;height:50px"><?php echo $findings?></textarea></td>
             <td><?php echo $date?></td>
             <td><?php echo $status?></td>
+            <td><a onclick="show_downloads('<?php echo$reference_code?>')">Download File</a></td>
         </tr>
     
 
@@ -86,8 +93,66 @@ include '../cn.php';
 </div>
 
 
+
+
+<div id="downloads" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Download Findings</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="hidden_id">
+        <p id="downloadmoto"></p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn" data-dismiss="modal" id="removemoto"> Close </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 <script>  
       
+function show_downloads(reference_code) {
+  $.ajax({
+    type : 'POST',
+    url : 'functions.php',
+    data: { action : 'Downloads', reference_code : reference_code },
+    dataType: 'json',
+    success:function(response){
+      $("p#downloadmoto").each(function() {
+        var substr = response.files.split(',');
+        for(var i=0; i< substr.length; i++) {
+          $.ajax({
+              type : 'POST',
+              url : 'functions.php',
+              cache:false,
+              data: { action : 'download files', files : substr[i]  },
+              dataType: 'json',
+              success:function(r) {
+                $('#downloads').modal({ backdrop: 'static', keyboard: false })
+                feedback(r.files);
+              }
+          })
+        }
+        
+      });
+    }
+  })
+}
+
+function feedback(message)
+{ 
+    $('#removemoto').click(function(){
+        $('#downloadmoto').html('');
+    })
+      $('#downloadmoto').append('<div class="row"><div class="form-group"><div class="col-md-12"><div id="feedback"><a class="btn btn-success flat" href="download.php?file='+message+'">Download Files</a></div></div></div></div>');
+}
 $(document).ready(function() {
         var handleDataTableButtons = function() {
           if ($("#datatable-buttons").length) {
@@ -176,11 +241,15 @@ $(document).ready(function() {
                 success:function(response) {
                   if(response.success == true){
                     alert('Cancellation message here');
-                    location.href="http://laggers.tk/my_history.php";
+                    location.href="http://laggerslane.tk/my_history.php";
                   }
                 }
             })
         })
       }
       confirm_cancellation()
+
+      function downloadfile(data) {
+        alert(data);
+      }
 </script>

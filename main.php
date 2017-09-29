@@ -5,6 +5,9 @@ if(isset($_SESSION['session_iid'])){
 session_start();
 include "cn.php";
 include "function/enc.php";
+@$query = $db->query("SELECT * FROM appointment WHERE status = 0 AND email = '".$_SESSION['session_email']."'");
+$check = $query->num_rows;
+$count_appointment = ($check > 0) ? '<span style="padding:5px" class="label label-success pull-right">'.$check.'</span>' : '<span style="padding:5px" class="label label-danger pull-right">0</span>';
 
 }
 ?>
@@ -160,7 +163,7 @@ color:orange;
 		<li><a href="main.php" class="active">Home</a></li>
 		<li><a href="main.php?p=about">About </a></li>
 		<li><a href="doctor_list.php">Doctors</a></li>
-		<li><a href="main.php?p=news">News/Annoucements</a></li>
+		<li><a href="main.php?p=news">News/Announcements</a></li>
 		<li><a href="main.php?p=contact_us">Contact Us</a></li>
 		<li><a href="main.php?p=faq">Doctor Ratings/Feedbacks</a></li>
 	
@@ -217,7 +220,9 @@ color:orange;
 <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
+
 <script>
+
 function UpdateSpecialization(id) {
 	var specialization = $('#specialization'+id).val();
 	$.ajax({

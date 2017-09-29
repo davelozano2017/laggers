@@ -139,11 +139,9 @@ include "cn.php";
 						}
 					}
 			 		echo "<script type='text/javascript'> ";
-					echo "alert('Invalid username or password'); ";
+					echo "alert('Invalid username or password or your account is under approval.'); ";
 					echo "window.location = ('index.php');\n"; 
 					echo "</script>";	
-	
 				}
-					
-	}}
-?>
+			}
+		}

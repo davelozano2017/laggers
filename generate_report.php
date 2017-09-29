@@ -4,6 +4,10 @@ if(empty($_SESSION['session_email'])){
 	header('location: index.php');
 }
 include 'cn.php';
+$query = $db->query("SELECT * FROM appointment WHERE status = 0 AND email = '".$_SESSION['session_email']."'");
+$check = $query->num_rows;
+$count_appointment = ($check > 0) ? '<span style="padding:5px" class="label label-success pull-right">'.$check.'</span>' : '<span style="padding:5px" class="label label-danger pull-right">0</span>';
+
 ?>
 
 
@@ -167,7 +171,7 @@ include 'cn.php';
 			
             <a href="main.php" >Doctor Information</a>
             <a href="my_availability.php">My Availability</a>
-            <a href="view_appointment.php" >View Appointments</a>
+            <a href="view_appointment.php" >View Appointments <?php echo $count_appointment?></a>
             <a href="patient_history.php" >Patient History</a>
             <a href="generate_report.php" >Generate Report</a>
             <a href="my_uploads.php" >My Uploads</a>
@@ -206,6 +210,7 @@ include 'cn.php';
                         <th>Date</th>
                       </tr>
                     </thead>
+                    <tbody>
                       <?php 
                       $query = $db->query("SELECT * FROM payment WHERE 
                       doctor_email = '".$_SESSION['session_email']."'");
@@ -217,7 +222,6 @@ include 'cn.php';
                       $chosentime = $row1->chosentime;
                       
                       ?>
-                    <tbody>
                             <tr>
                             <td><?php echo $row['patient_name']?></td>
                             <td><?php echo date('M d Y ', strtotime($schedule)). 
@@ -226,8 +230,8 @@ include 'cn.php';
                             <td><?php echo $row['reference_code']?></td>
                             <td><?php echo $row['date']?></td>
                             </tr>
-                    </tbody>
                         <?php endforeach; ?>
+                    </tbody>
                   </table>
 
                     <!-- end -->

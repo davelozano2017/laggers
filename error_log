@@ -26,3 +26,87 @@ Stack trace:
 #2 /home/laggersl/public_html/index.php(85): include('/home/laggersl/...')
 #3 {main}
   thrown in /home/laggersl/public_html/cn.php on line 12
+[28-Aug-2017 20:12:56 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/appointment.php(3): include('/home/laggersl/...')
+#2 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:12:58 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/appointment.php(3): include('/home/laggersl/...')
+#2 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:12:59 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/appointment.php(3): include('/home/laggersl/...')
+#2 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:13:00 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/appointment.php(3): include('/home/laggersl/...')
+#2 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:13:00 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/appointment.php(3): include('/home/laggersl/...')
+#2 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:13:01 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/appointment.php(3): include('/home/laggersl/...')
+#2 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:13:01 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/appointment.php(3): include('/home/laggersl/...')
+#2 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:13:03 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/main.php(6): include('/home/laggersl/...')
+#2 /home/laggersl/public_html/index.php(85): include('/home/laggersl/...')
+#3 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:13:06 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/main.php(6): include('/home/laggersl/...')
+#2 /home/laggersl/public_html/index.php(85): include('/home/laggersl/...')
+#3 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:13:20 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/main.php(6): include('/home/laggersl/...')
+#2 /home/laggersl/public_html/index.php(85): include('/home/laggersl/...')
+#3 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:13:24 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/main.php(6): include('/home/laggersl/...')
+#2 /home/laggersl/public_html/index.php(85): include('/home/laggersl/...')
+#3 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[28-Aug-2017 20:13:33 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/laggersl/public_html/cn.php:15
+Stack trace:
+#0 /home/laggersl/public_html/cn.php(15): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/laggersl/public_html/main.php(6): include('/home/laggersl/...')
+#2 /home/laggersl/public_html/index.php(85): include('/home/laggersl/...')
+#3 {main}
+  thrown in /home/laggersl/public_html/cn.php on line 15
+[29-Aug-2017 06:53:43 UTC] PHP Warning:  include(../cn.php): failed to open stream: No such file or directory in /home/laggersl/public_html/pages/doctors_list.php on line 51
+[29-Aug-2017 06:53:43 UTC] PHP Warning:  include(../cn.php): failed to open stream: No such file or directory in /home/laggersl/public_html/pages/doctors_list.php on line 51
+[29-Aug-2017 06:53:43 UTC] PHP Warning:  include(): Failed opening '../cn.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/laggersl/public_html/pages/doctors_list.php on line 51
+[29-Aug-2017 07:41:04 UTC] PHP Warning:  include(../cn.php): failed to open stream: No such file or directory in /home/laggersl/public_html/pages/doctors_list.php on line 51
+[29-Aug-2017 07:41:04 UTC] PHP Warning:  include(../cn.php): failed to open stream: No such file or directory in /home/laggersl/public_html/pages/doctors_list.php on line 51
+[29-Aug-2017 07:41:04 UTC] PHP Warning:  include(): Failed opening '../cn.php' for inclusion (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/laggersl/public_html/pages/doctors_list.php on line 51
+[24-Sep-2017 15:33:03 UTC] PHP Fatal error:  Class 'SmsGateway' not found in /home/laggersl/public_html/autonotifyvianumber.php on line 2

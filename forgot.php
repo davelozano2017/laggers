@@ -177,7 +177,7 @@ hr.hr2 {
 			
 			<div class="col-md-3">
                  <label class='control-label' for='id_title'><span style="color:red">*</span>Answer:</label>
-				<input type="text" name="sq1ans" id="sq1ans" class="form-control"/>
+				<input type="password" name="sq1ans" id="sq1ans" class="form-control"/>
             </div>
          
         </div>
@@ -200,7 +200,7 @@ hr.hr2 {
 			
 			<div class="col-md-3">
                  <label class='control-label' for='id_title'><span style="color:red">*</span>Answer:</label>
-				<input type="text" name="sq2ans" id="sq2ans" class="form-control"/>
+				<input type="password" name="sq2ans" id="sq2ans" class="form-control"/>
             </div>
          
         </div>

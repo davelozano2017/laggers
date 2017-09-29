@@ -14,6 +14,12 @@ if(!empty($_FILES)) {
     $query = $db->query("INSERT INTO doctor_upload 
     (email,patient_name,patient_email,filename,reference_code,findings,date) VALUES ('$email','$name','$patient_email','$filename','$reference_code','$findings','$date')");
 
+} else {
+    $query = $db->query("INSERT INTO doctor_upload 
+    (email,patient_name,patient_email,reference_code,findings,date) 
+    VALUES ('$email','$name','$patient_email','$reference_code','$findings','$date')");
+    if($query) {
+        echo '<script>alert("successfully saved.");location.href="../my_uploads.php"</script>';
+    }
 }
-?> 
 

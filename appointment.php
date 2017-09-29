@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include 'cn.php';
+$email = $_SESSION['session_email'];
 ?>
 
 
@@ -194,37 +195,71 @@ include 'cn.php';
       <div class="row row-offcanvas row-offcanvas-left">
 	        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
 		<div class="panel panel-primary">
-						 <div class="panel_title">Patient</div>
+<div class="panel_title">Patient</div>
 					
-				 <div class="panel-body" style="background: linear-gradient(to bottom, #eeeeef 0%, #c7c7cb 98%); background-image: -webkit-gradient(linear, left top, left bottom, from(#eeeeef), to(#98));
+<div class="panel-body" style="background: linear-gradient(to bottom, #eeeeef 0%, #c7c7cb 98%); background-image: -webkit-gradient(linear, left top, left bottom, from(#eeeeef), to(#98));
   background-image: -webkit-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);
   background-image:      -o-linear-gradient(top, #eeeeef 0%, #c7c7cb 98%);">
-				<div  class="list-group" >
-			
-		
-    
-		  
-		  	
-		
-
-	
+        <div  class="list-group" >
             <a href="#" onclick="show_page('profile','0')" >Personal Information</a>
             <a href="appointment.php" >View Appointments</a>
             <a href="my_history.php">My History</a>
             <a href="billing.php">Billing</a>
             <a href="pages/logout.php" >Logout</a>
-			
-			
-			
+	    </div>
 
-		 
-	</br>
-	</br>
-	</div>
+        <div  class="list-group" >
+        <label>Top 10 recent appointments</label>
+        
+        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php 
+        
+        
+        $query = $db->query("SELECT * FROM appointment WHERE patient_email = '$email' LIMIT 10");
+        if($query->num_rows == 0) {
+            echo '<tr><td colspan=4 style="text-align:center">No record found.</td></tr>';
+        } 
+        foreach($query as $row) :
+        $id = $row['id'];
+        $myDate = new DateTime($row['date']);
+        $date = $myDate->format('D, M d, Y');
+        $email = $row['email'];
+        $appointment = $date. ' '.date('g:i A', strtotime($row['chosentime']));
+        if($row['status'] == 0) {
+            $status = '<label class="label label-warning">Pending</label>';
+        } elseif($row['status'] == 1) {
+            $status = '<label class="label label-primary">Approved</label>';
+        } elseif($row['status'] == 2) {
+            $status = '<label class="label label-danger">Declined</label>';
+        }
+        
+        $q = $db->query("SELECT * FROM doctor WHERE EMAIL = '$email'");
+        $r = $q->fetch_object();
+        $doctor_name = "Dr. ".$r->FN.' '.$r->LN. ' '.$r->SN;
+        
+    ?>
+    
+            <tr>
+                <td><?php echo $doctor_name?></td>
+                <td><?php echo $date?></td>
+                <td><?php echo $status?></td>
+            </tr>
+        
+    
+    
+        <?php  endforeach;  ?>
+        </tbody>
+    </table>
+	    </div>
 	
-	
-
-      <!--/.sidebar-offcanvas-->
 				</div>	
 		</div>
       </div><!--/row-->
@@ -238,10 +273,10 @@ include 'cn.php';
 
                     <!-- start -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="specialization">Search by Specialization</label>
-                <select class="form-control specialization" id="search" style="width:100%">
+                <select class="form-control specialization" id="search_specialization" style="width:100%">
                     <option value="" selected></option>
                     <?php $query = $db->query("SELECT * FROM specialization");
                     foreach ($query as $row) : ?>
@@ -250,6 +285,10 @@ include 'cn.php';
                 </select>
             </div>
         </div>
+
+
+        <div id="show_doctor_name"></div>
+       
     </div>
     <input type="hidden" name="today" id="today" value="<?php echo date('Y-m-d')?>">
     <div id="calendarshow"></div>
@@ -315,118 +354,200 @@ include 'cn.php';
 <script src="bt/assets/js/ie-emulation-modes-warning.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script type="text/javascript">
-  $(".specialization").select2({
-          placeholder: "Select Doctor's Specialization",
-          allowClear: true
-    });
+$(".specialization").select2({
+    placeholder: "Select Doctor's Specialization",
+    allowClear: true
+});
 
+
+
+
+    $(document).ready(function() {
+        var handleDataTableButtons = function() {
+          if ($("#datatable-buttons").length) {
+            $("#datatable-buttons").DataTable({
+                
+              responsive: true
+            });
+          }
+        };
+
+        TableManageButtons = function() {
+          "use strict";
+          return {
+            init: function() {
+              handleDataTableButtons();
+            }
+          };
+        }();
+
+        $('#datatable').dataTable();
+
+        $('#datatable-keytable').DataTable({
+          keys: true
+        });
+
+        $('#datatable-responsive').DataTable({
+            "paging": false, "lengthChange": true, "searching": false,
+            "ordering": false, "info": false, "autoWidth": true
+        });
+
+
+        $('#datatable-fixed-header').DataTable({
+          fixedHeader: true
+        });
+
+        var $datatable = $('#datatable-checkbox');
+
+        $datatable.dataTable({
+          'order': [[ 1, 'asc' ]],
+          'columnDefs': [
+            { orderable: false, targets: [0] }
+          ]
+        });
+        $datatable.on('draw.dt', function() {
+          $('input').iCheck({
+            checkboxClass: 'icheckbox_flat-green'
+          });
+        });
+
+        TableManageButtons.init();
+      });
 
 var today = $('#today').val();
 
-
-    function search() {
-        
-        $('#search').change(function(e){
-        e.preventDefault();
-        var search = $('#search').val();
-        showcalendar() 
-            // start ajax
+    function search_specialization() {
+        $('#search_specialization').change(function(e){
+            var specialization = $('#search_specialization').val();
+            e.preventDefault();
             $.ajax({
-                type:'POST',
+                type : 'POST',
                 url : 'functions.php',
-                data: { action : 'search', specialization : search },
-                dataType: 'json',
-                success:function(data){
-                    // start calendar
-                    $('#calendar').fullCalendar({
-                        displayEventTime : false,
-                        header: {
-                            left: 'next today',
-                            center: 'title',
-                            right: 'month,agendaWeek,agendaDay'
-                        },
-                        
-                        defaultDate: new Date(),
-                        navLinks: true,  
-                        selectable: true,
-                        select: function(start, end) {
-                            if(start.isBefore(moment())) {
-                                $('#calendar').fullCalendar('unselect');
-                                return false;
-                            } 
-
-                            if(start.isAfter(moment())) {
-                                $('#calendar').fullCalendar('unselect');
-                                return false;
-                            } 
-                            
-                            $('.modal').modal({ backdrop: 'static', keyboard: false })
-                            $('.modal').find('#title').text('');
-                            $('.modal').find('#from').text('');
-                            $('.modal').find('#hiddenid').val('');
-                            $('.modal').find('#doctor_email').val('');
-                            $('.modal').find('#specialization').text('');
-                            $('.modal').find('#day').val('');
-                            $('.modal').find('#chosentime').val('');
-                            $('#submit').attr('disabled',true);
-                            $('.timepicker').timepicker('remove');
-                            $('#submit').attr('disabled',true);
-                        },
-                        
-                        eventClick: function(event, element) {
-                            if(today > event.day) {                               
-                                $('#submit').hide();
-                            } else {
-                                $('#submit').show();
-                            }
-                            $('.timepicker').timepicker({ 
-                                'timeFormat': 'g:i A',
-                                minTime:  event.time_base_from,
-                                maxTime: event.time_base_to
-                                
-                                
-                            });
-                            // Display the modal and set the values to the event values.
-                            $('.modal').modal({ backdrop: 'static', keyboard: false })
-                            $('.modal').find('#title').text(event.title);
-                            $('.modal').find('#from').text(event.time_from + ' - ' + event.time_to);
-                            $('.modal').find('#hiddenid').val(event.id);
-                            $('.modal').find('#doctor_email').val(event.email);
-                            $('.modal').find('#specialization').text(event.SPECIALIZATION);
-                            $('.modal').find('#day').val(event.day);
-                            $('.modal').find('#chosentime').val('');
-
-                        
-                        },
-                            editable: false,
-                            eventLimit: true,
-                            events: data
-
-                    });
-                    $('#calendarerror').hide();
+                data : { action : 'search specialization', specialization : specialization },
+                success:function(response){
+                    $('#show_doctor_name').html(response);
+                    $('#calendar').hide();
+                    $('#search_name').change(function(e){
+                    e.preventDefault();
+                    var search_specialization = $('#search_specialization').val();
+                    var search_name = $('#search_name').val();
+                    showcalendar() 
                     
-                    // end calendar
-                },error:function() {
-                $('#calendarerror').show();
-                $('#calendarerror').html('No result found').addClass('alert alert-danger');
+                        // start ajax
+                        $.ajax({
+                            type:'POST',
+                            url : 'functions.php',
+                            data: { action : 'search', search_specialization : search_specialization, search_name : search_name },
+                            dataType: 'json',
+                            success:function(data){
+                                // start calendar
+                                $('#calendar').fullCalendar({
+                                    displayEventTime : false,
+                                    header: {
+                                        left: 'next today',
+                                        center: 'title',
+                                        right: 'month,agendaWeek,agendaDay'
+                                    },
+                                    
+                                    defaultDate: new Date(),
+                                    navLinks: true,  
+                                    selectable: true,
+                                    select: function(start, end) {
+                                        if(start.isBefore(moment())) {
+                                            $('#calendar').fullCalendar('unselect');
+                                            return false;
+                                        } 
+
+                                        if(start.isAfter(moment())) {
+                                            $('#calendar').fullCalendar('unselect');
+                                            return false;
+                                        } 
+                                        
+                                        $('.modal').modal({ backdrop: 'static', keyboard: false })
+                                        $('.modal').find('#title').text('');
+                                        $('.modal').find('#from').text('');
+                                        $('.modal').find('#hiddenid').val('');
+                                        $('.modal').find('#doctor_email').val('');
+                                        $('.modal').find('#specialization').text('');
+                                        $('.modal').find('#day').val('');
+                                        $('.modal').find('#chosentime').val('');
+                                        $('#submit').attr('disabled',true);
+                                        $('.timepicker').timepicker('remove');
+                                        $('#submit').attr('disabled',true);
+
+                                    },
+                                    
+                                    eventClick: function(event, element) {
+                                        if(today > event.day) {                               
+                                            $('#submit').hide();
+                                        } else {
+                                            $('#submit').show();
+                                        }
+                                        $('.timepicker').timepicker({ 
+                                            'timeFormat': 'g:i A',
+                                            minTime:  event.time_base_from,
+                                            maxTime: event.time_base_to
+                                            
+                                            
+                                        });
+                                        // Display the modal and set the values to the event values.
+                                        $('.modal').modal({ backdrop: 'static', keyboard: false })
+                                        $('.modal').find('#title').text(event.title);
+                                        $('.modal').find('#from').text(event.time_from + ' - ' + event.time_to);
+                                        $('.modal').find('#hiddenid').val(event.id);
+                                        $('.modal').find('#doctor_email').val(event.email);
+                                        $('.modal').find('#specialization').text(event.SPECIALIZATION);
+                                        $('.modal').find('#day').val(event.day);
+                                        $('.modal').find('#chosentime').val('');
+                                        $('#chosentime').change(function(e){
+                                            var chosentime = $('#chosentime').val();
+                                            $.ajax({
+                                                type: 'POST',
+                                                url : 'checkslots.php',
+                                                data: { time : chosentime,email : event.email},
+                                                dataType: 'json',
+                                                success:function(response){
+                                                    response.success == true ? $('#remaining_slots').text(response.remaining_slots) : null;
+                                                }
+                                            });
+                                        });
+                                    },
+                                        editable: false,
+                                        eventLimit: true,
+                                        events: data
+
+                                });
+                                $('#calendarerror').hide();
+                                
+                                // end calendar
+                            },error:function() {
+                            $('#calendarerror').show();
+                            $('#calendarerror').html('No result found').addClass('alert alert-danger');
+                            }
+                        });
+                        // end ajax
+                    })
                 }
-            });
-            // end ajax
+            })
         })
     }
+
+
    
-    search();
+    
+    search_specialization();
+
 
     function showcalendar() {
         $.ajax({
             url : 'calendarshow.php',
             success:function(data){
                 $('#calendarshow').html(data)
+                
             }
         });
     }
-
-
+    
 </script>
 
 </html>

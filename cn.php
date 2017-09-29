@@ -2,15 +2,15 @@
 ob_start();
 $uploaded_files_path = "../../uploads/jQuery-File-Upload-9.8.0/server/php/files/";
 
-// $host 	= "localhost";
-// $user 	= "laggersl";
-// $pass 	= "27qzCnYn70";
-// $dbname	= "laggersl_ane";
-
 $host 	= "localhost";
-$user 	= "root";
-$pass 	= "";
-$dbname	= "dblaggerslane";
+$user 	= "laggersl";
+$pass 	= "27qzCnYn70";
+$dbname	= "laggersl_ane";
+
+// $host 	= "localhost";
+// $user 	= "root";
+// $pass 	= "";
+// $dbname	= "dblaggerslane";
 
 $pdo = new PDO("mysql:host={$host};dbname={$dbname}",$user,$pass);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

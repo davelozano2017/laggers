@@ -1,6 +1,7 @@
 <?php 
 include 'cn.php';
 $today = date('Y-m-d', strtotime('+3 days'));     
+
 $query = $db->query("SELECT * FROM appointment WHERE date = '$today' AND status = 1 AND notify = 0");
 foreach($query as $row) {
 $email[] = $row['patient_email'];

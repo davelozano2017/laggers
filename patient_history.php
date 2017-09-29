@@ -5,6 +5,10 @@ if(empty($_SESSION['session_email'])){
 }
 include 'cn.php';
 ob_start();
+$query = $db->query("SELECT * FROM appointment WHERE status = 0 AND email = '".$_SESSION['session_email']."'");
+$check = $query->num_rows;
+$count_appointment = ($check > 0) ? '<span style="padding:5px" class="label label-success pull-right">'.$check.'</span>' : '<span style="padding:5px" class="label label-danger pull-right">0</span>';
+
 ?>
 
 
@@ -168,7 +172,7 @@ ob_start();
 			
             <a href="main.php" >Doctor Information</a>
             <a href="my_availability.php">My Availability</a>
-            <a href="view_appointment.php" >View Appointments</a>
+            <a href="view_appointment.php" >View Appointments <?php echo $count_appointment?></a>
             <a href="patient_history.php" >Patient History</a>
             <a href="generate_report.php" >Generate Report</a>
             <a href="my_uploads.php" >My Uploads</a>

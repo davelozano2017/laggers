@@ -15,14 +15,14 @@ include '../cn.php';
     <tbody>
     <?php 
     
-    $query = $db->query("SELECT * FROM appointment WHERE email = '$email' AND status = 0");
+    $query = $db->query("SELECT * FROM appointment WHERE status = 0 AND email = '$email'");
     if($query->num_rows == 0) {
         echo '<tr><td colspan=4 style="text-align:center">No record found.</td></tr>';
     } 
     foreach($query as $row) :
     $id = $row['id'];
     $myDate = new DateTime($row['date']);
-    $date = $myDate->format('D, M d, Y');
+    $date = $myDate->format(', F d, Y');
     $purpose = $row['purpose'];
     $patient_name = $row['patient_name'];
     $patient_email = $row['patient_email'];

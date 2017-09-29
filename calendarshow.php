@@ -36,6 +36,11 @@
                         <label for="">Purpose</label>
                         <input type="text" class="form-control" id="purpose">
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="">Remaining Slots</label>
+                        <p class="form-control" id="remaining_slots"></p>
+                    </div>
 
                 </div>
             <div class="modal-footer">

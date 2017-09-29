@@ -174,6 +174,8 @@ $purpose = $row->purpose;
                     <div class="form-group">
                     <a href="my_uploads.php" class="btn btn-info">Back</a>
                     <button id="uploadedfiles" class="btn btn-primary">Show  Files</button>
+                    <button type="submit" id="savefindings" class="btn btn-success ">Save</button>
+                    
                     </div>
                     <div class="row">
                       <div class="col-md-12">
@@ -203,6 +205,10 @@ $purpose = $row->purpose;
                     <input type="hidden" name="name" value="<?php echo $patient_name?>">
                     <input type="hidden" name="reference_code" value="<?php echo $reference_code?>">
                     <input type="hidden" name="findings" id="findings">
+
+
+
+
                     </form>
                     
                       <br />
@@ -263,6 +269,11 @@ $purpose = $row->purpose;
 
 <script>
 
+    $('#savefindings').click(function(e){
+        e.preventDefault();
+        $('#uploads').submit();
+    })
+    
     $('#findings-source').keyup(function(){
         var f = $('#findings-source').val();
         

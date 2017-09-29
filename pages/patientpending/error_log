@@ -13,3 +13,78 @@ Stack trace:
 #0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
 #1 {main}
   thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[29-Aug-2017 06:48:53 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[29-Aug-2017 06:48:58 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[29-Aug-2017 06:49:00 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[29-Aug-2017 06:49:01 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[29-Aug-2017 07:14:00 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[29-Aug-2017 07:14:16 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[11-Sep-2017 09:26:38 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[15-Sep-2017 04:31:52 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[15-Sep-2017 04:31:55 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[15-Sep-2017 08:37:31 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[15-Sep-2017 08:40:46 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[25-Sep-2017 02:41:51 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[25-Sep-2017 03:06:10 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[25-Sep-2017 03:11:43 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15
+[25-Sep-2017 03:16:21 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fid' cannot be null' in /home/laggersl/public_html/pages/patientpending/y_update.php:15
+Stack trace:
+#0 /home/laggersl/public_html/pages/patientpending/y_update.php(15): PDOStatement->execute()
+#1 {main}
+  thrown in /home/laggersl/public_html/pages/patientpending/y_update.php on line 15

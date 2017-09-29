@@ -175,6 +175,7 @@
 			<a onclick="show_page('patient/y','1')" class="list-group-items">Patients</a>
 			<a onclick="show_page('profile_admin','0')" class="list-group-items">Admins</a>
 			<a onclick="show_page('add_specialization_view','0')" class="list-group-items">Add Specialization</a>
+			<a href="pages/reports.php" class="list-group-items">Generate Reports</a>
 			<hr class="hr2" style="margin:0px"/>
            <a onclick="show_page('news/y','1')" >Edit News/Annoucement</a>
            <a href="main.php?p=editor&id=1" >Edit About Hospital</a>
@@ -188,7 +189,7 @@
 	?>
 	   <a  onclick="show_page('profile_doctor','0')" >Doctor Information</a>
 	   <a href="my_availability.php">My Availability</a>
-	   <a href="view_appointment.php">View Appointment</a>
+	   <a href="view_appointment.php">View Appointment <?php echo $count_appointment?></a>
 	   <a href="patient_history.php">Patient History</a>
 		 <a href="generate_report.php" >Generate Report</a>
 		 <a href="my_uploads.php" >My Uploads</a>
@@ -543,7 +544,7 @@
 			<div class='col-md-6'>
 			  <div class='form-group'>
                 <div class='col-md-11'>
-                  <input  required type="text" name="height" id="height" placeholder="Enter Height" class="form-control"/>
+                  <input  required type="text" name="height" id="height" placeholder="Enter Height(ft)" class="form-control"/>
                 </div>
               </div>
 			</div>
@@ -552,7 +553,7 @@
 			<div class='col-md-6'>
 			  <div class='form-group'>
                 <div class='col-md-11'>
-                  <input  required type="text" name="weight" id="weight" placeholder="Enter Weight" class="form-control"/>
+                  <input  required type="text" name="weight" id="weight" placeholder="Enter Weight(kg)" class="form-control"/>
                 </div>
               </div>
 			</div>
@@ -561,7 +562,7 @@
 			<div class='col-md-6'>
 			  <div class='form-group'>
                 <div class='col-md-11'>
-                  <input  required type="text" name="bloodtype" id="bloodtype" placeholder="Enter Blood Type" class="form-control"/>
+                <input  required type="text" name="bloodtype" id="bloodtype" placeholder="Enter Blood Type" class="form-control"/>
                 </div>
               </div>
 			</div>
@@ -593,11 +594,11 @@
 				</div>
 			</div>
 
-			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>Condominium:</label>
+			<label class='control-label  col-md-4 col-md-offset-0' for='mname'>Bldg. Number:</label>
 			<div class='col-md-6'>
 			  <div class='form-group'>
 					<div class='col-md-11'>
-						<input  required type="text" name="condominium" id="condominium" placeholder="Condominium" class="form-control"/>
+						<input  required type="text" name="condominium" id="condominium" placeholder="Bldg. Number" class="form-control"/>
 					</div>
 				</div>
 			</div>
